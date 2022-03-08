@@ -1,0 +1,71 @@
+.welcome-screen {
+  min-height: 100vh;
+}
+@media (max-width: 767px) {
+  .welcome-screen {
+    min-height: 50vh;
+  }
+}
+@media (max-width: 991px) {
+  .welcome-screen {
+    min-height: 70vh;
+  }
+}
+.downicon {
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  color: var(--secondcolor);
+  animation: godown 0.5s infinite alternate-reverse;
+}
+@media (max-width: 991px) {
+  .downicon {
+    display: none !important;
+  }
+}
+.btn-group .btn-get {
+  transition: 0.3s !important;
+}
+
+.welcome-screen {
+  overflow: hidden;
+  height: 100vh;
+}
+@media (max-width: 991px) {
+  .welcome-screen {
+    height: auto;
+  }
+}
+.logowelcomepage img {
+  width: 200px;
+  margin: 3% 0px 40px 40px;
+}
+.welcome-screen .welcome-content .row > div:not(:last-of-type) {
+  margin-top: 1%;
+}
+.welcome-screen .welcome-content .row > div .social i {
+  cursor: pointer;
+}
+.heart {
+  animation: animate 2s infinite alternate-reverse;
+}
+.btn-group .btn {
+  background: var(--secondcolor);
+  font-size: 22px;
+  flex: 0.3 1 auto !important;
+}
+.btn-group .btn:hover {
+  letter-spacing: 1.5px;
+}
+a.services {
+  z-index: 150;
+}
+.btn-services {
+  display: none !important;
+}
+@media (max-width: 991px) {
+  .btn-services {
+    display: block !important;
+  }
+}

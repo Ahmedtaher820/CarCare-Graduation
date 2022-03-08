@@ -1,0 +1,7 @@
+:root {
+    --maincolor: #FDBE33;
+    --secondcolor: #20212B;
+    --background-color: #dcdcdc;
+    --bg-second-color: #f1f1f1;
+    --maintransition:.3s ease-in-out
+  }

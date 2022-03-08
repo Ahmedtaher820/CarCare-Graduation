@@ -1,0 +1,121 @@
+/* Heart Animation */
+@keyframes animate {
+  0% {
+    transform: scale(0.75);
+  }
+  20% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.75);
+  }
+  60% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(0.75);
+  }
+  100% {
+    transform: scale(0.75);
+  }
+}
+/* GOTOP */
+@keyframes godown {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(10px);
+  }
+}
+/* MAIN TITLE ANIMATION   */
+@keyframes move-left {
+  50% {
+    right: 0;
+    width: 12px;
+    height: 12px;
+  }
+  100% {
+    right: 0;
+    border-radius: 0px;
+    width: 60%;
+    height: 100%;
+  }
+}
+@keyframes move-right {
+  50% {
+    left: 0;
+    width: 12px;
+    height: 12px;
+  }
+  100% {
+    left: 0;
+    border-radius: 0px;
+    width: 60%;
+    height: 100%;
+  }
+}
+
+/* SPIN */
+@keyframes spin {
+  from {
+    transform: translate(0px) rotate(0deg);
+  }
+  to {
+    transform: translate(80px) rotate(360deg);
+  }
+}
+@media (max-width: 1199px) {
+  @keyframes spin {
+    from {
+      transform: translateY(0px) rotate(0deg);
+    }
+    to {
+      transform: translateY(40px) rotate(360deg);
+    }
+  }
+}
+/* animation step one of book washing */
+@keyframes moveOn {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+/* icon move in carwash book */
+@keyframes movetoright {
+  from {
+    transform: translateX(0px);
+  }
+  fto {
+    transform: translateX(10px);
+  }
+}
+
+/* FOR IMG ANIMATION ON BACKGROUN */
+
+@keyframes moving {
+  0% {
+    transform: translate(10px, 10px) scale(1.1) rotate(-15deg);
+  }
+  25% {
+    transform: translate(-10px, -10px) scale(0.9) rotate(0deg);
+  }
+  50% {
+    transform: translate(0px, 0px) scale(1) rotate(15deg);
+  }
+  75% {
+    transform: translate(10px, 10px) scale(1.1) rotate(-15deg);
+  }
+}

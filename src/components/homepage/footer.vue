@@ -127,6 +127,8 @@ export default {};
 <style>
 .footer-section {
   padding: 60px 0px;
+  z-index: 999;
+  position: relative;
 }
 .footer-section h2 {
   color: var(--maincolor);

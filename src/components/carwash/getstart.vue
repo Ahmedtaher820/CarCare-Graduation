@@ -11,7 +11,7 @@
           <p>
             Book
             <router-link
-              to="/bookwash"
+              to="/carwashBook"
               class="text-primary text-decoration-underline"
               >ONLINE</router-link
             >
@@ -80,5 +80,4 @@ export default {
 .getbox-img img {
   width: 100%;
 }
-
 </style>

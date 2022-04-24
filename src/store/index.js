@@ -188,30 +188,37 @@ export default new Vuex.Store({
     userprofile: [],
     usercarwash: {
       location: {
-        // lat: "",
-        // long: "",
+        lat: "",
+        long: "",
       },
+      options: [
+        {
+          price: "",
+          option: "",
+        },
+      ],
       formstepone: {
         // country: "",
         // city: "",
         // street: "",
         // locname: "",
       },
-      car:{
+      car: {
         // type: "",
         // make: "",
         // model: "",
         // color: "",
       },
-      pricing: null,
-      personal:{
+      pricing: "26$",
+      personal: {
         // firstname: "",
         // lastname: "",
         // email: "",
         // phone: "",
         // id: "",
         // coupon: null,
-      }
+      },
+      totalPrice: 26,
     },
   },
   mutations: {
@@ -228,21 +235,46 @@ export default new Vuex.Store({
       return (state.userprofile = payload);
     },
     userlatlong(state, payload) {
-      state.userlatlan++;
       return (state.usercarwash.location = payload);
+    },
+    // to make sure option is not add ever
+    useroptions(state, payload) {
+      state.usercarwash.options.forEach((e) => {
+        if (payload.option == e.option) {
+          // to make Subtract in total price if option was find
+          state.usercarwash.totalPrice -= Number(
+            payload.price.slice(0, payload.price.indexOf("$"))
+          );
+          e.option = "";
+          e.price = "";
+          return;
+        }
+      });
+      return state.usercarwash.options.push(payload);
+    },
+    cleanoption(state) {
+      return (state.usercarwash.options = []);
     },
     userlocation(state, payload) {
       return (state.usercarwash.formstepone = payload);
     },
     pricingplan(state, payload) {
+      console.log(payload);
+      state.usercarwash.totalPrice = Number(
+        payload.slice(0, payload.indexOf("$"))
+      );
       return (state.usercarwash.pricing = payload);
     },
-    carinfo(state,payload){
-      return state.usercarwash.car = payload
+    carinfo(state, payload) {
+      return (state.usercarwash.car = payload);
     },
-    personalinfo(state,payload){
-      return state.usercarwash.personal = payload
-    }
+    personalinfo(state, payload) {
+      return (state.usercarwash.personal = payload);
+    },
+    // to make sum in all option and sum
+    optionSum(state, payload) {
+      return (state.usercarwash.totalPrice += Number(payload));
+    },
   },
   actions: {
     async getuserfun({ commit }) {
@@ -267,5 +299,6 @@ export default new Vuex.Store({
           commit("getuser", response.data.user.name);
         });
     },
+    checkuser() {},
   },
 });

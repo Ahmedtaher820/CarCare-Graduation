@@ -9,11 +9,11 @@
       <a
         v-for="img in imageList"
         :key="img.url"
-        :href="require(`../../../assets/carsbrand/${img.imgurl}.jpg`)"
+        :href="require(`../../../assets/carsbrand/${img.imgurl}.webp`)"
         class="position-relative"
       >
         <img
-          :src="require(`../../../assets/carsbrand/${img.imgurl}.jpg`)"
+          :src="require(`../../../assets/carsbrand/${img.imgurl}.webp`)"
           alt=""
         />
         <span class="position-absolute">{{ img.brand }}</span>
@@ -36,24 +36,12 @@ export default {
           brand: "ford",
         },
         {
-          imgurl: "audi",
-          brand: "audi",
-        },
-        {
-          imgurl: "chevrolet",
-          brand: "chevrolet",
-        },
-        {
           imgurl: "mercedes",
           brand: "mercedes",
         },
         {
           imgurl: "kia",
           brand: "kia",
-        },
-        {
-          imgurl: "Honda",
-          brand: "Honda",
         },
         {
           imgurl: "porsche",

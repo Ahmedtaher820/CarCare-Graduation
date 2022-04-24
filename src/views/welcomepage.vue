@@ -59,7 +59,7 @@
             >
               <router-link
                 class="btn me-lg-3 mx-auto mx-lg-0 py-3 text-light fw-light"
-                :to="{ path: '/chooserole' }"
+                :to="{ path: '/signin'}"
                 data-aos="fade-up"
                 data-aos-duration="1000"
               >

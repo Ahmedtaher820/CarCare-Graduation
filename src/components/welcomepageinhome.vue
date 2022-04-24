@@ -33,9 +33,9 @@
           </div>
         </div>
         <div class="col-12 col-lg-5">
-          <div class="content-text mt-5 ms-3">
+          <div class="content-text mt-2 ms-3">
             <h1
-              class="text-lg-start lh-base text-capitalize"
+              class="text-lg-start lh-base text-capitalize fs-1"
               data-aos="fade-down"
               data-aos-duration="1500"
               data-os-delay="500"

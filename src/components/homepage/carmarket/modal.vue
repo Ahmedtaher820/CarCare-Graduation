@@ -11,7 +11,9 @@
               <div class="modal-car-img mx-auto">
                 <div class="main-img w-100 center-items">
                   <img
-                    :src="require(`../../../assets/oldcars/${carinfo.carimg}.jpg`)"
+                    :src="
+                      require(`../../../assets/oldcars/${carinfo.carimg}.webp`)
+                    "
                     class="w-100"
                   />
                 </div>
@@ -32,7 +34,7 @@
                 <div class="car-info pt-3">
                   <p class="mb-1">
                     BRAND: <strong>{{ carinfo.brand }}</strong>
-                  </p >
+                  </p>
                   <p class="fw-bold mb-1">
                     PRICE: <strong>{{ carinfo.price }}</strong>
                   </p>
@@ -40,14 +42,17 @@
                     SELLER NAME: <strong>{{ carinfo.seller }}</strong>
                   </p>
                   <div class="model-btn mt-2 px-3">
-                  <button class="btn btn-main-bg mx-1" @click="addcart">
-                    <small>ADD TO CART</small>
-                  </button>
-                  <button class="btn btn-main-bg mx-1 px-3" @click="contact($event)">
-                    <small>CALL</small>
-                    <i class="bi bi-telephone-fill ms-1"></i>
-                  </button>
-                </div>
+                    <button class="btn btn-main-bg mx-1" @click="addcart">
+                      <small>ADD TO CART</small>
+                    </button>
+                    <button
+                      class="btn btn-main-bg mx-1 px-3"
+                      @click="contact($event)"
+                    >
+                      <small>CALL</small>
+                      <i class="bi bi-telephone-fill ms-1"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -67,23 +72,22 @@ export default {
     closemodal() {
       this.$emit("closemodal");
     },
-    addcart(){
+    addcart() {
       swal({
-          title: "DONE!",
-          text: "Product Added To Cart !",
-          icon: "success",
-          button: "Ok!",
-        });
-      this.$store.commit("increasecar")
+        title: "DONE!",
+        text: "Product Added To Cart !",
+        icon: "success",
+        button: "Ok!",
+      });
+      this.$store.commit("increasecar");
     },
-    contact(e){
-      e.target.textContent = ""
-      if(e.target.textContent == ""){
-        e.target.style.fontSize = "18px"
-        e.target.textContent = 19952441
+    contact(e) {
+      e.target.textContent = "";
+      if (e.target.textContent == "") {
+        e.target.style.fontSize = "18px";
+        e.target.textContent = 19952441;
       }
-      
-    }
+    },
   },
 };
 </script>
@@ -116,10 +120,10 @@ export default {
 .modal-map-header i {
   cursor: pointer;
 }
-.stars-list i{
-   transition: .3s; 
+.stars-list i {
+  transition: 0.3s;
 }
-.stars-list:hover i{
+.stars-list:hover i {
   color: var(--maincolor) !important;
 }
 .stars-list li {
@@ -130,24 +134,24 @@ export default {
   width: 250px;
 }
 .model-btn .btn {
-  border-radius: 0px ;
+  border-radius: 0px;
   transition: 0.5s;
 }
 .model-btn .btn:hover {
- border-radius: 10px;
+  border-radius: 10px;
   background-color: var(--maincolor) !important;
 }
-.bi-telephone-fill{
+.bi-telephone-fill {
   opacity: 0;
   display: inline-block;
   transform: translateX(30px);
-  transition: .3s;
+  transition: 0.3s;
 }
-.btn:last-of-type:hover .bi-telephone-fill{
-  animation: movephone 1 .3s ease-in-out both;
+.btn:last-of-type:hover .bi-telephone-fill {
+  animation: movephone 1 0.3s ease-in-out both;
 }
-@keyframes movephone{
-  to{
+@keyframes movephone {
+  to {
     opacity: 1;
     transform: translateX(0px);
   }

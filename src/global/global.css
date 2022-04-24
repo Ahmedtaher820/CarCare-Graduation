@@ -33,7 +33,7 @@ ul {
   margin: 0px !important;
 }
 h1 {
-  background: transparent;
+  background: transparent !important;
   color: var(--secondcolor) !important;
   padding-left: 0px !important;
 }
@@ -78,6 +78,15 @@ h1 {
 /* FOR IMG ANIMATION ON BACKGROUN */
 .moving {
   animation: moving 8s infinite alternate-reverse;
+}
+@media (max-width: 991px) {
+  .form-label,
+  .form-control,
+  form .bt,
+  form .btn {
+    width: 100% !important;
+    margin-left: 0% !important;
+  }
 }
 /* main btn */
 .carwashbtn {

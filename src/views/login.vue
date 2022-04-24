@@ -22,23 +22,17 @@
               v-model="userinfo.password"
               placeholder="Password"
             />
-            <div class="err text-danger mt-2 fs-5">
-              {{err}}
+            <div class="error text-danger mt-2 fs-5">
+              {{ err }}
             </div>
             <p class="text-secondary text-center text-lg-start mt-4">
               Forget Email Or Password ?
-              <router-link class="text-secondary" :to="{ path: '/reset' }"
+              <router-link class="text-secondary" :to="{ path: '/verify' }"
                 >Reset Password</router-link
               >
             </p>
             <div
-              class="
-                login-box
-                d-flex
-                justify-content-md-between
-                align-items-center
-                flex-column flex-md-row
-              "
+              class="login-box d-flex justify-content-md-between align-items-center flex-column flex-md-row"
             >
               <div class="form-check mb-3 mb-lg-0">
                 <input
@@ -47,15 +41,21 @@
                   value=""
                   id="flexCheckDefault"
                 />
-                <label class="form-check-label " for="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
                   Remember Me
                 </label>
               </div>
-              <button type="button" class="btn btn-main-bg me-0" @click="loginuser">LOGIN</button>
+              <button
+                type="button"
+                class="btn btn-main-bg me-0"
+                @click="loginuser"
+              >
+                LOGIN
+              </button>
             </div>
             <router-link
               class="mt-3 d-block text-secondary text-center text-lg-start"
-              :to="{ path: '/chooserole' }"
+              :to="{ path: '/signin' }"
               >Not A Member Yet ? Sign Up</router-link
             >
           </form>
@@ -65,48 +65,61 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios";
 import "../components/carousel.vue";
 import Carousel from "../components/carousel.vue";
 export default {
   data() {
     return {
-      userinfo:{
+      userinfo: {
         email: "",
-        password: "", 
+        password: "",
       },
-      err:''
+      err: "",
     };
   },
-  methods:{
-    async loginuser(){
-      await axios.post(`https://car-care3.herokuapp.com/api/users/loginUser`,this.userinfo).then((resolve)=>{
-        localStorage.setItem("user-info",JSON.stringify(resolve.data.user._id))
-        this.$router.push({path:"/",params:{id:resolve.data.user._id}})
-      }).catch((e)=>{
-        if(e.response.data.error){
-          this.err = e.response.data.error
-        }
-        else{
-          this.err = e.response.data.message
-        }
-        
-      })
-    }
+  methods: {
+    async loginuser() {
+      await axios
+        .post(
+          `https://car-care3.herokuapp.com/api/users/loginUser`,
+          this.userinfo
+        )
+        .then((resolve) => {
+          localStorage.setItem(
+            "user-info",
+            JSON.stringify(resolve.data.user._id)
+          );
+          localStorage.setItem("usertoken", JSON.stringify(resolve.data.token));
+          this.$router.push({
+            path: "/",
+            params: { token: resolve.data.token },
+          });
+          console.log(resolve.data.token);
+        })
+        .catch((e) => {
+          if (e.response.data.error) {
+            this.err = e.response.data.error;
+          } else {
+            this.err = e.response.data.message;
+          }
+        });
+    },
   },
   components: {
     Carousel,
   },
-  async created(){
-    await axios.get("https://car-care3.herokuapp.com/api/users/5555/getUsers").then((resolve)=>{
-      console.log(resolve.data.user)
-    })
-  }
+  async created() {
+    await axios
+      .get("https://car-care3.herokuapp.com/api/users/5555/getUsers")
+      .then((resolve) => {
+        console.log(resolve.data.user);
+      });
+  },
 };
 </script>
 

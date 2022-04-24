@@ -38,7 +38,7 @@
               class="nav-link text-light"
               data-path="contact"
               @click="goprofile()"
-              >ContactUs</span
+              >Contact Us</span
             >
           </li>
           <li class="nav-item">
@@ -87,8 +87,9 @@ export default {
           });
           e.classList.add("active");
           document.querySelector(".navbar-nav").classList.remove("active");
-          if (this.$route.path !== "/" + e.dataset.path)
+          if (this.$route.path !== "/" + e.dataset.path) {
             this.$router.push("/" + e.dataset.path);
+          }
         });
       });
     },
@@ -108,6 +109,8 @@ export default {
 .navbar {
   z-index: 999;
   background-color: var(--secondcolor);
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
 }
 .navbar .navbar-nav {
   align-items: center;
@@ -147,8 +150,8 @@ export default {
 @media (max-width: 991px) {
   .navbar-nav {
     position: absolute;
-    top: 116px;
-    left: -0px;
+    top: 100px;
+    left:0px;
     height: calc(100vh - 100px);
     width: 100%;
     background-color: var(--secondcolor);

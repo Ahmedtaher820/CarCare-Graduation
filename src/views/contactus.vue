@@ -1,91 +1,99 @@
 <template>
-<div class="contact">
-  <pagebg :title="title" />
-  <div class="container">
-    <h2 class="main-title fs-2">Contact Us</h2>
-    <div class="row contact-row">
-      <div v-for="(data, i) in contactData" :key="i" :class="data.mainclass"  data-aos="fade-up" data-aos-duration="1500" data-os-delay="500">
+  <div class="contact">
+    <pagebg :title="title" />
+    <div class="container">
+      <h2 class="main-title fs-2">Contact Us</h2>
+      <div class="row contact-row">
         <div
-          class="
-            haeding-box
-            py-4
-            text-center
-            shadow
-            bg-light
-            rounded-3
-            text-muted
-          "
+          v-for="(data, i) in contactData"
+          :key="i"
+          :class="data.mainclass"
+          data-aos="fade-up"
+          data-aos-duration="1500"
+          data-os-delay="500"
         >
-          <i :class="data.icon"></i>
-          <h4 class="mb-2 fs-4">{{ data.title }}</h4>
-          <p>{{ data.paragraph }}</p>
-        </div>
-      </div>
-      <div class="contact-main row mt-5">
-        <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000" data-os-delay="200">
-          <div class="con-box mb-md-0 mb-4">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d219909.0810580769!2d32.296855496887424!3d30.547060922997975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1645251075259!5m2!1sen!2seg"
-              width="100%"
-              height="368"
-              loading="lazy"
-              class="p-4 bg-light rounded-3 shadow"
-            ></iframe>
+          <div
+            class="haeding-box py-4 text-center shadow bg-light rounded-3 text-muted"
+          >
+            <i :class="data.icon"></i>
+            <p>{{ data.paragraph }}</p>
           </div>
         </div>
-        <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-          <div class="contact-form bg-light p-4 shadow rounded-3">
-            <form>
-              <div class="row">
-                <div class="col-6">
-                  <input
-                    type="text"
-                    class="p-2 bg-transparent"
-                    placeholder="Enter Your Name"
-                    v-model="name"
-                  />
+        <div class="contact-main row mt-5">
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-os-delay="200"
+          >
+            <div class="con-box mb-md-0 mb-4">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d219909.0810580769!2d32.296855496887424!3d30.547060922997975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1645251075259!5m2!1sen!2seg"
+                width="100%"
+                height="368"
+                loading="lazy"
+                class="p-4 bg-light rounded-3 shadow"
+              ></iframe>
+            </div>
+          </div>
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="200"
+          >
+            <div class="contact-form bg-light p-4 shadow rounded-3">
+              <form>
+                <div class="row">
+                  <div class="col-6">
+                    <input
+                      type="text"
+                      class="p-2 bg-transparent"
+                      placeholder="Enter Your Name"
+                      v-model="name"
+                    />
+                  </div>
+                  <div class="col-6">
+                    <input
+                      type="Email"
+                      class="p-2 bg-transparent"
+                      placeholder="Enter Your Email"
+                      v-model="email"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <input
+                      type="text"
+                      class="p-2 bg-transparent"
+                      placeholder="Your Subject"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <textarea
+                      class="p-2 bg-transparent"
+                      placeholder="Enter Your Message"
+                      v-model="message"
+                      maxlength="150"
+                    ></textarea>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn fs-5 btn-main-bg"
+                    @click="check"
+                  >
+                    Send Message
+                  </button>
+                  <span class="main-text text-center mt-2" v-if="errMsg"
+                    >Mail Sent Successfully!</span
+                  >
                 </div>
-                <div class="col-6">
-                  <input
-                    type="Email"
-                    class="p-2 bg-transparent"
-                    placeholder="Enter Your Email"
-                    v-model="email"
-                  />
-                </div>
-                <div class="col-12">
-                  <input
-                    type="text"
-                    class="p-2 bg-transparent"
-                    placeholder="Your Subject"
-                  />
-                </div>
-                <div class="col-12">
-                  <textarea
-                    class="p-2 bg-transparent"
-                    placeholder="Enter Your Message"
-                    v-model="message"
-                  ></textarea>
-                </div>
-                <button
-                  type="button"
-                  class="btn fs-5 btn-main-bg"
-                  @click="check"
-                >
-                  Send Message
-                </button>
-                <span class="main-text text-center mt-2" v-if="errMsg"
-                  >Mail Sent Successfully!</span
-                >
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-  
 </template>
 
 <script>
@@ -93,29 +101,26 @@ import swal from "sweetalert";
 import pagebg from "../components/pagesbg.vue";
 
 export default {
-  components:{
+  components: {
     pagebg,
   },
   data() {
     return {
-      title:"CONTACT US",
+      title: "CONTACT US",
       contactData: {
         loctaion: {
           mainclass: "col-md-6 ",
           icon: "bi bi-geo-alt contact-icon rounded-circle mb-1 fs-2 bg-light d-inline-block border main-text",
-          title: "Email Us",
           paragraph: "Elkhalifa Street, Cairo, NY 535022",
         },
         email: {
           mainclass: "col-md-3 col-6 mt-md-0 mt-2",
           icon: "bi bi-envelope contact-icon rounded-circle mb-1 fs-2 bg-light d-inline-block border main-text",
-          title: "Email Us",
           paragraph: "Ahmed@gmail.com",
         },
         call: {
           mainclass: "col-md-3 col-6 mt-md-0 mt-2",
           icon: "bi bi-telephone contact-icon rounded-circle mb-1 fs-2 bg-light d-inline-block border main-text",
-          title: "Call Us",
           paragraph: "01008203698",
         },
       },
@@ -137,7 +142,7 @@ export default {
           button: "Ok!",
         });
         this.err.push("err");
-        return false
+        return false;
       }
       if (!this.message) {
         swal({
@@ -147,14 +152,14 @@ export default {
           button: "Ok!",
         });
         this.err.push("err");
-        return false
+        return false;
       }
       this.emailCheck();
       if (this.err.length == 0) {
         this.errMsg = true;
-        setTimeout(()=>{
+        setTimeout(() => {
           this.errMsg = false;
-        },5000)
+        }, 5000);
       }
     },
     emailCheck() {

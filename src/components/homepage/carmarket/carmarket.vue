@@ -12,7 +12,7 @@
         <div class="box w-100 shadow-lg position-relative">
           <div class="box-img position-relative">
             <img
-              :src="require(`../../../assets/oldcars/${value.name}.jpg`)"
+              :src="require(`../../../assets/oldcars/${value.name}.webp`)"
               :class="value.class"
               alt=""
             />
@@ -59,7 +59,7 @@
     <modal v-if="showmodal" v-on:closemodal="closemodal" :carinfo="posts" />
     <button
       type="button"
-      class="btn btn-main-bg mt-5 p-3 fw-bold position-relative mainhover "
+      class="btn btn-main-bg mt-5 p-3 fw-bold position-relative mainhover"
       data-aos="fade-up"
       data-aos-duration="500"
     >

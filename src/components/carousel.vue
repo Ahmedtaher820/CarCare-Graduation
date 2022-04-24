@@ -1,19 +1,23 @@
 <template>
-  <div class="carousel h-100 " >
-    <div class="carousel-row ">
-      <div class="carousel-content" data-aos-duration="1000" data-os-delay="200">
+  <div class="carousel h-100">
+    <div class="carousel-row">
+      <div
+        class="carousel-content"
+        data-aos-duration="1000"
+        data-os-delay="200"
+      >
         <div
           class="carousel-img"
           v-for="(value, index) in carouselimg"
           :key="index"
         >
-        <img :src="require(`../assets/fiveImg/${value.url}.png`)" />
+          <img :src="require(`../assets/fiveImg/${value.url}.webp`)" />
         </div>
       </div>
     </div>
 
     <div class="dots position-absolute">
-      <span class=" active" @click="move">1</span>
+      <span class="active" @click="move">1</span>
       <span @click="move">2</span>
       <span @click="move">3</span>
       <span @click="move">4</span>
@@ -50,11 +54,11 @@ export default {
       return this.$store.state.carouselimgs;
     },
   },
-  mounted(){
-    if(this.$route.name == "Home"){
+  mounted() {
+    if (this.$route.name == "Home") {
       // document.querySelector(".group-img").style.display = "none"
     }
-  }
+  },
 };
 </script>
 
@@ -90,22 +94,22 @@ export default {
   bottom: 50%;
   transform: translateY(50%);
 }
-@media (min-width:992px) and (max-width:1199px){
+@media (min-width: 992px) and (max-width: 1199px) {
   .dots {
-  right: 10px !important;
-}
+    right: 10px !important;
+  }
 }
 .dots span {
   width: 25px;
-  height:25px;
+  height: 25px;
   font-size: 12px;
   border-radius: 50%;
-  background-color:  var(--maincolor);
+  background-color: var(--maincolor);
   border: 1px solid #fff;
   display: block;
   cursor: pointer;
-  margin-bottom: 10px; 
-  transition: .3s;
+  margin-bottom: 10px;
+  transition: 0.3s;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,7 +120,7 @@ export default {
   background-color: #fff;
   color: var(--maincolor);
 }
-.dots span:not(span.active):hover{
+.dots span:not(span.active):hover {
   background-color: rgba(255, 255, 255, 0.424);
 }
 .group-img {

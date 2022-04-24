@@ -87,8 +87,6 @@ export default {
   align-items: stretch;
   flex-direction: column;
 }
-.info {
-}
 .userinfo li span {
   font-size: 20px;
   font-weight: bold;

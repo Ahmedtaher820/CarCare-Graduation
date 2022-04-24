@@ -65,8 +65,9 @@ export default {
     },
   },
   async created() {
+    // console.log(this.$route.params.token)
     window.addEventListener("scroll", () => {
-      if (this.$route.name == "Home") {
+      if (this.$route.name == "Home" ) {
         var scrolltop = document.querySelector(".scrolltop");
         if (window.pageYOffset > 500) {
           scrolltop.style.opacity = "1";
@@ -81,6 +82,7 @@ export default {
     await axios.get("https://car-care3.herokuapp.com/api/users/5555/getUsers").then((resolve)=>{
       console.log(resolve)
     })
+    
   },
 };
 </script>

@@ -103,10 +103,10 @@
                   v-model="userdata.job"
                 />
               </div>
-            
+
               <div class="btn-register">
-                <div class="err text-danger mt-2 fs-5">
-                    {{err}}
+                <div class="error text-danger mt-2 fs-5">
+                  {{ err }}
                 </div>
                 <button
                   type="button"
@@ -151,9 +151,9 @@ export default {
         phone: "",
         password: "",
         confirmPassword: "",
-        job:''
+        job: "",
       },
-      err:'',
+      err: "",
     };
   },
   components: {
@@ -171,30 +171,27 @@ export default {
       }
     },
     async signin() {
-      this.err = ''
-      await axios.post("https://car-care3.herokuapp.com/api/users/signUser", this.userdata).then(()=>{
-        this.$router.push({path:"/login"})
-        console.log("done")
-      }).catch((e)=>{
-        if(e.response.data.message.search("confirmPassword") > 0){
-          return this.err = " \"Password\" are not matching"
-        }else{
-          return this.err = e.response.data.message
-        }
-      })
+      this.err = "";
+      await axios
+        .post(
+          "https://car-care3.herokuapp.com/api/users/signUser",
+          this.userdata
+        )
+        .then(() => {
+          this.$router.push({ path: "/login" });
+        })
+        .catch((e) => {
+          if (e.response.data.message.search("confirmPassword") > 0) {
+            return (this.err = ' "Password" are not matching');
+          } else {
+            return (this.err = e.response.data.message);
+          }
+        });
     },
     closemodal() {
       this.showmodal = false;
     },
   },
-  // async mounted() {
-  //   if (this.$route.params.dervier == "1") {
-  //     this.driverinput = true;
-  //   }
-  //      await axios.get(`https://car-care3.herokuapp.com/api/5555/getUsers`).then((result)=>{
-  //        console.log(result.data.user)
-  //      })
-  // },
 };
 </script>
 
@@ -235,7 +232,7 @@ form .btn {
 }
 form .btn:hover {
   background-color: var(--maincolor);
-  color:  var(--secondcolor);
+  color: var(--secondcolor);
 }
 .form-control:focus {
   border: 1px solid var(--maincolor) !important;

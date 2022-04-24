@@ -15,7 +15,7 @@
       >
         <div class="carouselimg" v-for="(brand, i) in prodBrands" :key="i">
           <img
-            :src="require(`../../../assets/brand/${brand}.png`)"
+            :src="require(`../../../assets/brand/${brand}.webp`)"
             class="brand-img"
             alt=""
           />
@@ -30,20 +30,7 @@ import carousel from "vue-owl-carousel";
 export default {
   data() {
     return {
-      prodBrands: [
-        "Audi",
-        "Chevrolet",
-        "ford",
-        "honda",
-        "Kia",
-        "Mercedes",
-        "Mini",
-        "porsche",
-        "toyota",
-        "Volkswagen",
-        "nissan",
-        "Fiat",
-      ],
+      prodBrands: ["ford", "Kia", "Mercedes", "toyota", "Volkswagen", "nissan"],
     };
   },
   components: { carousel },

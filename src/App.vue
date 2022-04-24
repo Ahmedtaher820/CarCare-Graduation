@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <navgiation v-if="shownav" />
-    <router-view />
+    <!-- <transition class="fade-out" name="fade"> -->
+      <router-view />
+    <!-- </transition> -->
+
     <img
       v-for="(img, i) in animationimg"
       :key="i"
@@ -31,7 +34,7 @@ export default {
     if (!user) {
       this.$router.push({ path: "/welcomepage" });
     } else {
-      this.$router.push({ path: "/" });
+      this.$router.push({ path:this.$router.path });
     }
     this.checkRouter();
   },
@@ -40,7 +43,8 @@ export default {
       if (
         this.$route.name === "signin" ||
         this.$route.name === "login" ||
-        this.$route.name === "welcomepage"
+        this.$route.name === "welcomepage"||
+        this.$route.name === "verify"
       ) {
         this.shownav = false;
         this.shawfooter = false;
@@ -73,5 +77,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.fade-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+.fade-enter-to {
+  opacity: 1;
+  transform: translateX(0px);
+}
+.fade-enter-active {
+  transition: .5s;
 }
 </style>

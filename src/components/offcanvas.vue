@@ -1,6 +1,6 @@
 <template>
 <div class="off-box">
-    <a href="#services-off" data-bs-toggle="offcanvas" class="services text-light text-underline fs-2 position-absolute">Services</a>
+    <a href="#services-off" data-bs-toggle="offcanvas" class="services text-dark text-underline fs-2 position-absolute">Services</a>
       <div class="offcanvas offcanvas-start" tabindex="-1" id="services-off" aria-labelledby="services-off">
   <div class="offcanvas-header">
     <h2 class="offcanvas-title" id="services-off">Our Services</h2>

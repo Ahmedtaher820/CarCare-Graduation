@@ -47,7 +47,7 @@ const routes = [
     component: signin,
     meta: {
       title: "Signin Page",
-    }
+    },
   },
   {
     path: "/login",
@@ -114,25 +114,25 @@ const routes = [
     },
   },
   {
-    path:"/passenger",
-    name:"passenger",
-    component:passenger,
-    meta:{
-      title:"Passenger"
-    }
+    path: "/passenger",
+    name: "passenger",
+    component: passenger,
+    meta: {
+      title: "Passenger",
+    },
   },
   {
-    path:"/driver",
-    name:"driver",
-    component:driver,
-    meta:{
-      title:"driver"
-    }
+    path: "/driver",
+    name: "driver",
+    component: driver,
+    meta: {
+      title: "driver",
+    },
   },
   {
     path: "/carshare",
     name: "carshare",
-    component:carshare,
+    component: carshare,
     meta: {
       title: "Carshare",
     },
@@ -162,13 +162,13 @@ const routes = [
     },
   },
   {
-    path:"/carwashBook",
-    name:"carwashBook",
-    component:carwashBook,
-    meta:{
-      title:"CarWash"
-    }
-  }
+    path: "/carwashBook",
+    name: "carwashBook",
+    component: carwashBook,
+    meta: {
+      title: "CarWash",
+    },
+  },
 ];
 
 const router = new VueRouter({

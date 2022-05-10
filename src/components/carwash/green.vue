@@ -61,7 +61,7 @@ export default {
 
 <style>
 .green .green-img {
-  width: 600px;
+  max-width: 600px;
   margin: 0px auto;
 }
 .green-img img {

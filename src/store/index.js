@@ -120,7 +120,7 @@ export default new Vuex.Store({
       {
         imgsrc: "man1",
         job: "Mechanic",
-        name: "Mokhtar Ahmed",
+        name: "Mohamed Yehiya",
       },
       {
         imgsrc: "man2",

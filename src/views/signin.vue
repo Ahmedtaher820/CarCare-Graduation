@@ -215,6 +215,9 @@ export default {
   .sign-heading img {
     width: 150px;
   }
+  .signin .row > * {
+  padding-left: 12px !important ;
+}
 }
 .form-control {
   border-radius: 8px !important;

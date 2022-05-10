@@ -58,7 +58,7 @@
               class="btn-group mt-4 d-flex justify-content-center justify-content-lg-start flex-column flex-sm-row gap-2"
             >
               <router-link
-                class="btn me-lg-3 mx-auto mx-lg-0 py-3 text-light fw-light"
+                class="btn welcome-btn me-lg-3 mx-auto mx-lg-0 py-3 text-light fw-light"
                 :to="{ path: '/signin'}"
                 data-aos="fade-up"
                 data-aos-duration="1000"
@@ -68,7 +68,7 @@
 
               <a
                 href="#services-off"
-                class="btn btn-services me-lg-3 mx-auto mx-lg-0 py-3 text-light fw-light"
+                class="btn welcome-btn btn-services me-lg-3 mx-auto mx-lg-0 py-3 text-light fw-light"
                 data-bs-toggle="offcanvas"
               >
                 SERVICES

@@ -68,4 +68,15 @@ a.services {
   .btn-services {
     display: block !important;
   }
+  .welcome-btn{
+    font-size: 18px;
+    width: 180px;
+    height: 65px;
+    margin-top: 20px;
+  }
 }
+.btn-group>.btn-group:not(:last-child)>.btn, .btn-group>.btn:not(:last-child):not(.dropdown-toggle),.btn-group>:not(.btn-check)+.btn{
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  border-top-left-radius: 10px !important;
+  border-bottom-left-radius: 10px !important}

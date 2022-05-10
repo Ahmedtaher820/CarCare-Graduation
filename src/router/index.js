@@ -5,6 +5,9 @@ import welcomepage from "../views/welcomepage.vue";
 import signin from "../views/signin.vue";
 import login from "../views/login.vue";
 import carwashBook from "../views/carwash-book.vue";
+import carshare from "../views/carshare.vue";
+import driver from "../views/driver.vue";
+import passenger from "../views/passenger.vue";
 import reset from "../views/reset.vue";
 import verify from "../views/verify.vue";
 import profile from "../views/profile.vue";
@@ -108,6 +111,30 @@ const routes = [
     component: () => import("../views/carwash"),
     meta: {
       title: "CarWash",
+    },
+  },
+  {
+    path:"/passenger",
+    name:"passenger",
+    component:passenger,
+    meta:{
+      title:"Passenger"
+    }
+  },
+  {
+    path:"/driver",
+    name:"driver",
+    component:driver,
+    meta:{
+      title:"driver"
+    }
+  },
+  {
+    path: "/carshare",
+    name: "carshare",
+    component:carshare,
+    meta: {
+      title: "Carshare",
     },
   },
   {

@@ -40,6 +40,7 @@ export default {
         event.target.parentElement.firstChild.nextElementSibling.textContent;
       this.options.option =
         event.target.parentElement.firstChild.nextElementSibling.nextElementSibling.textContent;
+        console.log(this.options)
       this.$store.commit("useroptions", this.options);
       this.$store.commit(
         "optionSum",

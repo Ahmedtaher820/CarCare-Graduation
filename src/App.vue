@@ -2,7 +2,7 @@
   <div id="app">
     <navgiation v-if="shownav" />
     <!-- <transition class="fade-out" name="fade"> -->
-      <router-view />
+    <router-view />
     <!-- </transition> -->
 
     <img
@@ -30,20 +30,20 @@ export default {
     footersection,
   },
   created() {
+    this.checkRouter();
     let user = localStorage.getItem("user-info");
     if (!user) {
       this.$router.push({ path: "/welcomepage" });
     } else {
-      this.$router.push({ path:this.$router.path });
+      this.$router.push({ path: this.$router.path });
     }
-    this.checkRouter();
   },
   methods: {
     checkRouter() {
       if (
         this.$route.name === "signin" ||
         this.$route.name === "login" ||
-        this.$route.name === "welcomepage"||
+        this.$route.name === "welcomepage" ||
         this.$route.name === "verify"
       ) {
         this.shownav = false;
@@ -87,6 +87,6 @@ export default {
   transform: translateX(0px);
 }
 .fade-enter-active {
-  transition: .5s;
+  transition: 0.5s;
 }
 </style>

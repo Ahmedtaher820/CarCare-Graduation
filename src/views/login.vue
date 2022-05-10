@@ -99,6 +99,7 @@ export default {
             path: "/",
             params: { token: resolve.data.token },
           });
+          location.reload();
           console.log(resolve.data.token);
         })
         .catch((e) => {
@@ -114,6 +115,10 @@ export default {
     Carousel,
   },
   async created() {
+    if (localStorage.getItem("usertoken")) {
+      this.$router.push({ path: "/" });
+      location.reload();
+    }
     await axios
       .get("https://car-care3.herokuapp.com/api/users/5555/getUsers")
       .then((resolve) => {

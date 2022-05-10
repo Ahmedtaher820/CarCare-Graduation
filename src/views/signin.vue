@@ -192,6 +192,12 @@ export default {
       this.showmodal = false;
     },
   },
+  created() {
+    if (localStorage.getItem("usertoken")) {
+      this.$router.push({ path: "/" });
+      location.reload()
+    }
+  },
 };
 </script>
 

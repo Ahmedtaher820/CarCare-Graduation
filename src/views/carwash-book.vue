@@ -2,7 +2,7 @@
   <div class="carwash-book py-5 position-relative">
     <div class="container">
       <div class="row">
-        <div class="col-md-8 text-start">
+        <div class="col-md-8 text-start car-book-left">
           <div class="p-4 shadow mb-3">
             <h3 class="fs-3">Let’s get that dirty car washed!</h3>
             <h4 class="fs-4 mt-4 mb-3">Start Your Booking</h4>
@@ -191,6 +191,13 @@
         </div>
       </div>
     </div>
+    <div class="dollar-bag" v-if="showBag">
+      <i
+        class="fa-solid fa-sack-dollar center-items shadow bg-light"
+        @click="showPrice"
+        
+      ></i>
+    </div>
   </div>
 </template>
 
@@ -204,6 +211,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      showBag: false,
       userBookInfo: {
         carType: "",
         email: "",
@@ -256,14 +264,16 @@ export default {
     },
     check(message, id, index) {
       let inputCheck = document.querySelectorAll(".input-check-err");
-      let element = document.getElementById(id);
-      if (element.id == "car-select") {
-        inputCheck[index].textContent = message;
-      } else if (element.id == "car-type") {
-        inputCheck[index].textContent = message;
-      } else if (element.value.trim() == "") {
-        inputCheck[index].textContent = message;
-        window.scrollTo(0, 0);
+      inputCheck[index].textContent = message;
+    },
+    showPrice(event) {
+      document.querySelector(".total-box").classList.toggle("active");
+      if (event.target.classList.contains("fa-sack-dollar")) {
+        event.target.classList.remove("fa-sack-dollar");
+        event.target.classList.add("fa-xmark");
+      } else {
+        event.target.classList.add("fa-sack-dollar");
+        event.target.classList.remove("fa-xmark");
       }
     },
   },
@@ -282,12 +292,27 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", () => {
-      if (window.pageYOffset > 100) {
-        document.querySelector(".right-box").style.transform =
-          "translateY(-100px)";
+      if (window.innerWidth > 991) {
+        if (window.pageYOffset > 100) {
+          document.querySelector(".right-box").style.transform =
+            "translateY(-100px)";
+        } else {
+          document.querySelector(".right-box").style.transform =
+            "translateY(0px)";
+        }
+      }
+    });
+    window.addEventListener("resize", () => {
+      if (innerWidth < 992) {
+        document.querySelector(".car-book-left").classList.remove("col-md-8");
+        document.querySelector(".car-book-left").classList.add("col-12");
+        document.querySelector(".car-book-left").classList.add("active");
+        this.showBag = true;
       } else {
-        document.querySelector(".right-box").style.transform =
-          "translateY(0px)";
+        document.querySelector(".car-book-left").classList.remove("col-12");
+        document.querySelector(".car-book-left").classList.add("col-md-8");
+        document.querySelector(".car-book-left").classList.remove("active");
+        this.showBag = false;
       }
     });
   },
@@ -348,7 +373,7 @@ export default {
   transition: 0.3s;
   overflow: scroll;
 }
-.carwash-book .right-box::-webkit-scrollbar{
+.carwash-book .right-box::-webkit-scrollbar {
   display: none;
 }
 .carwash-book .right-box .content {
@@ -372,6 +397,22 @@ export default {
 .total-wash {
   color: #fff;
 }
+@media (max-width: 991px) {
+  .total-box {
+    transform: translateX(100%);
+    transition: 0.3s;
+  }
+  .total-box.active {
+    padding: 0px;
+    transform: translateX(0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .carwash-book .container {
+    max-width: 100%;
+  }
+}
 .faq {
   bottom: -700px !important;
 }
@@ -381,5 +422,28 @@ export default {
 }
 .right-box .option-box {
   font-size: 12px;
+}
+.fa-sack-dollar,
+.fa-xmark {
+  font-size: 25px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.dollar-bag {
+  position: fixed;
+  top: 120px;
+  right: 30px;
+}
+.dollar-bag::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #f00;
 }
 </style>

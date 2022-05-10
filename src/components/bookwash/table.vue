@@ -183,6 +183,11 @@ export default {
       })
       document.querySelectorAll("."+e.target.dataset.price).forEach((e)=>{
         e.classList.add("selected")
+        
+      })
+      document.querySelectorAll(".option button.active").forEach((e)=>{
+        e.classList.remove("active")
+        
       })
       this.$store.commit("pricingplan",this.priceplan)
       this.$store.commit("cleanoption")
@@ -195,7 +200,7 @@ export default {
 table {
   width: 100% !important;
   max-width: 100%;
-  overflow-x: scroll;
+  overflow:visible;
 }
 .thead-span {
   text-align: center !important;

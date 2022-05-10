@@ -9,7 +9,7 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <span
-              class="nav-link active text-light"
+              class="nav-link active text-light home"
               aria-current="page"
               @click="goprofile()"
               data-path=""
@@ -19,7 +19,7 @@
           </li>
           <li class="nav-item">
             <span
-              class="nav-link text-light"
+              class="nav-link text-light services"
               data-path="services"
               @click="goprofile()"
               >Services</span
@@ -74,17 +74,30 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  mounted() {
+    let navItemList = document.querySelectorAll(".nav-link");
+    document.querySelector(".nav-link.active").classList.remove("active");
+    navItemList.forEach((e) => {
+      if ("/" + e.dataset.path == this.$route.path) {
+        e.classList.add("active")
+        return
+      }
+    });
+    if(this.$route.path=="/carshare" || this.$route.path=="/driver" || this.$route.path=="/carwashBook"  || this.$route.path=="/carwash" || this.$route.path=="/passengar" ){
+       document.querySelector(".services").classList.add("active")
+    }
+  },
+  watch: {
+    $route() {
+      this.checkRouter();
+    },
+  },
   methods: {
     goprofile() {
       let navItemList = document.querySelectorAll(".nav-link");
       navItemList.forEach((e) => {
         e.addEventListener("click", () => {
-          navItemList.forEach((el) => {
-            if (el.classList.contains("active")) {
-              el.classList.remove("active");
-            }
-          });
+          document.querySelector(".nav-link.active").classList.remove("active");
           e.classList.add("active");
           document.querySelector(".navbar-nav").classList.remove("active");
           if (this.$route.path !== "/" + e.dataset.path) {
@@ -95,6 +108,12 @@ export default {
     },
     burger() {
       document.querySelector(".navbar-nav").classList.toggle("active");
+    },
+    checkRouter() {
+      if (this.$route.path == "/") {
+        document.querySelector(".nav-link.active").classList.remove("active");
+        document.querySelector(".home").classList.add("active");
+      }
     },
   },
   computed: {
@@ -151,7 +170,7 @@ export default {
   .navbar-nav {
     position: absolute;
     top: 100px;
-    left:0px;
+    left: 0px;
     height: calc(100vh - 100px);
     width: 100%;
     background-color: var(--secondcolor);

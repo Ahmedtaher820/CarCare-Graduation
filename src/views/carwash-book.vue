@@ -45,11 +45,11 @@
             <div class="row mt-0">
               <div class="col-md-6">
                 <div class="car-group">
-                  <label for="make" class="form-label">Car Make</label>
+                  <label for="carMake" class="form-label">Car Make</label>
                   <select
                     class="form-control"
-                    v-model="userBookInfo.make"
-                    id="car-select"
+                    v-model="userBookInfo.carMake"
+                    id="carMake"
                   >
                     <option value="Hond" selected>Honda</option>
                     <option value="Volkswagen">Volkswagen</option>
@@ -70,7 +70,7 @@
               <div class="col-md-6">
                 <div class="car-group">
                   <label for="color" class="form-label">Color</label>
-                  <input class="form-control" type="text" id="car-color" />
+                  <input class="form-control" type="text" id="car-color"  />
                 </div>
                 <span class="input-check-err text-danger mt-2"></span>
               </div>
@@ -160,7 +160,7 @@
                 <div
                   class="price-type pt-2 d-flex justify-content-between align-items-center"
                 >
-                  <span>Bronze</span>
+                  <span>{{title}}</span>
                   <b>{{ usercarwash }}</b>
                 </div>
                 <div
@@ -213,9 +213,9 @@ export default {
     return {
       showBag: false,
       userBookInfo: {
-        carType: "",
+        carModel: "",
         email: "",
-        make: "",
+        carMake: "",
       },
       personInfo: [],
       inputError: [],
@@ -232,7 +232,7 @@ export default {
   },
   methods: {
     cartype(e) {
-      this.userBookInfo.carType = e;
+      this.userBookInfo.carModel = e;
       let cartypes = document.querySelectorAll(".carkind");
       cartypes.forEach((e) => {
         e.addEventListener("click", () => {
@@ -243,24 +243,28 @@ export default {
     },
     bookWash(e) {
       e.preventDefault();
-      // to make all error in page is empty
+      // to carMake all error in page is empty
       let inputCheck = document.querySelectorAll(".input-check-err");
       inputCheck.forEach((err) => {
         err.textContent = "";
       });
       this.check("Required", "email-contact", 0);
-      if (this.userBookInfo.carType == "") {
+      if (this.userBookInfo.carModel == "") {
         this.check("Choose Your Car Type", "car-type", 1);
+        return
       }
-      if (this.userBookInfo.make == "") {
+      if (!this.userBookInfo.carMake) {
         this.check("Required", "car-select", 2);
+        return
       }
       if (this.userlatlong.lat == "") {
         this.check("Required", "address", 4);
         this.check("Required", "city", 5);
         this.check("Required", "Country", 6);
+        return
       }
-      this.check("Required", "car-color", 3);
+      this.$store.dispatch("userBookInfo",this.userBookInfo)
+      this.$store.dispatch("completeWashBook")
     },
     check(message, id, index) {
       let inputCheck = document.querySelectorAll(".input-check-err");
@@ -327,8 +331,11 @@ export default {
       return this.$store.state.usercarwash.options;
     },
     sum() {
-      return this.$store.state.usercarwash.totalPrice;
+      return this.$store.state.usercarwash.price;
     },
+    title(){
+      return this.$store.state.usercarwash.title
+    }
   },
 };
 </script>

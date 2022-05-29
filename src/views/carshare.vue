@@ -13,7 +13,7 @@
       <div>
         <router-link
           class="text-decoration-none d-inline-block fs-3"
-          to="/passengar"
+          to="/passenger"
         >
           PASSENGER
         </router-link>

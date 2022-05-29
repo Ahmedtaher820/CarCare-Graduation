@@ -48,7 +48,7 @@ export default {
       ) {
         this.shownav = false;
         this.shawfooter = false;
-      } else if (this.$route.name === "bookwash") {
+      } else if (this.$route.name === "bookwash" || this.$route.name == "passenger") {
         this.shownav = true;
         this.shawfooter = false;
       } else {

@@ -92,8 +92,8 @@
       </tr>
       <tr class="text-center">
         <td scope="row" class="text-start ps-2">
-          Paint Polish and Hybrid
-          Ceramic<br/> Sealant
+          Paint Polish and Hybrid Ceramic<br />
+          Sealant
         </td>
         <td></td>
         <td></td>
@@ -103,8 +103,8 @@
       </tr>
       <tr class="text-center">
         <td scope="row" class="text-start ps-2">
-          Exterior Plastic Dressing
-          w/<br /> UV Protection
+          Exterior Plastic Dressing w/<br />
+          UV Protection
         </td>
         <td></td>
         <td></td>
@@ -118,7 +118,7 @@
           <button
             data-price="price-26"
             class="py-2 px-3 active"
-            @click="selectPrice($event)"
+            @click="selectPrice($event, 'bronze')"
           >
             Select 26$
           </button>
@@ -127,7 +127,7 @@
           <button
             data-price="price-48"
             class="py-2 px-3"
-            @click="selectPrice($event)"
+            @click="selectPrice($event, 'silver')"
           >
             Select 48$
           </button>
@@ -136,7 +136,7 @@
           <button
             data-price="price-70"
             class="py-2 px-3"
-            @click="selectPrice($event)"
+            @click="selectPrice($event, 'gold')"
           >
             Select 70$
           </button>
@@ -145,7 +145,7 @@
           <button
             data-price="price-148"
             class="py-2 px-3"
-            @click="selectPrice($event)"
+            @click="selectPrice($event, 'platinum')"
           >
             Select 148$
           </button>
@@ -154,7 +154,7 @@
           <button
             data-price="price-349"
             class="py-2 px-3"
-            @click="selectPrice($event)"
+            @click="selectPrice($event, 'diamond')"
           >
             Select 349$
           </button>
@@ -168,29 +168,30 @@
 export default {
   data() {
     return {
-      priceplan:""
+      price: "",
+      title:''
     };
   },
   methods: {
-    selectPrice(e) {
+    selectPrice(e,plane) {
+      this.title = plane
       document
         .querySelector(".buttons-select button.active")
         .classList.remove("active");
       e.target.classList.add("active");
-      this.priceplan = e.target.textContent.slice(-5).trim()
-      document.querySelectorAll(".option.selected").forEach((ele)=>{
-        ele.classList.remove("selected")
-      })
-      document.querySelectorAll("."+e.target.dataset.price).forEach((e)=>{
-        e.classList.add("selected")
-        
-      })
-      document.querySelectorAll(".option button.active").forEach((e)=>{
-        e.classList.remove("active")
-        
-      })
-      this.$store.commit("pricingplan",this.priceplan)
-      this.$store.commit("cleanoption")
+      this.price = e.target.textContent.slice(-5).trim();
+      document.querySelectorAll(".option.selected").forEach((ele) => {
+        ele.classList.remove("selected");
+      });
+      document.querySelectorAll("." + e.target.dataset.price).forEach((e) => {
+        e.classList.add("selected");
+      });
+      document.querySelectorAll(".option button.active").forEach((e) => {
+        e.classList.remove("active");
+      });
+      this.$store.commit("pricingplan", this.price);
+      this.$store.commit("pricingTitle",this.title);
+      this.$store.commit("cleanoption");
     },
   },
 };
@@ -200,7 +201,7 @@ export default {
 table {
   width: 100% !important;
   max-width: 100%;
-  overflow:visible;
+  overflow: visible;
 }
 .thead-span {
   text-align: center !important;

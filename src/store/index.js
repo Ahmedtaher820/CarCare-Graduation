@@ -83,7 +83,7 @@ export default new Vuex.Store({
       {
         service: "carshare",
         content: "Car Share",
-        href: "/carshare",
+        href: "/passenger",
         list: [
           "Car sharing is all about filling empty seats, sharing costs, and it’s a great way to meet new people.",
           "examples of when car sharing can be used: Commuting to work, Going to college / university,Going to a sporting match",
@@ -189,7 +189,7 @@ export default new Vuex.Store({
     usercarwash: {
       location: {
         lat: "",
-        long: "",
+        lang: "",
       },
       options: [
         {
@@ -197,28 +197,13 @@ export default new Vuex.Store({
           option: "",
         },
       ],
-      formstepone: {
-        // country: "",
-        // city: "",
-        // street: "",
-        // locname: "",
-      },
-      car: {
-        // type: "",
-        // make: "",
-        // model: "",
-        // color: "",
-      },
+      carMake:"",
+      carModel:"",
+      email:"",
+      color:"",
       pricing: "26$",
-      personal: {
-        // firstname: "",
-        // lastname: "",
-        // email: "",
-        // phone: "",
-        // id: "",
-        // coupon: null,
-      },
-      totalPrice: 26,
+      title:"Bronze",
+      price: 26,
     },
   },
   mutations: {
@@ -242,7 +227,7 @@ export default new Vuex.Store({
       state.usercarwash.options.forEach((e) => {
         if (payload.option == e.option) {
           // to make Subtract in total price if option was find
-          state.usercarwash.totalPrice -= Number(
+          state.usercarwash.price -= Number(
             payload.price.slice(0, payload.price.indexOf("$"))
           );
           e.option = "";
@@ -260,21 +245,39 @@ export default new Vuex.Store({
     },
     pricingplan(state, payload) {
       console.log(payload);
-      state.usercarwash.totalPrice = Number(
+      state.usercarwash.price = Number(
         payload.slice(0, payload.indexOf("$"))
       );
       return (state.usercarwash.pricing = payload);
     },
+    pricingTitle(state,payload){
+      console.log(payload)
+      return state.usercarwash.title = payload
+    },
     carinfo(state, payload) {
       return (state.usercarwash.car = payload);
+    },
+    carMake(state,payload){
+      return state.usercarwash.carMake = payload
+    },
+    carModel(state,payload){
+      return state.usercarwash.carModel = payload
+    },
+    email(state,payload){
+      return state.usercarwash.email = payload
+    },
+    color(state,payload){
+      return state.usercarwash.color = payload
     },
     personalinfo(state, payload) {
       return (state.usercarwash.personal = payload);
     },
     // to make sum in all option and sum
     optionSum(state, payload) {
-      return (state.usercarwash.totalPrice += Number(payload));
+      return (state.usercarwash.price += Number(payload));
     },
+    // Car Kind
+    
   },
   actions: {
     async getuserfun({ commit }) {
@@ -300,5 +303,16 @@ export default new Vuex.Store({
         });
     },
     checkuser() {},
+    userBookInfo({commit},payload){
+      console.log(payload)
+      commit("carMake",payload.carMake)
+      commit("carModel",payload.carModel)
+      commit("email",payload.email)
+      commit("color",payload.color)
+    },
+    completeWashBook({state}) {
+      console.log("done")
+      console.log(state.usercarwash);
+    },
   },
 });

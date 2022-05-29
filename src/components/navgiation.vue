@@ -83,7 +83,7 @@ export default {
         return
       }
     });
-    if(this.$route.path=="/carshare" || this.$route.path=="/driver" || this.$route.path=="/carwashBook"  || this.$route.path=="/carwash" || this.$route.path=="/passengar" ){
+    if(this.$route.path=="/carshare" || this.$route.path=="/verfiyCarShare" || this.$route.path=="/driver" || this.$route.path=="/carwashBook"  || this.$route.path=="/carwash" || this.$route.path=="/passenger" ){
        document.querySelector(".services").classList.add("active")
     }
   },

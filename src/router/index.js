@@ -8,6 +8,7 @@ import carwashBook from "../views/carwash-book.vue";
 import carshare from "../views/carshare.vue";
 import driver from "../views/driver.vue";
 import passenger from "../views/passenger.vue";
+import verfiyCarShare from "../views/carShareVerify.vue";
 import reset from "../views/reset.vue";
 import verify from "../views/verify.vue";
 import profile from "../views/profile.vue";
@@ -55,6 +56,14 @@ const routes = [
     component: login,
     meta: {
       title: "loginPage",
+    },
+  },
+  {
+    path: "/verfiyCarShare",
+    name: "verfiyCarShare",
+    component: verfiyCarShare,
+    meta: {
+      title: "verfiyCarShare",
     },
   },
   {

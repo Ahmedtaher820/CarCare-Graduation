@@ -107,15 +107,11 @@
 
 @keyframes moving {
   0% {
-    transform: translate(10px, 10px) scale(1.1) rotate(-15deg);
+    transform: translate(15px) scale(0) rotate(0deg);
+    opacity: 1;
   }
-  25% {
-    transform: translate(-10px, -10px) scale(0.9) rotate(0deg);
-  }
-  50% {
-    transform: translate(0px, 0px) scale(1) rotate(15deg);
-  }
-  75% {
-    transform: translate(10px, 10px) scale(1.1) rotate(-15deg);
+  100% {
+    transform: translate(0px) scale(1.5) rotate(360deg);
+    opacity: 0;
   }
 }

@@ -1,0 +1,35 @@
+.threeD .carousel-3d-slide {
+  min-height: 300px;
+  border: none;
+  filter: blur(8px);
+   background-color: var(--maincolor);
+  box-shadow: 0px 0px 10px rgba(0,0,0,.3);
+}
+.threeD .carousel-3d-slide.current {
+  filter: blur(0px);
+ background-color: rgba(255, 255, 255, 0.383);
+ border-radius: 15px;
+ transition: var(--maintransition ) !important;
+ margin-top: 10px !important;
+}
+.slide-box {
+  background-color: rgba(255, 255, 255, 0.383);
+  min-height: 100%;
+}
+.threeD .carousel-3d-container[data-v-07917306]{
+  overflow: hidden;
+  min-height: 320px !important;
+}
+.threeD .quote-img {
+  width: 64px;
+  margin-left: auto;
+}
+.threeD .carousel-3d-slide.current:hover{
+  background-color: #fff;
+}
+.threeD .carousel-3d-slider {
+  min-height: 300px;
+}
+.slide-box .boxes img {
+  width: 64px;
+}

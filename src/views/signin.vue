@@ -225,7 +225,7 @@ export default {
   border-radius: 15px !important;
 }
 .signin form label {
-  color: #555;
+  color: var(--main-color);
 }
 @media (max-width: 991px) {
   .form-label,
@@ -240,7 +240,7 @@ form .btn {
   color: var(--maincolor);
 }
 form .btn:hover {
-  background-color: var(--maincolor);
+  background-color: var(--thirdcolor);
   color: var(--secondcolor);
 }
 .form-control:focus {

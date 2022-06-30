@@ -1,7 +1,10 @@
 :root {
-    --maincolor: #FDBE33;
-    --secondcolor: #20212B;
-    --background-color: #dcdcdc;
+    --maincolor: #b4b89775;
+    --secondcolor: #368b85;
+    --thirdcolor: #B94E48;
+    --main-text:#464660;
+    --background-color: #b4b89757  ;
     --bg-second-color: #f1f1f1;
+    --main-gredient:linear-gradient(to right,#368b85,#080e20bf);
     --maintransition:.3s ease-in-out
   }

@@ -61,7 +61,7 @@
             </div>
           </div>
         </div>
-        <div class="d-none d-lg-block col-lg-6 carousel-box">
+        <div class="d-none d-lg-block col-lg-5 carousel-box">
           <carousel></carousel>
         </div>
       </div>

@@ -6,11 +6,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     carouselimgs: [
-      { url: "11" },
-      { url: "22" },
-      { url: "33" },
-      { url: "44" },
-      { url: "55" },
+      { url: "firstService" },
+      { url: "secondService" },
+      { url: "thirdService" },
     ],
     animationimg: [
       {
@@ -101,6 +99,7 @@ export default new Vuex.Store({
         ],
       },
     ],
+
     testmonial: [
       {
         imgsrc: "avatar",
@@ -136,6 +135,158 @@ export default new Vuex.Store({
         imgsrc: "woman",
         job: "Youtuber",
         name: "Hala Khaled",
+      },
+    ],
+    imgSrc: [
+      {
+        srcName: "ahmed",
+        member: "Ahmed Taher",
+        job: "Front-End",
+        description:
+          "My name ahmed taher,Recent graduate from faculty computer and information,I interested about front-end specially",
+        social: [
+          {
+            name: "bi-facebook",
+            url: "https://www.facebook.com/profile.php?id=100022070504463",
+          },
+          {
+            name: "bi-linkedin",
+            url: "https://www.linkedin.com/in/ahmed-taher-141682221/",
+          },
+          {
+            name: "bi-instagram",
+            url: "https://www.instagram.com/aahmedttaherr/",
+          },
+          {
+            name: "bi-github",
+            url: "https://github.com/Ahmedtaher820",
+          },
+        ],
+      },
+      {
+        srcName: "abdo",
+        member: "Abdo Alaa",
+        job: "Back-End",
+        description:
+          "My name abdelrahman alaa,Recent graduate from faculty computer and information,I interested about Back-end specially",
+        social: [
+          {
+            name: "bi-facebook",
+            url: "https://www.facebook.com/profile.php?id=100003936277814",
+          },
+          {
+            name: "bi-linkedin",
+            url: "https://www.linkedin.com/in/ahmed-taher-141682221/",
+          },
+          {
+            name: "bi-instagram",
+            url: "https://www.instagram.com/aahmedttaherr/",
+          },
+          {
+            name: "bi-github",
+            url: "https://github.com/Ahmedtaher820",
+          },
+        ],
+      },
+      {
+        srcName: "mohamed",
+        member: "M.Mahmoud",
+        job: "Back-End",
+        description:
+          "My name mohamed mahmoud,Recent graduate from faculty computer and information,I interested about Back-end specially",
+        social: [
+          {
+            name: "bi-facebook",
+            url: "https://www.facebook.com/profile.php?id=100022070504463",
+          },
+          {
+            name: "bi-linkedin",
+            url: "https://www.linkedin.com/in/ahmed-taher-141682221/",
+          },
+          {
+            name: "bi-instagram",
+            url: "https://www.instagram.com/aahmedttaherr/",
+          },
+          {
+            name: "bi-github",
+            url: "https://github.com/Ahmedtaher820",
+          },
+        ],
+      },
+      {
+        srcName: "elhegawi",
+        member: "M.Elhegawi",
+        job: "Flutter",
+        description:
+          "My name mohamed elhegawi,Recent graduate from faculty computer and information,I interested about Flutter specially",
+        social: [
+          {
+            name: "bi-facebook",
+            url: "https://www.facebook.com/profile.php?id=100002225277967",
+          },
+          {
+            name: "bi-linkedin",
+            url: "https://www.linkedin.com/in/mohamed-ashraf-230280225/",
+          },
+          {
+            name: "bi-instagram",
+            url: "https://www.instagram.com/aahmedttaherr/",
+          },
+          {
+            name: "bi-github",
+            url: "https://github.com/MOHAMD-ASHRAF",
+          },
+        ],
+      },
+      {
+        srcName: "mohamed",
+        member: "Moaz Ahmed",
+        job: "Flutter",
+        description:
+          "My name moaz ahmed,Recent graduate from faculty computer and information,I interested about Flutter specially",
+        social: [
+          {
+            name: "bi-facebook",
+            url: "https://www.facebook.com/profile.php?id=100022070504463",
+          },
+          {
+            name: "bi-linkedin",
+            url: "https://www.linkedin.com/in/ahmed-taher-141682221/",
+          },
+          {
+            name: "bi-instagram",
+            url: "https://www.instagram.com/aahmedttaherr/",
+          },
+          {
+            name: "bi-github",
+            url: "https://github.com/Ahmedtaher820",
+          },
+        ],
+      },
+      {
+        srcName: "ahmed",
+        member: "Omar Ismail",
+        job: "UI/UX",
+        description:
+          "My name omar ismail,Recent graduate from faculty computer and information,I interested about UI/UX specially",
+        social: [
+          {
+            name: "bi-facebook",
+            url: "https://www.facebook.com/profile.php?id=100022070504463",
+          },
+          {
+            name: "bi-linkedin",
+            url: "https://www.linkedin.com/in/omar9ismail",
+          },
+          {
+            name: "bi-instagram",
+            url: "https://www.instagram.com/Omar9ismail/",
+          },
+          {
+            name: "bi-github",
+            url: "https://github.com/Omar9ismail",
+          },
+        ],
       },
     ],
     prices: [
@@ -197,12 +348,12 @@ export default new Vuex.Store({
           option: "",
         },
       ],
-      carMake:"",
-      carModel:"",
-      email:"",
-      color:"",
+      carMake: "",
+      carModel: "",
+      email: "",
+      color: "",
       pricing: "26$",
-      title:"Bronze",
+      title: "Bronze",
       price: 26,
     },
   },
@@ -245,29 +396,27 @@ export default new Vuex.Store({
     },
     pricingplan(state, payload) {
       console.log(payload);
-      state.usercarwash.price = Number(
-        payload.slice(0, payload.indexOf("$"))
-      );
+      state.usercarwash.price = Number(payload.slice(0, payload.indexOf("$")));
       return (state.usercarwash.pricing = payload);
     },
-    pricingTitle(state,payload){
-      console.log(payload)
-      return state.usercarwash.title = payload
+    pricingTitle(state, payload) {
+      console.log(payload);
+      return (state.usercarwash.title = payload);
     },
     carinfo(state, payload) {
       return (state.usercarwash.car = payload);
     },
-    carMake(state,payload){
-      return state.usercarwash.carMake = payload
+    carMake(state, payload) {
+      return (state.usercarwash.carMake = payload);
     },
-    carModel(state,payload){
-      return state.usercarwash.carModel = payload
+    carModel(state, payload) {
+      return (state.usercarwash.carModel = payload);
     },
-    email(state,payload){
-      return state.usercarwash.email = payload
+    email(state, payload) {
+      return (state.usercarwash.email = payload);
     },
-    color(state,payload){
-      return state.usercarwash.color = payload
+    color(state, payload) {
+      return (state.usercarwash.color = payload);
     },
     personalinfo(state, payload) {
       return (state.usercarwash.personal = payload);
@@ -277,7 +426,6 @@ export default new Vuex.Store({
       return (state.usercarwash.price += Number(payload));
     },
     // Car Kind
-    
   },
   actions: {
     async getuserfun({ commit }) {
@@ -303,16 +451,34 @@ export default new Vuex.Store({
         });
     },
     checkuser() {},
-    userBookInfo({commit},payload){
-      console.log(payload)
-      commit("carMake",payload.carMake)
-      commit("carModel",payload.carModel)
-      commit("email",payload.email)
-      commit("color",payload.color)
+    userBookInfo({ commit }, payload) {
+      console.log(payload);
+      commit("carMake", payload.carMake);
+      commit("carModel", payload.carModel);
+      commit("email", payload.email);
+      commit("color", payload.color);
     },
-    completeWashBook({state}) {
-      console.log("done")
+    completeWashBook({ state }) {
+      console.log("done");
       console.log(state.usercarwash);
+    },
+    async submitCarshareUser({ state }, payload) {
+      console.log(state);
+      let userToken = JSON.parse(localStorage.getItem("usertoken"));
+      await axios
+        .post(
+          "https://car-care3.herokuapp.com/api/carSharingInfo/register",
+          payload,
+          {
+            headers: { "x-auth-token": `${userToken}` },
+          }
+        )
+        .then((resolve) => {
+          console.log(resolve);
+        })
+        .catch((e) => {
+          console.log(e.response);
+        });
     },
   },
 });

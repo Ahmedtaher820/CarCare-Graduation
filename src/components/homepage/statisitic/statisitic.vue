@@ -1,6 +1,6 @@
 <template>
-  <div class="statistic-box text-light" id="statistic">
-    <div class="container">
+  <div class="statistic-box text-light d-flex justify-content-center align-items-center" id="statistic">
+    <div class="container d-flex justify-content-center flex-column">
       <h2 class="pt-4 fs-1">Our Statistics</h2>
       <div class="row">
         <div class="col-md-4">
@@ -28,7 +28,6 @@
         </div>
       </div>
     </div>
-    <div class="overlay"></div>
   </div>
 </template>
 
@@ -69,11 +68,11 @@ export default {
 
 <style>
 .statistic-box {
-  min-height: 350px;
+  min-height: 480px;
   background: url("../../../assets/statistics/statistics.jpg") no-repeat;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
   background-size: cover;
-  background-position: 40% 50%;
+  /* background-position: 40% 50%; */
   position: relative;
   z-index: 1;
 }

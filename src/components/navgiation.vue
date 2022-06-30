@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg position-relative">
+  <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/">
         <img src="../assets/logo/Logo3.png" class="logo2 ms-3" alt=""
@@ -79,12 +79,19 @@ export default {
     document.querySelector(".nav-link.active").classList.remove("active");
     navItemList.forEach((e) => {
       if ("/" + e.dataset.path == this.$route.path) {
-        e.classList.add("active")
-        return
+        e.classList.add("active");
+        return;
       }
     });
-    if(this.$route.path=="/carshare" || this.$route.path=="/verfiyCarShare" || this.$route.path=="/driver" || this.$route.path=="/carwashBook"  || this.$route.path=="/carwash" || this.$route.path=="/passenger" ){
-       document.querySelector(".services").classList.add("active")
+    if (
+      this.$route.path == "/carshare" ||
+      this.$route.path == "/verfiyCarShare" ||
+      this.$route.path == "/driver" ||
+      this.$route.path == "/carwashBook" ||
+      this.$route.path == "/carwash" ||
+      this.$route.path == "/passenger"
+    ) {
+      document.querySelector(".services").classList.add("active");
     }
   },
   watch: {
@@ -127,7 +134,7 @@ export default {
 <style>
 .navbar {
   z-index: 999;
-  background-color: var(--secondcolor);
+  background: var(--main-gredient);
   padding-top: 0px !important;
   padding-bottom: 0px !important;
 }

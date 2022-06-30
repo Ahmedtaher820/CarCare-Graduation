@@ -26,15 +26,7 @@
                   class="form-control"
                   id="age"
                   placeholder="Age"
-                />
-              </div>
-              <div class="col-md-6 mb-2">
-                <label class="form-label">Your Photo:</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  data-type="userPicture"
-                  @change="licenceCheck"
+                  v-model="trip.age"
                 />
               </div>
               <div class="col-md-6 mb-2">
@@ -44,6 +36,7 @@
                   class="form-control"
                   data-type="userlicense"
                   @change="licenceCheck"
+                  accept="image/**"
                 />
               </div>
               <div class="col-md-6 mb-2">
@@ -57,7 +50,11 @@
               </div>
 
               <div class="mt-4">
-                <button class="btn verify-btn" type="button">
+                <button
+                  class="btn verify-btn"
+                  type="button"
+                  @click="submitUserInfo()"
+                >
                   Verifed Information
                 </button>
               </div>
@@ -73,12 +70,12 @@
 export default {
   data() {
     return {
-      isVerify:false,
+      isVerify: true, 
       trip: {
-        userlicense: "",
-        carlicense: "",
-        userPicture: "",
-        carPictures: null,
+        gender: "",
+        age: "",
+        licensePhoto: "",
+        licenseCarPhoto: "",
       },
     };
   },
@@ -90,24 +87,23 @@ export default {
         this.uploadImage("userlicense", e.target.files[0]);
       } else if (file == "carlicense") {
         this.uploadImage("carlicense", e.target.files[0]);
-      } else {
-        this.uploadImage("userPicture", e.target.files[0]);
       }
     },
     uploadImage(ele, value) {
-      console.log(ele);
       let fd = new FormData();
       fd.append("img", value, value.name);
       if (ele == "userlicense") {
-        this.trip.userlicense = fd;
+        this.trip.licensePhoto = fd;
+        console.log(this.trip.licensePhoto)
       } else if (ele == "carlicense") {
-        this.trip.carlicense = fd;
-      } else if (ele == "userPicture") {
-        this.trip.userPicture = fd;
+        this.trip.licenseCarPhoto = fd;
       }
     },
+    submitUserInfo() {
+      this.$store.dispatch("submitCarshareUser", this.trip);
+    },
   },
-  created(){
+  created() {
     // axios.get("URL",{
     //   Headers:{
     //     "auth-token":"auth-token"
@@ -115,11 +111,11 @@ export default {
     // }).then((resolve)=>{
     //     this.isVerify = resolve.data.user.isVerify
     // })
-    
-    if (!this.isVerify){
-      this.$router.push("/driver")
+
+    if (!this.isVerify) {
+      this.$router.push("driver");
     }
-  }
+  },
 };
 </script>
 

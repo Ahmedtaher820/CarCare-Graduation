@@ -11,17 +11,15 @@
           v-for="(value, index) in carouselimg"
           :key="index"
         >
-          <img :src="require(`../assets/fiveImg/${value.url}.webp`)" />
+          <img :src="require(`../assets/fiveImg/${value.url}.svg`)" />
         </div>
       </div>
     </div>
 
-    <div class="dots position-absolute">
+    <div class="dots position-absolute d-flex">
       <span class="active" @click="move">1</span>
       <span @click="move">2</span>
       <span @click="move">3</span>
-      <span @click="move">4</span>
-      <span @click="move">5</span>
     </div>
     <div class="group-img position-absolute">
       <img src="../assets/Layer 4@2x.png" alt="" />
@@ -84,15 +82,15 @@ export default {
   height: 100%;
 }
 .carousel .carousel-img img {
-  width: 350px;
-  height: 350px;
+  width: 400px;
+  height: 400px;
 }
 
 .dots {
   width: fit-content;
-  right: 30px;
-  bottom: 50%;
-  transform: translateY(50%);
+  left: 50%;
+  bottom: 30%;
+  transform: translateY(-50%);
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .dots {
@@ -108,7 +106,7 @@ export default {
   border: 1px solid #fff;
   display: block;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin:0px 10px;
   transition: 0.3s;
   display: flex;
   justify-content: center;
@@ -117,8 +115,8 @@ export default {
 }
 
 .dots span.active {
-  background-color: #fff;
-  color: var(--maincolor);
+  background-color: var(--thirdcolor);
+  color: #fff;
 }
 .dots span:not(span.active):hover {
   background-color: rgba(255, 255, 255, 0.424);

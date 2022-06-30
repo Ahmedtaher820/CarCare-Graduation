@@ -47,7 +47,7 @@
               </div>
               <button
                 type="button"
-                class="btn btn-main-bg me-0"
+                class="btn me-0"
                 @click="loginuser"
               >
                 LOGIN
@@ -129,9 +129,16 @@ export default {
 </script>
 
 <style scoped>
-/* .login-heading img {
-  width: 250px;
-} */
+form .btn{
+  color: #fff;
+}
+form .btn:hover {
+  background-color: var(--thirdcolor);
+  color: #fff;
+}
+.login label {
+  color: var(--main-text);
+}
 .form-control {
   border: none;
 }
@@ -143,4 +150,5 @@ export default {
   width: fit-content !important;
   padding: 10px 35px;
 }
+
 </style>

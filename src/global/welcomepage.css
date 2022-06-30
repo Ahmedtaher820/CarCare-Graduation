@@ -32,11 +32,7 @@
   overflow: hidden;
   height: 100vh;
 }
-@media (max-width: 991px) {
-  .welcome-screen {
-    height: auto;
-  }
-}
+
 .logowelcomepage img {
   width: 200px;
   margin: 3% 0px 40px 40px;
@@ -61,13 +57,16 @@
 a.services {
   z-index: 150;
 }
-.btn-services {
-  display: none !important;
+.welcome-btn{
+  background: var(--main-gredient) !important;
 }
+.content-text h1{
+  color: var(--main-text);
+}
+/* .btn-services {
+  display: none !important;
+} */
 @media (max-width: 991px) {
-  .btn-services {
-    display: block !important;
-  }
   .welcome-btn{
     font-size: 18px;
     width: 180px;

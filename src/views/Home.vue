@@ -4,9 +4,9 @@
     <div class="carmarket py-5 position-relative" id="carmarket">
       <Carmaket />
     </div>
-    <div class="position-relative py-5">
+    <!-- <div class="position-relative py-5">
       <product />
-    </div>
+    </div> -->
     <div
       class="aboutus position-relative py-5"
       id="aboutus"
@@ -14,9 +14,7 @@
       data-aos-duration="1500"
     >
     <div class="container">
-    <h2 class="main-title fs-2 mb-2" data-aos="fade-bottom" data-aos-duration="1000">
-      About Us
-    </h2>
+
       <about />
     </div>
     </div>
@@ -38,7 +36,7 @@
 import welcomepageinhome from "../components/welcomepageinhome.vue";
 import Carmaket from "../components/homepage/carmarket/carmarket.vue";
 import about from "../components/homepage/about.vue";
-import product from "../components/homepage/products/product.vue";
+// import product from "../components/homepage/products/product.vue";
 import staisitic from "../components/homepage/statisitic/statisitic.vue";
 import test from "../components/homepage/testmonial/test.vue";
 // import userstyle from "../components/homepage/userstyle.vue"
@@ -54,7 +52,7 @@ export default {
     welcomepageinhome,
     Carmaket,
     about,
-    product,
+    // product,
     staisitic,
     test,
     // userstyle

@@ -28,8 +28,8 @@
                     <label for="" class="form-label">Country</label>
                     <select
                       id="country"
-                      v-model="trip.fromCountry"
-                      @change="countryChange('from')"
+                      v-model="trip.country"
+                      @change="countryChange()"
                       class="form-control mb-3"
                     >
                       <option value="" selected disabled>
@@ -57,7 +57,7 @@
                         Select Your Start City
                       </option>
                       <option
-                        v-for="(city, i) in fromcities"
+                        v-for="(city, i) in cities"
                         :value="city"
                         :key="i"
                       >
@@ -92,8 +92,8 @@
 
                     <select
                       id="tocountry"
-                      v-model="trip.toCountry"
-                      @change="countryChange('to')"
+                      v-model="trip.country"
+                      @change="countryChange()"
                       class="form-control mb-3"
                     >
                       <option value="" selected disabled>
@@ -120,7 +120,7 @@
                         Select Your End City
                       </option>
                       <option
-                        v-for="(city, i) in tocities"
+                        v-for="(city, i) in cities"
                         :value="city"
                         :key="i"
                       >
@@ -171,8 +171,8 @@
             </button>
           </form>
         </div>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -181,14 +181,11 @@ export default {
   data() {
     return {
       trip: {
-        fromCountry: "",
+        country: "",
         fromCity: "",
-        toCountry: "",
         toCity: "",
         date: "2022-06-12T19:30",
-        gender: "",
         price: "",
-        
       },
       country: [
         "Bahrain",
@@ -204,8 +201,7 @@ export default {
         "United Arab Emirates",
         "Yemen",
       ],
-      fromcities: [],
-      tocities: [],
+      cities: [],
       countries: Object(),
       city_states: Object(),
     };
@@ -215,59 +211,53 @@ export default {
     //Middle East
 
     this.city_states["Bahrain"] =
-      "|Manama||Al Hadd|Al Manamah|Al Mintaqah al Gharbiyah|Al Mintaqah al Wusta|Al Mintaqah ash Shamaliyah|Al Muharraq|Ar Rifa wa al Mintaqah al Janubiyah|Jidd Hafs|Madinat Hamad|Madinat Isa|Juzur Hawar|Sitrah";
+      "Manama|Al Hadd|Al Manamah|Al Mintaqah al Gharbiyah|Al Mintaqah al Wusta|Al Mintaqah ash Shamaliyah|Al Muharraq|Ar Rifa wa al Mintaqah al Janubiyah|Jidd Hafs|Madinat Hamad|Madinat Isa|Juzur Hawar|Sitrah";
     this.city_states["Egypt"] =
-      "|Cairo||Ad Daqahliyah|Al Bahr al Ahmar|Al Buhayrah|Al Fayyum|Al Gharbiyah|Al Iskandariyah|Al Isma iliyah|Al Jizah|Al Minufiyah|Al Minya|Al Qahirah|Al Qalyubiyah|Al Wadi al Jadid|Ash Sharqiyah|As Suways|Aswan|Asyut|Bani Suwayf|Bur Said|Dumyat|Janub Sina|Kafr ash Shaykh|Matruh|Qina|Shamal Sina|Suhaj";
+      "Cairo|Ad Daqahliyah|Al Bahr al Ahmar|Al Buhayrah|Al Fayyum|Al Gharbiyah|Al Iskandariyah|Al Isma iliyah|Al Jizah|Al Minufiyah|Al Minya|Al Qahirah|Al Qalyubiyah|Al Wadi al Jadid|Ash Sharqiyah|As Suways|Aswan|Asyut|Bani Suwayf|Bur Said|Dumyat|Janub Sina|Kafr ash Shaykh|Matruh|Qina|Shamal Sina|Suhaj";
     this.city_states["Iran"] =
-      "|Tehran||Ardabil|Azarbayjan-e Gharbi|Azarbayjan-e Sharqi|Bushehr|Chahar Mahall va Bakhtiari|Esfahan|Fars|Gilan|Golestan|Hamadan|Hormozgan|Ilam|Kerman|Kermanshah|Khorasan|Khuzestan|Kohkiluyeh va Buyer Ahmad|Kordestan|Lorestan|Markazi|Mazandaran|Qazvin|Qom|Semnan|Sistan va Baluchestan|Yazd|Zanjan";
+      "Tehran|Ardabil|Azarbayjan-e Gharbi|Azarbayjan-e Sharqi|Bushehr|Chahar Mahall va Bakhtiari|Esfahan|Fars|Gilan|Golestan|Hamadan|Hormozgan|Ilam|Kerman|Kermanshah|Khorasan|Khuzestan|Kohkiluyeh va Buyer Ahmad|Kordestan|Lorestan|Markazi|Mazandaran|Qazvin|Qom|Semnan|Sistan va Baluchestan|Yazd|Zanjan";
     this.city_states["Iraq"] =
-      "|Baghdad||Al Anbar|Al Basrah|Al Muthanna|Al Qadisiyah|An Najaf|Arbil|As Sulaymaniyah|At Tamim|Babil|Dahuk|Dhi Qar|Diyala|Karbala|Maysan|Ninawa|Salah ad Din|Wasit";
+      "Baghdad|Al Anbar|Al Basrah|Al Muthanna|Al Qadisiyah|An Najaf|Arbil|As Sulaymaniyah|At Tamim|Babil|Dahuk|Dhi Qar|Diyala|Karbala|Maysan|Ninawa|Salah ad Din|Wasit";
     this.city_states["Jordan"] =
-      "|Amman||Ajlun|Al Aqabah|Al Balqa|Al Karak|Al Mafraq|At Tafilah|Az Zarqa|Irbid|Jarash|Maan|Madaba";
+      "Amman|Ajlun|Al Aqabah|Al Balqa|Al Karak|Al Mafraq|At Tafilah|Az Zarqa|Irbid|Jarash|Maan|Madaba";
     this.city_states["Kuwait"] =
-      "|Kuwait||Al Ahmadi|Al Farwaniyah|Al Asimah|Al Jahra|Hawalli";
+      "Kuwait|Al Ahmadi|Al Farwaniyah|Al Asimah|Al Jahra|Hawalli";
     this.city_states["Lebanon"] =
-      "|Beirut||Beyrouth|Beqaa|Liban-Nord|Liban-Sud|Mont-Liban|Nabatiye";
+      "Beirut|Beyrouth|Beqaa|Liban-Nord|Liban-Sud|Mont-Liban|Nabatiye";
     this.city_states["Oman"] =
-      "|Muscat||Ad Dakhiliyah|Al Batinah|Al Wusta|Ash Sharqiyah|Az Zahirah|Musandam|Zufar";
+      "Muscat|Ad Dakhiliyah|Al Batinah|Al Wusta|Ash Sharqiyah|Az Zahirah|Musandam|Zufar";
 
     this.city_states["Qatar"] =
-      "|Doha||Ad Dawhah|Al Ghuwayriyah|Al Jumayliyah|Al Khawr|Al Wakrah|Ar Rayyan|Jarayan al Batinah|Madinat ash Shamal|Umm Salal";
+      "Doha|Ad Dawhah|Al Ghuwayriyah|Al Jumayliyah|Al Khawr|Al Wakrah|Ar Rayyan|Jarayan al Batinah|Madinat ash Shamal|Umm Salal";
     this.city_states["Saudi Arabia"] =
-      "|Riyadh||Al Bahah|Al Hudud ash Shamaliyah|Al Jawf|Al Madinah|Al Qasim|Ar Riyad|Ash Sharqiyah (Eastern Province)|Asir|Hail|Jizan|Makkah|Najran|Tabuk";
+      "Riyadh|Al Bahah|Al Hudud ash Shamaliyah|Al Jawf|Al Madinah|Al Qasim|Ar Riyad|Ash Sharqiyah (Eastern Province)|Asir|Hail|Jizan|Makkah|Najran|Tabuk";
     this.city_states["Syria"] =
-      "|Damascus||Al Hasakah|Al Ladhiqiyah|Al Qunaytirah|Ar Raqqah|As Suwayda|Dara|Dayr az Zawr|Dimashq|Halab|Hamah|Hims|Idlib|Rif Dimashq|Tartus";
+      "Damascus|Al Hasakah|Al Ladhiqiyah|Al Qunaytirah|Ar Raqqah|As Suwayda|Dara|Dayr az Zawr|Dimashq|Halab|Hamah|Hims|Idlib|Rif Dimashq|Tartus";
 
     this.city_states["United Arab Emirates"] =
-      "|Abu Dhabi||Abu Zaby (Abu Dhabi)|Ajman|Al Fujayrah|Ash Shariqah (Sharjah)|Dubayy (Dubai)|Ras al Khaymah|Umm al Qaywayn";
+      "Abu Dhabi|Abu Zaby (Abu Dhabi)|Ajman|Al Fujayrah|Ash Shariqah (Sharjah)|Dubayy (Dubai)|Ras al Khaymah|Umm al Qaywayn";
 
     this.city_states["Yemen"] =
-      "|Sanaa||Abyan|Adan|Al Bayda|Al Hudaydah|Al Jawf|Al Mahrah|Al Mahwit|Dhamar|Hadramawt|Hajjah|Ibb|Lahij|Marib|Sadah|Sana|Shabwah|Taizz";
+      "Sanaa|Abyan|Adan|Al Bayda|Al Hudaydah|Al Jawf|Al Mahrah|Al Mahwit|Dhamar|Hadramawt|Hajjah|Ibb|Lahij|Marib|Sadah|Sana|Shabwah|Taizz";
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
   },
   methods: {
-    countryChange(direction) {
-      if (direction == "to") {
+    countryChange() {
+      console.log("done")
         for (var prop1 in this.city_states) {
-          if (this.trip.toCountry === prop1) {
+          if (this.trip.country === prop1) {
             document.getElementById("tocity").disabled = false;
-            this.tocities = this.city_states[prop1].split("|");
-          }
-        }
-      } else {
-        for (var prop2 in this.city_states) {
-          if (this.trip.fromCountry === prop2) {
             document.getElementById("city").disabled = false;
-            this.fromcities = this.city_states[prop2].split("|");
+
+            this.cities = this.city_states[prop1].split("|");
           }
         }
-      }
+      
     },
-    
+
     sumbitShare() {
-      console.log(this.trip.userlicense);
       console.log(this.trip);
     },
   },

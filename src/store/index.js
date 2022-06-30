@@ -264,7 +264,7 @@ export default new Vuex.Store({
         ],
       },
       {
-        srcName: "ahmed",
+        srcName: "omar",
         member: "Omar Ismail",
         job: "UI/UX",
         description:

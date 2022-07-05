@@ -6,7 +6,7 @@
         <div class="work-box">
           <div class="work-img">
             <img
-              :src="require(`../../assets/carwash/contact/${info.num}.jpg`)"
+              :src="require(`../../assets/carwash/contact/${info.num}.png`)"
               alt=""
             />
           </div>

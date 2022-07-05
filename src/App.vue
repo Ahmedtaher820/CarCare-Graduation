@@ -2,9 +2,9 @@
   <div id="app">
     <navgiation v-if="shownav" />
     <!-- <transition class="fade-out" name="fade"> -->
-    <router-view />
+    <!-- <transition> -->
+      <router-view />
     <!-- </transition> -->
-
     <img
       v-for="(img, i) in animationimg"
       :key="i"
@@ -48,7 +48,10 @@ export default {
       ) {
         this.shownav = false;
         this.shawfooter = false;
-      } else if (this.$route.name === "bookwash" || this.$route.name == "passenger") {
+      } else if (
+        this.$route.name === "bookwash" ||
+        this.$route.name == "passenger"
+      ) {
         this.shownav = true;
         this.shawfooter = false;
       } else {
@@ -78,15 +81,13 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-.fade-enter-from {
-  opacity: 0;
-  transform: translateX(-30px);
+.v-enter-active,
+.v-leave-active {
+  transition: transform 1s ease;
 }
-.fade-enter-to {
-  opacity: 1;
-  transform: translateX(0px);
-}
-.fade-enter-active {
-  transition: 0.5s;
+
+.v-enter-from,
+.v-leave-to {
+  transform:translateX(100%);
 }
 </style>

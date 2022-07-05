@@ -99,14 +99,17 @@ export default {
   color: var(--maincolor);
 }
 .special-serv {
-  width: 80%;
-  margin-left: 10%;
+  width: 100%;
 }
 .special-serv .special-box {
-  background-color: var(--secondcolor);
+  min-height: 480px;
+  background: url("../assets/statistics/statistics.jpg") no-repeat;
+  background-size: cover;
+  position: relative;
+  z-index: 1;
 }
 .special-box h2 {
-  color: var(--maincolor);
+  color: #fff
 }
 
 </style>

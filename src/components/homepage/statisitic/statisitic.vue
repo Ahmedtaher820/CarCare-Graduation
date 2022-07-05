@@ -70,9 +70,7 @@ export default {
 .statistic-box {
   min-height: 480px;
   background: url("../../../assets/statistics/statistics.jpg") no-repeat;
-  /* background-attachment: fixed; */
   background-size: cover;
-  /* background-position: 40% 50%; */
   position: relative;
   z-index: 1;
 }

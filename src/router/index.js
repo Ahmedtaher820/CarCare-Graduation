@@ -16,8 +16,6 @@ import Services from "../views/services.vue";
 import aboutus from "../views/aboutpage.vue";
 import contact from "../views/contactus.vue";
 import resetpass from "../views/resetpass.vue";
-// import carwash from "../views/carwash.vue";
-// import bookwash from "../views/bookwash.vue";
 import edit from "../views/edit.vue";
 import "../global/global.css";
 import "../global/animation.css";
@@ -144,14 +142,6 @@ const routes = [
     component: carshare,
     meta: {
       title: "Carshare",
-    },
-  },
-  {
-    path: "/bookwash",
-    name: "bookwash",
-    component: () => import("../views/bookwash.vue"),
-    meta: {
-      title: "Bookwash",
     },
   },
   {

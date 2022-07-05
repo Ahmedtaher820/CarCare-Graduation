@@ -5,7 +5,7 @@
       <div>
         <router-link
           class="text-decoration-none d-inline-block fs-3"
-          to="/driver"
+          to="/verfiyCarShare"
         >
           DRIVER
         </router-link>

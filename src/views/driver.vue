@@ -12,50 +12,16 @@
                 data-aos-duration="300"
                 data-aos-delay="100"
               >
-                <h4 class="fs-5">From:</h4>
+                <h4 class="fs-5">Directions:</h4>
                 <div class="row">
-                  <div class="col-md-4">
-                    <label for="Continent" class="form-label">Continent</label>
-                    <input
-                      type="text"
-                      readonly
-                      placeholder="Middle East"
-                      id="Continent"
-                      class="form-control"
-                    />
-                  </div>
-                  <div class="col-md-4">
-                    <label for="" class="form-label">Country</label>
-                    <select
-                      id="country"
-                      v-model="trip.country"
-                      @change="countryChange()"
-                      class="form-control mb-3"
-                    >
-                      <option value="" selected disabled>
-                        Select Your Start Country
-                      </option>
-                      <option
-                        v-for="(countdata, i) in country"
-                        :value="countdata"
-                        :key="i"
-                      >
-                        {{ countdata }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="" class="form-label">City</label>
+                  <div class="col-md-6">
+                    <label for="" class="form-label">From</label>
                     <select
                       id="city"
-                      v-model="trip.fromCity"
-                      disabled
+                      v-model="trip.from.city"
                       class="form-control mb-3"
                     >
-                      <option value="" selected disabled>
-                        Select Your Start City
-                      </option>
+                      <option value="" selected>Select Your Start City</option>
                       <option
                         v-for="(city, i) in cities"
                         :value="city"
@@ -65,60 +31,14 @@
                       </option>
                     </select>
                   </div>
-                </div>
-              </div>
-              <!-- TO DIRECTION -->
-              <div
-                class="end-point shadow p-4 mb-5"
-                data-aos="fade-left"
-                data-aos-duration="600"
-                data-aos-delay="300"
-              >
-                <div class="row">
-                  <h4 class="fs-5">To:</h4>
-                  <div class="col-md-4">
-                    <label for="Continent" class="form-label">Continent</label>
-                    <input
-                      type="text"
-                      readonly
-                      placeholder="Middle East"
-                      id="Continent"
-                      class="form-control"
-                    />
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="" class="form-label">Country</label>
-
-                    <select
-                      id="tocountry"
-                      v-model="trip.country"
-                      @change="countryChange()"
-                      class="form-control mb-3"
-                    >
-                      <option value="" selected disabled>
-                        Select Your End Country
-                      </option>
-                      <option
-                        v-for="(countdata, i) in country"
-                        :value="countdata"
-                        :key="i"
-                      >
-                        {{ countdata }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="" class="form-label">City</label>
+                  <div class="col-md-6">
+                    <label for="" class="form-label">To</label>
                     <select
                       id="tocity"
-                      v-model="trip.toCity"
-                      disabled
+                      v-model="trip.to.city"
                       class="form-control mb-3"
                     >
-                      <option value="" selected disabled>
-                        Select Your End City
-                      </option>
+                      <option value="" selected>Select Your End City</option>
                       <option
                         v-for="(city, i) in cities"
                         :value="city"
@@ -158,14 +78,34 @@
                       placeholder="E.g 50$"
                     />
                   </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Number Of Passengers:</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      v-model="trip.number"
+                      placeholder="2 Passenger"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Trip Description:</label>
+                    <textarea
+                      class="form-control"
+                      placeholder="I Need Men Only"
+                      v-model="trip.description"
+                    ></textarea>
+                  </div>
                 </div>
               </div>
               <!-- GENDER -->
             </div>
             <button
-              class="btn mx-auto d-block px-4 py-2"
+              class="btn mx-auto d-block px-4 py-2 fs-4"
               @click="sumbitShare()"
               type="button"
+              data-aos="fade-left"
+              data-aos-duration="300"
+              data-aos-delay="100"
             >
               Share Now
             </button>
@@ -173,92 +113,111 @@
         </div>
       </div>
     </div>
+    <loading v-if="showLoad" />
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import loading from "../components/loading.vue";
 export default {
+  components: {
+    loading,
+  },
   data() {
     return {
+      showLoad: false,
       trip: {
-        country: "",
-        fromCity: "",
-        toCity: "",
-        date: "2022-06-12T19:30",
+        from: {
+          city: "",
+          country: "egypt",
+        },
+        to: {
+          city: "",
+          country: "egypt",
+        },
+        date:"",
         price: "",
+        description: "",
+        number: "",
       },
-      country: [
-        "Bahrain",
-        "Iraq",
-        "Jordan",
-        "Kuwait",
-        "Lebanon",
-        "Oman",
-        "Qatar",
-        "Saudi Arabia",
-        "Egypt",
-        "Syria",
-        "United Arab Emirates",
-        "Yemen",
+      cities: [
+        "Cairo",
+        "Giza",
+        "Alexandria",
+        "Shubra al Khaymah",
+        "AlMansurah",
+        "Halwan",
+        "Al Maḩallah al Kubrá",
+        "Port Said",
+        "Suez",
+        "Tanta",
+        "Asyuţ",
+        "Al Fayoum",
+        "El Zaqaziq",
+        "Ismailia",
+        "Aswan",
+        "Kafr ad Dawwar",
+        "Damanhur",
+        "Al Minya",
+        "Damietta",
+        "Luxor",
+        "Qina",
+        "Suhaj",
+        "Bani Suwayf",
+        "Shibin al Kawm",
+        "AlArish",
+        "Al Ghardaqah",
+        "Banha",
+        "Kafr ash Shaykh",
+        "Disuq",
+        "Bilbays",
+        "Mallawi",
+        "Idfu",
+        "Mit Ghamr",
+        "Munuf",
+        "Jirja",
+        "Akhmim",
+        "Zifta",
+        "Samalut",
+        "Armant",
+        "Maghaghah",
+        "Bur Fouad",
+        "Samannud",
+        "AlKarnak",
+        "Kafr Shukr",
+        "BirAlAbd",
+        "Shaykh Zuwayd",
+        "Aswan",
+        "Al Buhayrah",
+        "AlWadi Aljadid",
+        "Qina",
+        "Dumyat",
       ],
-      cities: [],
-      countries: Object(),
-      city_states: Object(),
     };
   },
-  mounted() {
-    ////////////////////////////////////////////////////////////////////////////
-    //Middle East
-
-    this.city_states["Bahrain"] =
-      "Manama|Al Hadd|Al Manamah|Al Mintaqah al Gharbiyah|Al Mintaqah al Wusta|Al Mintaqah ash Shamaliyah|Al Muharraq|Ar Rifa wa al Mintaqah al Janubiyah|Jidd Hafs|Madinat Hamad|Madinat Isa|Juzur Hawar|Sitrah";
-    this.city_states["Egypt"] =
-      "Cairo|Ad Daqahliyah|Al Bahr al Ahmar|Al Buhayrah|Al Fayyum|Al Gharbiyah|Al Iskandariyah|Al Isma iliyah|Al Jizah|Al Minufiyah|Al Minya|Al Qahirah|Al Qalyubiyah|Al Wadi al Jadid|Ash Sharqiyah|As Suways|Aswan|Asyut|Bani Suwayf|Bur Said|Dumyat|Janub Sina|Kafr ash Shaykh|Matruh|Qina|Shamal Sina|Suhaj";
-    this.city_states["Iran"] =
-      "Tehran|Ardabil|Azarbayjan-e Gharbi|Azarbayjan-e Sharqi|Bushehr|Chahar Mahall va Bakhtiari|Esfahan|Fars|Gilan|Golestan|Hamadan|Hormozgan|Ilam|Kerman|Kermanshah|Khorasan|Khuzestan|Kohkiluyeh va Buyer Ahmad|Kordestan|Lorestan|Markazi|Mazandaran|Qazvin|Qom|Semnan|Sistan va Baluchestan|Yazd|Zanjan";
-    this.city_states["Iraq"] =
-      "Baghdad|Al Anbar|Al Basrah|Al Muthanna|Al Qadisiyah|An Najaf|Arbil|As Sulaymaniyah|At Tamim|Babil|Dahuk|Dhi Qar|Diyala|Karbala|Maysan|Ninawa|Salah ad Din|Wasit";
-    this.city_states["Jordan"] =
-      "Amman|Ajlun|Al Aqabah|Al Balqa|Al Karak|Al Mafraq|At Tafilah|Az Zarqa|Irbid|Jarash|Maan|Madaba";
-    this.city_states["Kuwait"] =
-      "Kuwait|Al Ahmadi|Al Farwaniyah|Al Asimah|Al Jahra|Hawalli";
-    this.city_states["Lebanon"] =
-      "Beirut|Beyrouth|Beqaa|Liban-Nord|Liban-Sud|Mont-Liban|Nabatiye";
-    this.city_states["Oman"] =
-      "Muscat|Ad Dakhiliyah|Al Batinah|Al Wusta|Ash Sharqiyah|Az Zahirah|Musandam|Zufar";
-
-    this.city_states["Qatar"] =
-      "Doha|Ad Dawhah|Al Ghuwayriyah|Al Jumayliyah|Al Khawr|Al Wakrah|Ar Rayyan|Jarayan al Batinah|Madinat ash Shamal|Umm Salal";
-    this.city_states["Saudi Arabia"] =
-      "Riyadh|Al Bahah|Al Hudud ash Shamaliyah|Al Jawf|Al Madinah|Al Qasim|Ar Riyad|Ash Sharqiyah (Eastern Province)|Asir|Hail|Jizan|Makkah|Najran|Tabuk";
-    this.city_states["Syria"] =
-      "Damascus|Al Hasakah|Al Ladhiqiyah|Al Qunaytirah|Ar Raqqah|As Suwayda|Dara|Dayr az Zawr|Dimashq|Halab|Hamah|Hims|Idlib|Rif Dimashq|Tartus";
-
-    this.city_states["United Arab Emirates"] =
-      "Abu Dhabi|Abu Zaby (Abu Dhabi)|Ajman|Al Fujayrah|Ash Shariqah (Sharjah)|Dubayy (Dubai)|Ras al Khaymah|Umm al Qaywayn";
-
-    this.city_states["Yemen"] =
-      "Sanaa|Abyan|Adan|Al Bayda|Al Hudaydah|Al Jawf|Al Mahrah|Al Mahwit|Dhamar|Hadramawt|Hajjah|Ibb|Lahij|Marib|Sadah|Sana|Shabwah|Taizz";
-
-    ////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////
-  },
   methods: {
-    countryChange() {
-      console.log("done")
-        for (var prop1 in this.city_states) {
-          if (this.trip.country === prop1) {
-            document.getElementById("tocity").disabled = false;
-            document.getElementById("city").disabled = false;
-
-            this.cities = this.city_states[prop1].split("|");
-          }
-        }
-      
-    },
-
-    sumbitShare() {
+    async sumbitShare() {
+      this.showLoad = true;
+      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       console.log(this.trip);
+      try {
+        let tripInfo = await axios.post(
+          "https://car-care3.herokuapp.com/api/carSharingPost/register",
+          this.trip,
+          {
+            headers: {
+              "x-auth-token": `${usertoken}`,
+            },
+          }
+        );
+        console.log(tripInfo);
+        this.showLoad = false;
+      } catch (error) {
+        this.showLoad = false;
+
+        console.log(error);
+      }
     },
   },
 };
@@ -266,7 +225,10 @@ export default {
 
 <style>
 .driver-form form .row > div {
-  background-color: #fff;
+  background-color: #ecede4;
+}
+.btn {
+  color: #fff !important;
 }
 .driver-form .form-control {
   border-radius: 5px !important;

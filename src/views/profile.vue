@@ -226,11 +226,8 @@ export default {
 }
 .left-box {
   padding: 30px 20px;
-  background: linear-gradient(
-    45deg,
-    rgba(212, 88, 16, 0.431),
-    rgba(129, 117, 5, 0.575)
-  );
+  background:var(--main-gredient);
+  color: white;
   height: 100%;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;

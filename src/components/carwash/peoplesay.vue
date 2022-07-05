@@ -1,6 +1,6 @@
 <template>
   <div class="people-say py-5 my-5 threeD">
-    <h2 class="fw-bold fs-1 pt-3 text-light">WHAT PEOPLE SAY ABOUT OUR SERVICE..!</h2>
+    <h2 class="fw-bold fs-1 pt-3">WHAT PEOPLE SAY ABOUT OUR SERVICE..!</h2>
     <carousel-3d>
       <slide v-for="(info, i) in test" :key="i" :index="i">
         <div class="says-boxes fs-5 text-dark mt-5 px-5">
@@ -53,15 +53,10 @@ export default {
 
 <style>
 .people-say {
-  background: linear-gradient(45deg, rgba(51, 51, 51, 0.924), #222),
-    url("../../assets/carwash/test.jpg") center;
-  background-size: cover;
-  background-attachment: fixed;
   min-height: 400px;
   position: relative;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.445);
 }
-
+.people-say
 .threeD .carousel-3d-slide {
   min-height: 350px;
 }

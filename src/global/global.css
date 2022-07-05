@@ -207,6 +207,7 @@ img.wave {
   pointer-events: none;
   z-index: 999;
   transition: 0.3s;
+  transition: 0.3s;
 }
 .scrolltop:hover {
   background-color: var(--maincolor);

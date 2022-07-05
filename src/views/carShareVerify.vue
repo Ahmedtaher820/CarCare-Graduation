@@ -30,21 +30,41 @@
                 />
               </div>
               <div class="col-md-6 mb-2">
-                <label class="form-label">Your License:</label>
+                <label class="form-label">Your License(Front):</label>
                 <input
                   type="file"
                   class="form-control"
-                  data-type="userlicense"
+                  data-type="licensephotofront"
                   @change="licenceCheck"
                   accept="image/**"
                 />
               </div>
               <div class="col-md-6 mb-2">
-                <label class="form-label">Car License:</label>
+                <label class="form-label">Your License(Back):</label>
                 <input
                   type="file"
                   class="form-control"
-                  data-type="carlicense"
+                  data-type="licensephotoback"
+                  @change="licenceCheck"
+                  accept="image/**"
+                />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label class="form-label">Car License(Front):</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  data-type="userlicensefront"
+                  @change="licenceCheck"
+                  accept="image/**"
+                />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label class="form-label">Car License(Back):</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  data-type="userlicenseback"
                   @change="licenceCheck"
                 />
               </div>
@@ -67,51 +87,67 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      isVerify: true, 
+      isVerify: true,
       trip: {
         gender: "",
         age: "",
-        licensePhoto: "",
-        licenseCarPhoto: "",
+        licensePhoto: [],
+        licenseCarPhoto: [],
       },
+      userToken: "",
     };
   },
   methods: {
     licenceCheck(e) {
       let file = e.target.dataset.type;
-      console.log(e.target.files[0]);
-      if (file == "userlicense") {
-        this.uploadImage("userlicense", e.target.files[0]);
-      } else if (file == "carlicense") {
-        this.uploadImage("carlicense", e.target.files[0]);
+      if (file == "userlicensefront") {
+        this.uploadImage("userlicensefront", e.target.files[0]);
+      } else if (file == "userlicenseback") {
+        this.uploadImage("userlicenseback", e.target.files[0]);
+      } else if (file == "licensephotofront") {
+        this.uploadImage("licensephotofront", e.target.files[0]);
+      }else if (file == "licensephotoback") {
+        this.uploadImage("licensephotoback", e.target.files[0]);
       }
     },
     uploadImage(ele, value) {
       let fd = new FormData();
       fd.append("img", value, value.name);
-      if (ele == "userlicense") {
-        this.trip.licensePhoto = fd;
-        console.log(this.trip.licensePhoto)
-      } else if (ele == "carlicense") {
-        this.trip.licenseCarPhoto = fd;
+      if (ele == "userlicensefront") {
+        this.trip.licenseCarPhoto.push(fd);
+      } else if (ele == "userlicenseback") {
+        this.trip.licenseCarPhoto.push(fd);
+      } else if (ele == "licensephotofront") {
+        this.trip.licensePhoto.push(fd);
       }
+       else if (ele == "licensephotoback") {
+        this.trip.licensePhoto.push(fd);
+      }
+      console.log(this.trip);
     },
     submitUserInfo() {
       this.$store.dispatch("submitCarshareUser", this.trip);
     },
   },
-  created() {
-    // axios.get("URL",{
-    //   Headers:{
-    //     "auth-token":"auth-token"
-    //   }
-    // }).then((resolve)=>{
-    //     this.isVerify = resolve.data.user.isVerify
-    // })
-
+  async created() {
+    this.userToken = JSON.parse(localStorage.getItem("usertoken"));
+    try {
+      let userVerify = await axios.post(
+        "https://car-care3.herokuapp.com/api/carSharingPost/checkUser",
+        {
+          headers: {
+            "x-auth-token": `${this.userToken}`,
+          },
+        }
+      );
+      console.log(userVerify);
+    } catch (error) {
+      console.log(error.message);
+    }
     if (!this.isVerify) {
       this.$router.push("driver");
     }

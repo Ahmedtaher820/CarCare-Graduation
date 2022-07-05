@@ -81,7 +81,7 @@ export default new Vuex.Store({
       {
         service: "carshare",
         content: "Car Share",
-        href: "/passenger",
+        href: "/carshare",
         list: [
           "Car sharing is all about filling empty seats, sharing costs, and it’s a great way to meet new people.",
           "examples of when car sharing can be used: Commuting to work, Going to college / university,Going to a sporting match",
@@ -439,6 +439,7 @@ export default new Vuex.Store({
         .then((response) => {
           commit("userprofile", response.data.user);
         });
+       
     },
     async usernameFun({ commit }) {
       let id = JSON.parse(localStorage.getItem("user-info"));
@@ -464,6 +465,7 @@ export default new Vuex.Store({
     },
     async submitCarshareUser({ state }, payload) {
       console.log(state);
+      console.log(payload)
       let userToken = JSON.parse(localStorage.getItem("usertoken"));
       await axios
         .post(

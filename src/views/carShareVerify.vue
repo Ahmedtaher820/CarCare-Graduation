@@ -39,7 +39,7 @@
                   accept="image/**"
                 />
               </div>
-              <div class="col-md-6 mb-2">
+              <!-- <div class="col-md-6 mb-2">
                 <label class="form-label">Your License(Back):</label>
                 <input
                   type="file"
@@ -48,7 +48,7 @@
                   @change="licenceCheck"
                   accept="image/**"
                 />
-              </div>
+              </div> -->
               <div class="col-md-6 mb-2">
                 <label class="form-label">Car License(Front):</label>
                 <input
@@ -59,7 +59,7 @@
                   accept="image/**"
                 />
               </div>
-              <div class="col-md-6 mb-2">
+              <!-- <div class="col-md-6 mb-2">
                 <label class="form-label">Car License(Back):</label>
                 <input
                   type="file"
@@ -67,7 +67,7 @@
                   data-type="userlicenseback"
                   @change="licenceCheck"
                 />
-              </div>
+              </div> -->
 
               <div class="mt-4">
                 <button
@@ -95,8 +95,8 @@ export default {
       trip: {
         gender: "",
         age: "",
-        licensePhoto: [],
-        licenseCarPhoto: [],
+        licensePhoto: '',
+        licenseCarPhoto: '',
       },
       userToken: "",
     };
@@ -106,27 +106,32 @@ export default {
       let file = e.target.dataset.type;
       if (file == "userlicensefront") {
         this.uploadImage("userlicensefront", e.target.files[0]);
-      } else if (file == "userlicenseback") {
-        this.uploadImage("userlicenseback", e.target.files[0]);
-      } else if (file == "licensephotofront") {
+      } 
+      // else if (file == "userlicenseback") {
+      //   this.uploadImage("userlicenseback", e.target.files[0]);
+      // }
+       else if (file == "licensephotofront") {
         this.uploadImage("licensephotofront", e.target.files[0]);
-      }else if (file == "licensephotoback") {
-        this.uploadImage("licensephotoback", e.target.files[0]);
       }
+      // else if (file == "licensephotoback") {
+      //   this.uploadImage("licensephotoback", e.target.files[0]);
+      // }
     },
     uploadImage(ele, value) {
       let fd = new FormData();
       fd.append("img", value, value.name);
       if (ele == "userlicensefront") {
-        this.trip.licenseCarPhoto.push(fd);
-      } else if (ele == "userlicenseback") {
-        this.trip.licenseCarPhoto.push(fd);
-      } else if (ele == "licensephotofront") {
-        this.trip.licensePhoto.push(fd);
+        this.trip.licenseCarPhoto=fd;
+      } 
+      // else if (ele == "userlicenseback") {
+      //   this.trip.licenseCarPhoto.push(fd);
+      // } 
+      else if (ele == "licensephotofront") {
+        this.trip.licensePhoto=fd;
       }
-       else if (ele == "licensephotoback") {
-        this.trip.licensePhoto.push(fd);
-      }
+      //  else if (ele == "licensephotoback") {
+      //   this.trip.licensePhoto.push(fd);
+      // }
       console.log(this.trip);
     },
     submitUserInfo() {

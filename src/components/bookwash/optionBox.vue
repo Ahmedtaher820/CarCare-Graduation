@@ -1,6 +1,6 @@
 <template>
   <div
-    class="option mb-4 mb-md-4 d-flex position-relative flex-column text-center border justify-content-start align-items-center py-3"
+    class="option mb-4 mb-md-4 d-flex position-relative flex-column text-center justify-content-start align-items-center py-3"
     :class="optionInfo.pricePart"
   >
     <div class="option-img center-items">
@@ -12,7 +12,10 @@
     <h4 class="fs-4" id="price">{{ optionInfo.price }}</h4>
     <span class="fw-bold">{{ optionInfo.optionTitle }}</span>
     <small class="d-md-block d-none">{{ optionInfo.optionContent }}</small>
-    <button class="btn position-absolute border" @click="addService($event)">
+    <button
+      class="btn position-absolute border option-btn"
+      @click="addService($event)"
+    >
       Selected
     </button>
     <div class="included">
@@ -35,17 +38,22 @@ export default {
 
   methods: {
     addService(event) {
-      event.target.classList.toggle("active");
       this.options.price =
         event.target.parentElement.firstChild.nextElementSibling.textContent;
       this.options.option =
         event.target.parentElement.firstChild.nextElementSibling.nextElementSibling.textContent;
-        console.log(this.options)
-      this.$store.commit("useroptions", this.options);
-      this.$store.commit(
-        "optionSum",
-        this.removeDollarSign(this.options.price)
-      );
+      console.log(this.options.price);
+      if (event.target.classList.contains("active")) {
+        this.$store.commit("useroptions", this.options);
+      } else {
+        this.$store.commit("useroptions", this.options);
+        console.log("done")
+        this.$store.commit(
+          "optionSum",
+          this.removeDollarSign(this.options.price)
+        );
+      }
+      event.target.classList.toggle("active");
     },
     removeDollarSign(ele) {
       return ele.slice(0, ele.indexOf("$"));
@@ -55,10 +63,10 @@ export default {
 </script>
 
 <style>
-
 .option {
   min-height: 360px;
   gap: 16px;
+  border: 1px solid #368b857d;
 }
 @media (max-width: 767px) {
   .option {
@@ -101,5 +109,8 @@ export default {
 }
 .option button {
   bottom: 16px;
+}
+.btn.option-btn {
+  color: var(--secondcolor) !important;
 }
 </style>

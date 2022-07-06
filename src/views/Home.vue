@@ -13,10 +13,9 @@
       data-aos="fade-up"
       data-aos-duration="1500"
     >
-    <div class="container">
-
-      <about />
-    </div>
+      <div class="container">
+        <about />
+      </div>
     </div>
 
     <div class="position-relative py-5">
@@ -40,7 +39,7 @@ import about from "../components/homepage/about.vue";
 import staisitic from "../components/homepage/statisitic/statisitic.vue";
 import test from "../components/homepage/testmonial/test.vue";
 // import userstyle from "../components/homepage/userstyle.vue"
-import axios from "axios"
+import axios from "axios";
 export default {
   name: "Home",
   data() {
@@ -65,7 +64,7 @@ export default {
   async created() {
     // console.log(this.$route.params.token)
     window.addEventListener("scroll", () => {
-      if (this.$route.name == "Home" ) {
+      if (this.$route.name == "Home") {
         var scrolltop = document.querySelector(".scrolltop");
         if (window.pageYOffset > 500) {
           scrolltop.style.opacity = "1";
@@ -76,12 +75,16 @@ export default {
         }
       }
     });
+   
     this.$store.dispatch("usernameFun");
-    await axios.get("https://car-care3.herokuapp.com/api/users/5555/getUsers").then((resolve)=>{
-      console.log(resolve)
-    })
-    
+    await axios
+      .get("https://car-care3.herokuapp.com/api/users/5555/getUsers")
+      .then((resolve) => {
+        console.log(resolve);
+      });
   },
 };
 </script>
-<style></style>
+<style>
+
+</style>

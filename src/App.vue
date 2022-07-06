@@ -3,7 +3,7 @@
     <navgiation v-if="shownav" />
     <!-- <transition class="fade-out" name="fade"> -->
     <!-- <transition> -->
-      <router-view />
+    <router-view />
     <!-- </transition> -->
     <img
       v-for="(img, i) in animationimg"
@@ -37,6 +37,7 @@ export default {
     } else {
       this.$router.push({ path: this.$router.path });
     }
+   
   },
   methods: {
     checkRouter() {
@@ -88,6 +89,6 @@ export default {
 
 .v-enter-from,
 .v-leave-to {
-  transform:translateX(100%);
+  transform: translateX(100%);
 }
 </style>

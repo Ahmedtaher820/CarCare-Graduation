@@ -120,4 +120,7 @@ input.disabled {
   pointer-events: none;
   opacity: 0.5;
 }
+.btn.curr-loc{
+  color: var(--secondcolor) !important;
+}
 </style>

@@ -70,7 +70,7 @@
               <div class="col-md-6">
                 <div class="car-group">
                   <label for="color" class="form-label">Color</label>
-                  <input class="form-control" type="text" id="car-color"  />
+                  <input class="form-control" type="text" id="car-color" />
                 </div>
                 <span class="input-check-err text-danger mt-2"></span>
               </div>
@@ -102,7 +102,7 @@
             >
           </div>
           <!-- how often would user like car washed -->
-          <howOftenUserLikeWashed />
+          <!-- <howOftenUserLikeWashed /> -->
           <form action="" class="p-md-4 shadow mb-3 p-0">
             <h3 class="fs-3 mb-3">Personal and Billing Information</h3>
             <div class="row">
@@ -155,12 +155,12 @@
               class="content py-3 d-flex flex-column justify-content-between"
             >
               <div class="content-top">
-                <h6 class="fs-6 fw-bold mb-0">Bronze Wash</h6>
+                <h6 class="fs-6 fw-bold mb-0">{{ title }} Wash</h6>
                 <p class="mb-0 pb-4 pt-1 text-light">Scheduled One Time</p>
                 <div
                   class="price-type pt-2 d-flex justify-content-between align-items-center"
                 >
-                  <span>{{title}}</span>
+                  <span>{{ title }}</span>
                   <b>{{ usercarwash }}</b>
                 </div>
                 <div
@@ -195,7 +195,6 @@
       <i
         class="fa-solid fa-sack-dollar center-items shadow bg-light"
         @click="showPrice"
-        
       ></i>
     </div>
   </div>
@@ -205,7 +204,7 @@
 import tableprice from "../components/bookwash/table.vue";
 import optionPlus from "../components/bookwash/option.vue";
 import carbooklocation from "../components/bookwash/carbooklocation.vue";
-import howOftenUserLikeWashed from "../components/bookwash/howOftenUserLikeWashed.vue";
+// import howOftenUserLikeWashed from "../components/bookwash/howOftenUserLikeWashed.vue";
 import faq from "../components/bookwash/faq.vue";
 import axios from "axios";
 export default {
@@ -227,7 +226,7 @@ export default {
     tableprice,
     optionPlus,
     carbooklocation,
-    howOftenUserLikeWashed,
+    // howOftenUserLikeWashed,
     faq,
   },
   methods: {
@@ -251,20 +250,20 @@ export default {
       this.check("Required", "email-contact", 0);
       if (this.userBookInfo.carModel == "") {
         this.check("Choose Your Car Type", "car-type", 1);
-        return
+        return;
       }
       if (!this.userBookInfo.carMake) {
         this.check("Required", "car-select", 2);
-        return
+        return;
       }
       if (this.userlatlong.lat == "") {
         this.check("Required", "address", 4);
         this.check("Required", "city", 5);
         this.check("Required", "Country", 6);
-        return
+        return;
       }
-      this.$store.dispatch("userBookInfo",this.userBookInfo)
-      this.$store.dispatch("completeWashBook")
+      this.$store.dispatch("userBookInfo", this.userBookInfo);
+      this.$store.dispatch("completeWashBook");
     },
     check(message, id, index) {
       let inputCheck = document.querySelectorAll(".input-check-err");
@@ -296,27 +295,31 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", () => {
-      if (window.innerWidth > 991) {
-        if (window.pageYOffset > 100) {
-          document.querySelector(".right-box").style.transform =
-            "translateY(-100px)";
-        } else {
-          document.querySelector(".right-box").style.transform =
-            "translateY(0px)";
+      if (this.$route.path == "/carwashBook") {
+        if (window.innerWidth > 991) {
+          if (window.pageYOffset > 100) {
+            document.querySelector(".right-box").style.transform =
+              "translateY(-100px)";
+          } else {
+            document.querySelector(".right-box").style.transform =
+              "translateY(0px)";
+          }
         }
       }
     });
     window.addEventListener("resize", () => {
-      if (innerWidth < 992) {
-        document.querySelector(".car-book-left").classList.remove("col-md-8");
-        document.querySelector(".car-book-left").classList.add("col-12");
-        document.querySelector(".car-book-left").classList.add("active");
-        this.showBag = true;
-      } else {
-        document.querySelector(".car-book-left").classList.remove("col-12");
-        document.querySelector(".car-book-left").classList.add("col-md-8");
-        document.querySelector(".car-book-left").classList.remove("active");
-        this.showBag = false;
+      if (this.$route.path == "/carwashBook") {
+        if (innerWidth < 992) {
+          document.querySelector(".car-book-left").classList.remove("col-md-8");
+          document.querySelector(".car-book-left").classList.add("col-12");
+          document.querySelector(".car-book-left").classList.add("active");
+          this.showBag = true;
+        } else {
+          document.querySelector(".car-book-left").classList.remove("col-12");
+          document.querySelector(".car-book-left").classList.add("col-md-8");
+          document.querySelector(".car-book-left").classList.remove("active");
+          this.showBag = false;
+        }
       }
     });
   },
@@ -331,11 +334,11 @@ export default {
       return this.$store.state.usercarwash.options;
     },
     sum() {
-      return this.$store.state.usercarwash.price;
+      return this.$store.state.usercarwash.totalPrice;
     },
-    title(){
-      return this.$store.state.usercarwash.title
-    }
+    title() {
+      return this.$store.state.usercarwash.title;
+    },
   },
 };
 </script>
@@ -343,6 +346,9 @@ export default {
 <style>
 .carwash-book .form-control {
   border-radius: 5px !important;
+}
+.carwash-book .row .col-md-8 > div {
+  background-color: #ffffff42;
 }
 .carkind,
 .locat-kind,

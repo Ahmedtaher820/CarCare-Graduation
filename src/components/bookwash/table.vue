@@ -247,7 +247,7 @@ tr .text-start:first-of-type {
 .buttons-select button {
   border: none;
   outline: none;
-  background-color: var(--maincolor);
+  background-color: var(--secondcolor);
   color: #fff;
   transition: 0.3s;
   border: 1px solid var(--maincolor);
@@ -255,7 +255,7 @@ tr .text-start:first-of-type {
 }
 .buttons-select button:hover,
 .buttons-select button.active {
-  background-color: var(--secondcolor);
-  color: var(--maincolor);
+  background-color: var(--maincolor);
+  color: var(--secondcolor);
 }
 </style>

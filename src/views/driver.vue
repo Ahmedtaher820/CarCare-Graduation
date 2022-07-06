@@ -18,7 +18,7 @@
                     <label for="" class="form-label">From</label>
                     <select
                       id="city"
-                      v-model="trip.from.city"
+                      v-model="trip.fromCity"
                       class="form-control mb-3"
                     >
                       <option value="" selected>Select Your Start City</option>
@@ -35,7 +35,7 @@
                     <label for="" class="form-label">To</label>
                     <select
                       id="tocity"
-                      v-model="trip.to.city"
+                      v-model="trip.toCity"
                       class="form-control mb-3"
                     >
                       <option value="" selected>Select Your End City</option>
@@ -128,15 +128,10 @@ export default {
     return {
       showLoad: false,
       trip: {
-        from: {
-          city: "",
-          country: "egypt",
-        },
-        to: {
-          city: "",
-          country: "egypt",
-        },
-        date:"",
+        fromCity: "",
+        toCity: "",
+
+        date: "",
         price: "",
         description: "",
         number: "",

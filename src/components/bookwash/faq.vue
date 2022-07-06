@@ -165,12 +165,15 @@ export default {
 </script>
 
 <style>
-.stepfive .content .accordion-button:not(.collapsed) {
-  color: var(--maincolor);
-  background-color: var(--secondcolor);
+.car-type .accordion-button{
+  background-color: #ffffff42 !important
+}
+.car-type .accordion-button:not(.collapsed) {
+  color: var(--bg-second-color);
+  background-color: var(--secondcolor) !important;
   box-shadow: none;
 }
-.stepfive .content .accordion-button:focus {
+.scar-type .accordion-button:focus {
   border-color: none;
   box-shadow: none;
 }

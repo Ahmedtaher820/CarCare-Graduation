@@ -343,10 +343,10 @@ export default new Vuex.Store({
         lang: "",
       },
       options: [
-        {
-          price: "",
-          option: "",
-        },
+        // {
+        //   price: "",
+        //   option: "",
+        // },
       ],
       carMake: "",
       carModel: "",
@@ -354,7 +354,7 @@ export default new Vuex.Store({
       color: "",
       pricing: "26$",
       title: "Bronze",
-      price: 26,
+      totalPrice: 26,
     },
   },
   mutations: {
@@ -375,18 +375,40 @@ export default new Vuex.Store({
     },
     // to make sure option is not add ever
     useroptions(state, payload) {
-      state.usercarwash.options.forEach((e) => {
-        if (payload.option == e.option) {
-          // to make Subtract in total price if option was find
-          state.usercarwash.price -= Number(
-            payload.price.slice(0, payload.price.indexOf("$"))
+      if (state.usercarwash.options.length > 0) {
+        let findOption = state.usercarwash.options.find(
+          (optionParam) => optionParam == payload
+        );
+        if (findOption != undefined) {
+          state.usercarwash.totalPrice -= Number(
+            findOption.price.slice(0, findOption.price.indexOf("$"))
           );
-          e.option = "";
-          e.price = "";
-          return;
+
+          return state.usercarwash.options.splice(
+            state.usercarwash.options.indexOf(findOption),
+            1
+          );
+        } else {
+          return state.usercarwash.options.push(payload);
         }
-      });
-      return state.usercarwash.options.push(payload);
+      } else {
+        return state.usercarwash.options.push(payload);
+      }
+      // state.usercarwash.options.forEach((e) => {
+
+      //   if (payload.option == e.option) {
+      //     // to make Subtract in total price if option was find
+      //     state.usercarwash.totalPrice -= Number(
+      //       payload.price.slice(0, payload.price.indexOf("$"))
+      //     );
+      //     state.usercarwash.options.splice(
+      //       state.usercarwash.options.indexOf(payload),
+      //       1
+      //     );
+      //     return
+      //   } else {
+      //   }
+      // });
     },
     cleanoption(state) {
       return (state.usercarwash.options = []);
@@ -396,7 +418,9 @@ export default new Vuex.Store({
     },
     pricingplan(state, payload) {
       console.log(payload);
-      state.usercarwash.price = Number(payload.slice(0, payload.indexOf("$")));
+      state.usercarwash.totalPrice = Number(
+        payload.slice(0, payload.indexOf("$"))
+      );
       return (state.usercarwash.pricing = payload);
     },
     pricingTitle(state, payload) {
@@ -423,7 +447,7 @@ export default new Vuex.Store({
     },
     // to make sum in all option and sum
     optionSum(state, payload) {
-      return (state.usercarwash.price += Number(payload));
+      return (state.usercarwash.totalPrice += Number(payload));
     },
     // Car Kind
   },
@@ -439,7 +463,6 @@ export default new Vuex.Store({
         .then((response) => {
           commit("userprofile", response.data.user);
         });
-       
     },
     async usernameFun({ commit }) {
       let id = JSON.parse(localStorage.getItem("user-info"));
@@ -465,7 +488,7 @@ export default new Vuex.Store({
     },
     async submitCarshareUser({ state }, payload) {
       console.log(state);
-      console.log(payload)
+      console.log(payload);
       let userToken = JSON.parse(localStorage.getItem("usertoken"));
       await axios
         .post(

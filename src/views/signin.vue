@@ -133,16 +133,20 @@
         </div>
       </div>
     </div>
+    <loading v-if="show" />
   </div>
 </template>
 
 <script>
 import carousel from "../components/carousel.vue";
+import loading from "../components/loading.vue";
+
 import axios from "axios";
 export default {
   props: ["deriver"],
   data() {
     return {
+      show: false,
       eyeopen: true,
       driverinput: false,
       userdata: {
@@ -158,6 +162,7 @@ export default {
   },
   components: {
     carousel,
+    loading,
   },
   methods: {
     eyeopenfun() {
@@ -171,6 +176,7 @@ export default {
       }
     },
     async signin() {
+      this.show = true;
       this.err = "";
       await axios
         .post(
@@ -178,9 +184,15 @@ export default {
           this.userdata
         )
         .then(() => {
+          setTimeout(() => {
+            this.show = false;
+          }, 750);
           this.$router.push({ path: "/login" });
         })
         .catch((e) => {
+          setTimeout(() => {
+            this.show = false;
+          }, 750);
           if (e.response.data.message.search("confirmPassword") > 0) {
             return (this.err = ' "Password" are not matching');
           } else {
@@ -195,7 +207,7 @@ export default {
   created() {
     if (localStorage.getItem("usertoken")) {
       this.$router.push({ path: "/" });
-      location.reload()
+      location.reload();
     }
   },
 };
@@ -216,8 +228,8 @@ export default {
     width: 150px;
   }
   .signin .row > * {
-  padding-left: 12px !important ;
-}
+    padding-left: 12px !important ;
+  }
 }
 .form-control {
   border-radius: 8px !important;

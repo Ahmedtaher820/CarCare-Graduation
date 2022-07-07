@@ -29,7 +29,7 @@
               >Saturday</span
             >
             <span
-              v-if="new Date(post.date).getDay() == 1"
+              v-else-if="new Date(post.date).getDay() == 1"
               class="text-secondary"
               >Sunday</span
             >
@@ -54,14 +54,24 @@
               >Thrusday</span
             >
             <span v-else class="text-secondary">Friday</span>
-            <span>11:00 am</span>
+            <span>
+              {{
+                new Date(post.date).getUTCHours() > 12
+                  ? Math.ceil(new Date(post.date).getUTCHours() / 2) + 1
+                  : new Date(post.date).getUTCHours()
+              }}:{{
+                new Date(post.date).getUTCMinutes() > 10
+                  ? new Date(post.date).getUTCMinutes()
+                  : "0" + new Date(post.date).getUTCMinutes()
+              }}
+              {{ new Date(post.date).getUTCHours() > 12 ? "PM" : "AM" }}
+            </span>
           </div>
           <div class="header-dest-point d-flex flex-column gap-2 ms-0 ms-md-5">
             <div class="level yellow">
               <span class="point-sty yellow"></span>
             </div>
             <div class="dest-point mt-1">
-              <span></span>
               <span></span>
               <span></span>
               <span></span>

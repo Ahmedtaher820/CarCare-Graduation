@@ -45,11 +45,7 @@
                   Remember Me
                 </label>
               </div>
-              <button
-                type="button"
-                class="btn me-0"
-                @click="loginuser"
-              >
+              <button type="button" class="btn me-0" @click="loginuser">
                 LOGIN
               </button>
             </div>
@@ -65,6 +61,7 @@
         </div>
       </div>
     </div>
+    <loading v-if="show" />
   </div>
 </template>
 
@@ -72,9 +69,11 @@
 import axios from "axios";
 import "../components/carousel.vue";
 import Carousel from "../components/carousel.vue";
+import loading from "../components/loading.vue";
 export default {
   data() {
     return {
+      show: false,
       userinfo: {
         email: "",
         password: "",
@@ -84,6 +83,7 @@ export default {
   },
   methods: {
     async loginuser() {
+      this.show = true;
       await axios
         .post(
           `https://car-care3.herokuapp.com/api/users/loginUser`,
@@ -100,9 +100,15 @@ export default {
             params: { token: resolve.data.token },
           });
           location.reload();
+          setTimeout(() => {
+            this.show = false;
+          }, 750);
           console.log(resolve.data.token);
         })
         .catch((e) => {
+          setTimeout(() => {
+            this.show = false;
+          }, 750);
           if (e.response.data.error) {
             this.err = e.response.data.error;
           } else {
@@ -113,6 +119,7 @@ export default {
   },
   components: {
     Carousel,
+    loading,
   },
   async created() {
     if (localStorage.getItem("usertoken")) {
@@ -129,7 +136,7 @@ export default {
 </script>
 
 <style scoped>
-form .btn{
+form .btn {
   color: #fff;
 }
 form .btn:hover {
@@ -150,5 +157,4 @@ form .btn:hover {
   width: fit-content !important;
   padding: 10px 35px;
 }
-
 </style>

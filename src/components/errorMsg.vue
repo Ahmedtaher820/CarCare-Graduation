@@ -1,5 +1,5 @@
 <template>
-  <div class="error">{{err}}</div>
+  <div class="errorMsg">{{err}}</div>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ props:["err"]
 </script>
 
 <style>
-.error{
+.errorMsg{
     padding: 10px 20px;
     background-color: var(--thirdcolor);
     border-radius: 5px;

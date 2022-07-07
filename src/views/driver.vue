@@ -52,7 +52,7 @@
               </div>
               <!-- TRIP -->
               <div
-                class="trip-info shadow p-4 mb-5"
+                class="trip-info shadow p-4 mb-3"
                 data-aos="fade-right"
                 data-aos-duration="300"
                 data-aos-delay="100"
@@ -99,13 +99,11 @@
               </div>
               <!-- GENDER -->
             </div>
+            <err v-if="err != null" :err="err" />
             <button
               class="btn mx-auto d-block px-4 py-2 fs-4"
               @click="sumbitShare()"
               type="button"
-              data-aos="fade-left"
-              data-aos-duration="300"
-              data-aos-delay="100"
             >
               Share Now
             </button>
@@ -120,9 +118,10 @@
 <script>
 import axios from "axios";
 import loading from "../components/loading.vue";
+import err from "../components/errorMsg.vue"
 export default {
   components: {
-    loading,
+    loading,err
   },
   data() {
     return {
@@ -189,15 +188,15 @@ export default {
         "Qina",
         "Dumyat",
       ],
+      err:null
     };
   },
   methods: {
     async sumbitShare() {
       this.showLoad = true;
-      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
-      console.log(this.trip);
       try {
-        let tripInfo = await axios.post(
+        let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+        await axios.post(
           "https://car-care3.herokuapp.com/api/carSharingPost/register",
           this.trip,
           {
@@ -205,13 +204,12 @@ export default {
               "x-auth-token": `${usertoken}`,
             },
           }
-        );
-        console.log(tripInfo);
-        this.showLoad = false;
+        )
+        this.showLoad = false
+        this.$router.push("/passenger")
       } catch (error) {
+        this.err = error.response.data.message
         this.showLoad = false;
-
-        console.log(error);
       }
     },
   },

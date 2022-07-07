@@ -29,7 +29,7 @@
                   v-model="trip.age"
                 />
               </div>
-              <div class="col-md-6 mb-2">
+              <!-- <div class="col-md-6 mb-2">
                 <label class="form-label">Your License(Front):</label>
                 <input
                   type="file"
@@ -38,7 +38,7 @@
                   @change="licenceCheck"
                   accept="image/**"
                 />
-              </div>
+              </div> -->
               <!-- <div class="col-md-6 mb-2">
                 <label class="form-label">Your License(Back):</label>
                 <input
@@ -55,7 +55,7 @@
                   type="file"
                   class="form-control"
                   data-type="userlicensefront"
-                  @change="licenceCheck"
+                  @change="licenceCheck($event.target.files)"
                   accept="image/**"
                 />
               </div>
@@ -73,7 +73,7 @@
                 <button
                   class="btn verify-btn"
                   type="button"
-                  @click="submitUserInfo()"
+                  @click="submitUserInfo"
                 >
                   Verifed Information
                 </button>
@@ -95,47 +95,69 @@ export default {
       trip: {
         gender: "",
         age: "",
-        licensePhoto: '',
-        licenseCarPhoto: '',
+        // licensePhoto: null,
+        licenseCarPhoto: null,
       },
       userToken: "",
     };
   },
   methods: {
     licenceCheck(e) {
-      let file = e.target.dataset.type;
-      if (file == "userlicensefront") {
-        this.uploadImage("userlicensefront", e.target.files[0]);
-      } 
+      // let file = e.target.dataset.type;
+      // if (file == "userlicensefront") {
+      this.trip.licenseCarPhoto = e[0];
+      // this.uploadImage(e[0]);
+      // }
       // else if (file == "userlicenseback") {
       //   this.uploadImage("userlicenseback", e.target.files[0]);
       // }
-       else if (file == "licensephotofront") {
-        this.uploadImage("licensephotofront", e.target.files[0]);
-      }
+      // else if (file == "licensephotofront") {
+      //   this.uploadImage("licensephotofront", e.target.files[0]);
+      // }
       // else if (file == "licensephotoback") {
       //   this.uploadImage("licensephotoback", e.target.files[0]);
       // }
     },
-    uploadImage(ele, value) {
-      let fd = new FormData();
-      fd.append("img", value, value.name);
-      if (ele == "userlicensefront") {
-        this.trip.licenseCarPhoto=fd;
-      } 
-      // else if (ele == "userlicenseback") {
-      //   this.trip.licenseCarPhoto.push(fd);
-      // } 
-      else if (ele == "licensephotofront") {
-        this.trip.licensePhoto=fd;
+    // uploadImage(value) {
+    //   let fd = new FormData();
+    //   fd.append("img", value);
+    // if (ele == "userlicensefront") {
+    // this.trip.licenseCarPhoto=value;
+    // console.log(this.trip.licenseCarPhoto)
+    // }
+    // else if (ele == "userlicenseback") {
+    //   this.trip.licenseCarPhoto.push(fd);
+    // }
+    // else if (ele == "licensephotofront") {
+    //   this.trip.licensePhoto=fd;
+    // }
+    //  else if (ele == "licensephotoback") {
+    //   this.trip.licensePhoto.push(fd);
+    // }
+    //   console.log(this.trip);
+    // },
+    async submitUserInfo() {
+      // this.$store.dispatch("submitCarshareUser", this.trip);
+      let userToken = JSON.parse(localStorage.getItem("usertoken"));
+      var formData = new FormData();
+      formData.append("image", this.trip.licenseCarPhoto);
+      console.log(formData)
+      try {
+        let repo = await axios.post(
+          "https://car-care3.herokuapp.com/api/carSharingInfo/register",
+          {
+            gender: this.trip.gender,
+            age: this.trip.age,
+            licenseCarPhoto: formData,
+          },
+          {
+            headers: { "x-auth-token": `${userToken}` },
+          }
+        );
+        console.log(repo);
+      } catch (error) {
+        console.log(error);
       }
-      //  else if (ele == "licensephotoback") {
-      //   this.trip.licensePhoto.push(fd);
-      // }
-      console.log(this.trip);
-    },
-    submitUserInfo() {
-      this.$store.dispatch("submitCarshareUser", this.trip);
     },
   },
   async created() {

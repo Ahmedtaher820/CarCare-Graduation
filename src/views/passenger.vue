@@ -7,28 +7,53 @@
     >
       <i class="bi bi-plus fs-2"></i>
     </div>
-    <div class="recentPost">
-      <h3>Recent</h3>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div class="passenger-boxes" >
+    <recentPost />
+    <div class="passenger-boxes">
       <div class="input-box d-flex my-4 gap-2 align-items-center">
         <input type="text" class="form-control" placeholder="Start Point" />
         <span>To</span>
         <input type="text" class="form-control" placeholder="End Point" />
       </div>
       <div
-        class="passenger-box p-4 shadow-sm"
+        class="passenger-box p-4"
         v-for="(post, index) in passengerPost"
         :key="index"
       >
-        <div class="header d-flex gap-5 border-bottom pb-4">
+        <div class="header center-items gap-5 border-bottom pb-4">
           <div
             class="header-date me-0 me-md-5 pe-4 d-flex flex-column gap-3 justify-content-center align-items-center"
           >
-            <span class="text-secondary">Monday</span>
+            <span
+              v-if="new Date(post.date).getDay() == 0"
+              class="text-secondary"
+              >Saturday</span
+            >
+            <span
+              v-if="new Date(post.date).getDay() == 1"
+              class="text-secondary"
+              >Sunday</span
+            >
+            <span
+              v-else-if="new Date(post.date).getDay() == 2"
+              class="text-secondary"
+              >Monday</span
+            >
+            <span
+              v-else-if="new Date(post.date).getDay() == 3"
+              class="text-secondary"
+              >Tuesday</span
+            >
+            <span
+              v-else-if="new Date(post.date).getDay() == 4"
+              class="text-secondary"
+              >Wednesday</span
+            >
+            <span
+              v-else-if="new Date(post.date).getDay() == 5"
+              class="text-secondary"
+              >Thrusday</span
+            >
+            <span v-else class="text-secondary">Friday</span>
             <span>11:00 am</span>
           </div>
           <div class="header-dest-point d-flex flex-column gap-2 ms-0 ms-md-5">
@@ -41,6 +66,7 @@
               <span></span>
               <span></span>
               <span class="mb-0"></span>
+              <span class="down-icon"><i class="bi bi-chevron-down"></i></span>
             </div>
             <div class="level blue">
               <span class="point-sty"></span>
@@ -54,38 +80,43 @@
         <div class="post-body pt-3">
           <div class="post-user-info d-flex gap-5 align-items-center">
             <div class="user-info d-flex gap-2">
-              <img
-                :src="require(`../assets/carshare/${post.img}.jpg`)"
-                alt=""
-                class="user-img"
-              />
+              <img src="../assets/carshare/man.png" alt="" class="user-img" />
               <div
                 class="user-content d-flex flex-column justify-content-center text-start"
               >
                 <p class="mb-0 fw-bold fs-6 text-secondary">Ahmed</p>
+                <div class="info">
+                  <p class="mb-0">
+                    <span class="fw-bold text-secondary">(Man</span>
+                    - <span class="fw-bold text-secondary">25 )</span>
+                  </p>
+                </div>
               </div>
-            </div>
-            <div class="info">
-              <p class="mb-0">
-                <span class="fw-bold text-secondary">( {{ post.gender }}</span>
-                - <span class="fw-bold text-secondary">25 )</span>
-              </p>
             </div>
           </div>
           <div class="post-footer d-flex justify-content-between mt-4">
             <div class="bg-muted rounded-3 shadow-sm px-md-5 p-1">
-              <i class="bi bi-calendar"></i>
-              <span class="ms-2">2021-12-30</span>
+              <i class="bi bi-coin"></i>
+              <span class="ms-2">{{ post.price }}</span>
             </div>
             <div class="bg-muted rounded-3 shadow-sm px-md-5 p-1">
               <i class="bi bi-person-circle"></i>
-              <span class="ms-2">3 Person</span>
+              <span class="ms-2">{{ post.number }} Person</span>
             </div>
+
             <div class="bg-muted rounded-3 shadow-sm px-md-5 p-1">
-              <i class="bi bi-coin"></i>
-              <span class="ms-2">50</span>
+              <i class="bi bi-calendar"></i>
+              <span class="ms-2">{{
+                post.date.slice(0, post.date.indexOf("T"))
+              }}</span>
             </div>
           </div>
+          <button
+            class="btn d-block w-50 mx-auto py-2 mt-4"
+            @click="postBook(post._id)"
+          >
+            Book
+          </button>
         </div>
       </div>
     </div>
@@ -93,76 +124,66 @@
 </template>
 
 <script>
-import "../global/Carshare/carShare.css"
+import "../global/Carshare/carShare.css";
+import recentPost from "../components/carshare/recentPost.vue";
+import axios from "axios";
 export default {
+  components: {
+    recentPost,
+  },
   data() {
     return {
-      passengerPost: [
-        {
-          img: "user",
-          country: "Egypt",
-          fromCity: "Cairo",
-          toCity: "BaniSuif",
-          description: "Need Man with me not Woman",
-          gender: "Male",
-          tripPrice: "50$",
-          triptDate: "18/5/2022 1:30:00",
-          carImg: "carImg",
-        },
-        {
-          img: "user",
-          country: "Egypt",
-          fromCity: "Cairo",
-          toCity: "BaniSuif",
-          description: "Need Man with me not Woman",
-          gender: "Male",
-          tripPrice: "50$",
-          triptDate: "18/5/2022 1:30:00",
-          carImg: "carImg",
-        },
-        {
-          img: "user",
-          country: "Egypt",
-          fromCity: "Cairo",
-          toCity: "BaniSuif",
-          description: "Need Man with me not Woman",
-          gender: "Male",
-          tripPrice: "50$",
-          triptDate: "18/5/2022 1:30:00",
-          carImg: "carImg",
-        },
-      ],
+      passengerPost: null,
     };
   },
   methods: {
-    showOption() {
-      document.querySelectorAll(".option-edit").forEach((option) => {
-        option.addEventListener("click", () => {
-          document.querySelectorAll(".options-edit").forEach((optionedit) => {
-            optionedit.classList.remove("active");
-          });
-          option.nextElementSibling.classList.toggle("active");
-        });
-      });
-    },
     create() {
-      this.$router.push("/verfiyCarShare");
+      this.$router.push("/driver");
     },
     recentPosition() {
       console.log("done");
     },
+    postBook(postId) {
+      console.log(postId);
+    },
   },
-  mounted() {
-    // console.log(new Date().getHours());
-    // console.log(new Date().getMinutes());
+  async mounted() {
+    let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+    try {
+      let posts = await axios.get(
+        "https://car-care3.herokuapp.com/api/carSharingPost/getAllPost",
+        {
+          headers: {
+            "x-auth-token": `${usertoken}`,
+          },
+        }
+      );
+      this.passengerPost = posts.data;
+      console.log(posts.data);
+    } catch (error) {
+      console.log(error);
+    }
   },
-  created(){
-    // window.addEventListener("scroll",()=>{
-    //   console.log("done")
-    // })
-  }
+  created() {
+    window.addEventListener("scroll", () => {
+      if (this.$route.name == "passenger") {
+        if (window.innerWidth > 768) {
+          if (window.pageYOffset > 70) {
+            document.querySelector(".recentPost").classList.add("Up");
+          } else {
+            document.querySelector(".recentPost").classList.remove("Up");
+          }
+        }
+      }
+    });
+  },
 };
 </script>
 
-<style>
+<style scoped>
+.btn {
+  background-color: var(--secondcolor) !important;
+  color: #fff !important;
+  font-size: 18px;
+}
 </style>

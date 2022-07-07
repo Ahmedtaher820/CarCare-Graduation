@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/">
-        <img src="../assets/logo/Logo3.png" class="logo2 ms-3" alt=""
+        <img src="../assets/logo/logowhite .svg" class="logo2 ms-3" alt=""
       /></router-link>
 
       <div class="">
@@ -147,8 +147,8 @@ export default {
   display: none;
 }
 .navbar img.logo2 {
-  height: 90px;
-  width: 130px;
+  height: 70px;
+  width: 100px;
 }
 .nav-link {
   font-size: 20px;

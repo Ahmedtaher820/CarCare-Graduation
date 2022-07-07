@@ -8,12 +8,29 @@
   }
   .recentPost {
     position: fixed;
-    top: 100px;
+    top: 80px;
     left: 0px;
     width: 30%;
-    height: 100vh;
+    height: calc(100vh - 100px);
     overflow-y: scroll;
     border-right: 2px solid #ddd;
+    transition: .3s;
+  }
+  .recentPost.Up{
+    top:0px;
+    height:100vh;
+
+  }
+  .recentPost::-webkit-scrollbar{
+    display: none;
+  }
+  .recentPost::-webkit-thumb{
+    display: none;
+  }
+  .passenger-box {
+      margin: 0px auto 30px;
+      box-shadow: 0px 0px 73px rgb(255 255 255 / 47%);
+  
   }
   .recentPost > div {
     height: 50vh;
@@ -30,11 +47,7 @@
       width: 80%;
     }
   }
-  .passenger-box {
-    margin: 0px auto 30px;
-    background-color: #fff;
-    padding: 20px;
-  }
+ 
   .user-img {
     width: 50px;
     height: 50px;
@@ -68,8 +81,14 @@
   .options-edit li a {
     color: var(--maincolor);
   }
+  .post-body{
+    border-top: 1px dashed var(--secondcolor);
+  }
   .post-body p {
     font-size: 14px;
+  }
+  .dest-point{
+    height: 40px;
   }
   .header-dest-point .level {
     width: 20px;
@@ -79,10 +98,10 @@
     border-radius: 50%;
   }
   .header-dest-point .level.yellow {
-    background-color: rgb(242, 199, 10);
+    background-color: var(--maincolor);
   }
   .header-dest-point .level.blue {
-    background-color: rgb(82 149 237);
+    background-color: var(--secondcolor);
   }
   .header-dest-point .point-sty {
     width: 30px;
@@ -91,12 +110,12 @@
     border-radius: 50%;
     display: inline-block;
     padding: 10px;
-    border: 1px solid #333;
+    border: 1px solid var(--secondcolor);
     position: relative;
     top: -10px;
     left: -10px;
   }
-  .header-dest-point .dest-point span {
+  .header-dest-point .dest-point span:not(.down-icon) {
     width: 4px;
     height: 4px;
     background-color: #444;
@@ -106,11 +125,17 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  .down-icon{
+    position: relative;
+    top: -8px;
+    font-weight: bold;
+    display: inline-block;
+  }
   .header-date {
     border-right: 2px solid var(--secondcolor);
   }
   .header-dest-city {
-    height: 92px;
+    height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;

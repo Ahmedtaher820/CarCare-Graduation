@@ -394,21 +394,6 @@ export default new Vuex.Store({
       } else {
         return state.usercarwash.options.push(payload);
       }
-      // state.usercarwash.options.forEach((e) => {
-
-      //   if (payload.option == e.option) {
-      //     // to make Subtract in total price if option was find
-      //     state.usercarwash.totalPrice -= Number(
-      //       payload.price.slice(0, payload.price.indexOf("$"))
-      //     );
-      //     state.usercarwash.options.splice(
-      //       state.usercarwash.options.indexOf(payload),
-      //       1
-      //     );
-      //     return
-      //   } else {
-      //   }
-      // });
     },
     cleanoption(state) {
       return (state.usercarwash.options = []);
@@ -486,24 +471,24 @@ export default new Vuex.Store({
       console.log("done");
       console.log(state.usercarwash);
     },
-    async submitCarshareUser({ state }, payload) {
-      console.log(state);
-      console.log(payload);
-      let userToken = JSON.parse(localStorage.getItem("usertoken"));
-      await axios
-        .post(
-          "https://car-care3.herokuapp.com/api/carSharingInfo/register",
-          payload,
-          {
-            headers: { "x-auth-token": `${userToken}` },
-          }
-        )
-        .then((resolve) => {
-          console.log(resolve);
-        })
-        .catch((e) => {
-          console.log(e.response);
-        });
-    },
+    // async submitCarshareUser({ state }, payload) {
+      // console.log(state);
+      // console.log(payload.licenseCarPhoto);
+      // let userToken = JSON.parse(localStorage.getItem("usertoken"));
+      // await axios
+      //   .post(
+      //     "https://car-care3.herokuapp.com/api/carSharingInfo/register",
+      //     payload,
+      //     {
+      //       headers: { "x-auth-token": `${userToken}` },
+      //     }
+      //   )
+      //   .then((resolve) => {
+      //     console.log(resolve);
+      //   })
+      //   .catch((e) => {
+      //     console.log(e.response);
+      //   });
+    // },
   },
 });

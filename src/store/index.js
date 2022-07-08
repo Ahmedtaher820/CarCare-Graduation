@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import swal from "sweetalert";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -356,6 +358,10 @@ export default new Vuex.Store({
       title: "Bronze",
       totalPrice: 26,
     },
+    // carShare Part
+    getPostId: "",
+    myWatingBooking: [],
+    myPosts:[]
   },
   mutations: {
     increasecar(state) {
@@ -434,7 +440,19 @@ export default new Vuex.Store({
     optionSum(state, payload) {
       return (state.usercarwash.totalPrice += Number(payload));
     },
-    // Car Kind
+    // Car Share Post
+    postId(state, payload) {
+      console.log(payload);
+      return (state.getPostId = payload);
+    },
+    // Get All My Post
+    waitingBook(state, payload) {
+      return (state.myWatingBooking = payload);
+    },
+    // Get All My Post 
+    myPosts(state,payload){
+      return state.myPosts = payload
+    }
   },
   actions: {
     async getuserfun({ commit }) {
@@ -471,24 +489,68 @@ export default new Vuex.Store({
       console.log("done");
       console.log(state.usercarwash);
     },
-    // async submitCarshareUser({ state }, payload) {
-      // console.log(state);
-      // console.log(payload.licenseCarPhoto);
-      // let userToken = JSON.parse(localStorage.getItem("usertoken"));
-      // await axios
-      //   .post(
-      //     "https://car-care3.herokuapp.com/api/carSharingInfo/register",
-      //     payload,
-      //     {
-      //       headers: { "x-auth-token": `${userToken}` },
-      //     }
-      //   )
-      //   .then((resolve) => {
-      //     console.log(resolve);
-      //   })
-      //   .catch((e) => {
-      //     console.log(e.response);
-      //   });
-    // },
+    // for book post
+    async booking({ state,dispatch }, payload) {
+      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+      try {
+        let postBooking = await axios.post(
+          `https://car-care3.herokuapp.com/api/Booking/${state.getPostId}`,
+          payload,
+          {
+            headers: {
+              "x-auth-token": `${usertoken}`,
+            },
+          }
+        );
+        console.log(postBooking)
+        swal({
+          title: "Thank You!",
+          text: `${postBooking.data.message}`,
+          icon: "success",
+          button: "Ok!",
+        });
+        dispatch("getWaitingPostFun")
+      } catch (error) {
+        swal({
+          title: "Opps!",
+          text: `${error.response.data.message}`,
+          icon: "error",
+          button: "Ok!",
+        });
+      }
+    },
+    async getWaitingPostFun({ commit }) {
+      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+      try {
+        let watingPosts = await axios.get(
+          `https://car-care3.herokuapp.com/api/carSharingPost/getBooking`,
+          {
+            headers: {
+              "x-auth-token": `${usertoken}`,
+            },
+          }
+        );
+        console.log(watingPosts.data.booking)
+        commit("waitingBook", watingPosts.data.booking);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getMyAllPosts({commit}) {
+      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+      try {
+        let posts = await axios.get(
+          `https://car-care3.herokuapp.com/api/carSharingPost/getMyPost`,
+          {
+            headers: {
+              "x-auth-token": `${usertoken}`,
+            },
+          }
+        );
+        commit("myPosts", posts.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 });

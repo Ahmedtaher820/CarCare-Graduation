@@ -3,14 +3,14 @@
   }
   .passenger-boxes {
     position: absolute;
-    left: 35%;
+    left: 38%;
     width: 60%;
   }
   .recentPost {
     position: fixed;
     top: 80px;
     left: 0px;
-    width: 30%;
+    width: 35%;
     height: calc(100vh - 100px);
     overflow-y: scroll;
     border-right: 2px solid #ddd;
@@ -29,11 +29,11 @@
   }
   .passenger-box {
       margin: 0px auto 30px;
-      box-shadow: 0px 0px 73px rgb(255 255 255 / 47%);
+      box-shadow: 0px 0px 73px rgb(114 114 114 / 15%)
   
   }
-  .recentPost > div {
-    height: 50vh;
+  .main-box > div {
+    height: 80vh;
   }
   .passenger-boxes .input-box {
     width: fit-content;
@@ -166,4 +166,69 @@
   .createPost:hover {
     background-color: var(--secondcolor);
     color: var(--maincolor);
+  }
+  /* Post Modal */
+  .post-modal{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    
+    width: 100%;
+    min-height: 100%;
+    z-index: 999;
+    background-color: var(--maincolor);
+  }
+  .post-modal form{
+    width: 40%;
+    background-color: var(--secondcolor);
+    padding: 40px;
+    border-radius: 20px;
+  }
+  .post-modal .btn{
+    padding: 10px 30px;
+    background-color: var(--maincolor);
+    display: block;
+    margin-right: auto;
+    border-radius: 10px;
+  }
+  .post-modal h3{
+    text-align: left;
+    color: #fff;
+  }
+  @media (max-width:991px){
+    .post-modal form{
+      width: 80%;
+    }
+  }
+  .post-modal i{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+  }
+  /* Post Slider toggle Css */
+  div.active {
+    display: block;
+    animation: postAnimate .5s ease-in 1;
+  }
+  @keyframes postAnimate {
+    0% {
+      transform: scale(0) translateY(100%);
+    }
+    100% {
+      transform: scale(1) translateY(0%);
+    }
+  }
+  div.noactive {
+    display: none;
+  }
+  button {
+    border: none;
+    background-color: var(--secondcolor);
+    color: white;
+    transition: 0.3s;
+  }
+  button.active {
+    background-color: white;
+    color: var(--secondcolor);
   }

@@ -121,12 +121,14 @@
               }}</span>
             </div>
           </div>
+          <bookPost v-if="showPost" v-on:closePostModal="closePostModal" />
           <button
             class="btn d-block w-50 mx-auto py-2 mt-4"
             @click="postBook(post._id)"
           >
             Book
           </button>
+          <loading v-if="show" />
         </div>
       </div>
     </div>
@@ -136,14 +138,20 @@
 <script>
 import "../global/Carshare/carShare.css";
 import recentPost from "../components/carshare/recentPost.vue";
+import loading from "../components/loading.vue";
+import bookPost from "../components/carshare/bookPost.vue";
 import axios from "axios";
 export default {
   components: {
     recentPost,
+    loading,
+    bookPost,
   },
   data() {
     return {
       passengerPost: null,
+      show: false,
+      showPost: false,
     };
   },
   methods: {
@@ -154,10 +162,15 @@ export default {
       console.log("done");
     },
     postBook(postId) {
-      console.log(postId);
+      this.$store.commit("postId", postId);
+      this.showPost = true;
     },
+    closePostModal(){
+      this.showPost = false
+    }
   },
   async mounted() {
+    this.show = true;
     let usertoken = JSON.parse(localStorage.getItem("usertoken"));
     try {
       let posts = await axios.get(
@@ -170,7 +183,9 @@ export default {
       );
       this.passengerPost = posts.data;
       console.log(posts.data);
+      this.show = false;
     } catch (error) {
+      this.show = false;
       console.log(error);
     }
   },

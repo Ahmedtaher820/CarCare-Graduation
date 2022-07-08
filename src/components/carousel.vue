@@ -21,9 +21,6 @@
       <span @click="move">2</span>
       <span @click="move">3</span>
     </div>
-    <div class="group-img position-absolute">
-      <img src="../assets/Layer 4@2x.png" alt="" />
-    </div>
   </div>
 </template>
 
@@ -52,11 +49,7 @@ export default {
       return this.$store.state.carouselimgs;
     },
   },
-  mounted() {
-    if (this.$route.name == "Home") {
-      // document.querySelector(".group-img").style.display = "none"
-    }
-  },
+  mounted() {},
 };
 </script>
 
@@ -82,14 +75,15 @@ export default {
   height: 100%;
 }
 .carousel .carousel-img img {
-  width: 400px;
+  width: 450px;
   height: 400px;
+  margin-left: 50px;
 }
 
 .dots {
   width: fit-content;
   left: 50%;
-  bottom: 30%;
+  bottom: 15%;
   transform: translateY(-50%);
 }
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -106,7 +100,7 @@ export default {
   border: 1px solid #fff;
   display: block;
   cursor: pointer;
-  margin:0px 10px;
+  margin: 0px 10px;
   transition: 0.3s;
   display: flex;
   justify-content: center;

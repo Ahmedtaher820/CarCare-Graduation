@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-12 col-lg-5 ms-0 ms-lg-2">
           <div class="verify-content">
-            <img src="../assets/logo/logo2.png" class="mb-1" alt="" />
+            <img src="../assets/logo/logo.svg" class="mb-4" alt="" />
             <h3 class="fs-4 lh-base text-start">Enter Your Email</h3>
             <input
               class="text-secondary shadow-sm form-control"
@@ -26,8 +26,12 @@
         <div class="d-none d-lg-block col-lg-6 carousel-box">
           <carousel />
         </div>
-        <div class="resetmodal p-5 center-items rounded-3">
-          <form action="" class="bg-light p-5 position-relative" v-if="verifycode">
+        <div class="resetmodal p-5 rounded-3">
+          <form
+            action=""
+            class="bg-light p-5 position-relative"
+            v-if="verifycode"
+          >
             <h5 class="text-start mb-3 fs-5">Write Verify Code</h5>
             <input
               type="text"
@@ -133,6 +137,9 @@ export default {
   pointer-events: none;
   transition: 0.7s;
   z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .resetmodal.active {
   transform: translateY(0px);
@@ -140,10 +147,12 @@ export default {
   pointer-events: auto;
 }
 .resetmodal form {
+  width: 50%;
   border-radius: 15px;
 }
 .verify-content img {
-  width: 250px;
+  display:inline-block;
+  width: 200px;
 }
 .resetmodal .bi-x-circle {
   top: 15px;

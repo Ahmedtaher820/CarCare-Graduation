@@ -15,7 +15,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="offcanvas-body">
+      <div class="offcanvas-body center-items flex-column">
         <accordion />
       </div>
     </div>

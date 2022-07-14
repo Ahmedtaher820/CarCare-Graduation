@@ -147,6 +147,7 @@ export default {
     axios
       .get("https://car-care3.herokuapp.com/api/users/5555/" + id)
       .then((response) => {
+        console.log(response.data.user);
         this.userinfo.push(response.data.user);
       });
   },
@@ -226,7 +227,7 @@ export default {
 }
 .left-box {
   padding: 30px 20px;
-  background:var(--main-gredient);
+  background: var(--main-gredient);
   color: white;
   height: 100%;
   border-top-left-radius: 10px;

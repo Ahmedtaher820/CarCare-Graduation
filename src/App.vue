@@ -34,8 +34,6 @@ export default {
     let user = localStorage.getItem("user-info");
     if (!user) {
       this.$router.push({ path: "/welcomepage" });
-    } else {
-      this.$router.push({ path: this.$router.path });
     }
    
   },

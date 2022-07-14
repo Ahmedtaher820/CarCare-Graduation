@@ -1,0 +1,49 @@
+<template>
+  <div>
+    <router-link
+      :to="{ path: '/userPost/' + post._id, params: { id: post._id } }"
+    >
+      <table class="post-table mb-3">
+        <thead>
+          <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ post.fromCity }}</td>
+            <td>{{ post.toCity }}</td>
+            <td>{{ post.date.slice(0, post.date.indexOf("T")) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </router-link>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ["post"],
+  mounted() {
+    console.log("done");
+    console.log(this.post);
+  },
+};
+</script>
+
+<style>
+a {
+  text-decoration: none;
+}
+.post-table thead th {
+  width: 33.33%;
+  background-color: var(--maincolor);
+  color: var(--secondcolor);
+}
+.post-table tbody tr td {
+  background-color: var(--secondcolor);
+  color: white;
+}
+</style>

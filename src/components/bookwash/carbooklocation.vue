@@ -13,7 +13,7 @@
             @input="loactionNone"
             v-model="userLocationWrite.street"
           />
-          <span class="input-check-err text-danger mt-2  "></span>
+          <span class="input-check-err text-danger mt-2  d-inline-block"></span>
         </div>
       </div>
       <div class="col-md-6">
@@ -86,7 +86,6 @@ export default {
       } else {
         document.querySelector(".curr-loc").classList.remove("disabled");
       }
-      console.log(e.target.value.length);
     },
     currentLocation() {
       this.err = [];

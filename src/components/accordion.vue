@@ -1,5 +1,5 @@
 <template>
-  <div class="accordion" id="accordionExample">
+  <div class="accordion " id="accordionExample">
     <div class="accordion-item my-4">
       <h2 class="accordion-header" id="headingOne">
         <button
@@ -10,7 +10,7 @@
           aria-expanded="true"
           aria-controls="collapseOne"
         >
-          License Check <img src="../assets/licensecheck.png" alt="" />
+          License Check 
         </button>
       </h2>
       <div
@@ -19,66 +19,24 @@
         aria-labelledby="headingOne"
         data-bs-parent="#accordionExample"
       >
-        <div class="accordion-body text-start fs-5 mt-3">
+        <div class="accordion-body text-start fs-5 mt-2">
           You can use this services to:
           <ul>
             <li>
               view your driving record, for example vehicles you can drive
             </li>
             <li>check your penalty points or disqualifications</li>
-            <li>
-              create a licence ‘check code’ to share your driving record with
-              someone, for example a car hire company
-            </li>
+            
           </ul>
           The check code will be valid for 21 days. You’ll need:
           <ul>
             <li>your driving licence number</li>
-            <li>
-              your National Insurance number -
-              <a
-                class="text-light"
-                href="https://www.access.service.gov.uk/login/signin/creds"
-                >find your National Insurance number if you’ve lost it</a
-              >
-            </li>
-            <li>the postcode on your driving licence</li>
+            
           </ul>
         </div>
       </div>
     </div>
-    <div class="accordion-item my-4">
-      <h2 class="accordion-header" id="headingTwo">
-        <button
-          class="collapsed"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseTwo"
-          aria-expanded="false"
-          aria-controls="collapseTwo"
-        >
-          Car Parts
-        </button>
-      </h2>
-      <div
-        id="collapseTwo"
-        class="accordion-collapse collapse"
-        aria-labelledby="headingTwo"
-        data-bs-parent="#accordionExample"
-      >
-        <div class="accordion-body text-start mt-3">
-          <h5 class="lh-base">
-            We provide all spare parts for cars and for all cars
-            <small
-              >(DODGE , CHEVROLET , JEEP , FORD , AUDI , BMW , SKODA ,
-              MERCEDES)</small
-            >
-            and with amazing offers, you just have to
-            <a href="#" class="text-light">REGISTER</a> to discover more
-          </h5>
-        </div>
-      </div>
-    </div>
+  
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingThree">
         <button
@@ -166,11 +124,16 @@ export default {
   margin-left: 10px;
 }
 .accordion-header {
-  color: var(--maincolor);
+  background-color: #fff;
+}
+.accordion-header button{
+  background-color: transparent ;
+  color: var(--secondcolor);
+
 }
 .accordion-body {
-  background-color: var(--secondcolor);
-  color: white;
+  background-color: #fff;
+  color: var(--secondcolor);
 }
 .accordion-button:not(.collapsed) {
   color: #fff;
@@ -179,5 +142,8 @@ export default {
 .accordion-button.collapsed {
   color: #fff;
   background-color: var(--secondcolor);
+}
+.accordion-item{
+  border: none;
 }
 </style>

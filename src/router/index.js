@@ -17,6 +17,8 @@ import aboutus from "../views/aboutpage.vue";
 import contact from "../views/contactus.vue";
 import resetpass from "../views/resetpass.vue";
 import edit from "../views/edit.vue";
+import userPost from "../views/userPost.vue";
+import userbooking from "../views/userbooking.vue";
 import "../global/global.css";
 import "../global/animation.css";
 Vue.use(VueRouter);
@@ -166,6 +168,22 @@ const routes = [
     component: carwashBook,
     meta: {
       title: "CarWash",
+    },
+  },
+  {
+    path: "/userPost/:id",
+    name: "userPost",
+    component: userPost,
+    meta: {
+      title: "User-Post",
+    },
+  },
+  {
+    path: "/userbooking/:id",
+    name: "userbooking",
+    component: userbooking,
+    meta: {
+      title: "User-booking",
     },
   },
 ];

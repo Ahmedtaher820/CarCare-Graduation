@@ -11,7 +11,7 @@
     top: 80px;
     left: 0px;
     width: 35%;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 80px);
     overflow-y: scroll;
     border-right: 2px solid #ddd;
     transition: .3s;
@@ -209,11 +209,11 @@
   /* Post Slider toggle Css */
   div.active {
     display: block;
-    animation: postAnimate .5s ease-in 1;
+    animation: postAnimate .8s ease-in 1;
   }
   @keyframes postAnimate {
     0% {
-      transform: scale(0) translateY(100%);
+      transform: scale(0) translateY(-100%);
     }
     100% {
       transform: scale(1) translateY(0%);
@@ -231,4 +231,18 @@
   button.active {
     background-color: white;
     color: var(--secondcolor);
+  }
+  /* Confirm Delete Post */
+  .confirmDelete{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color:#368b85;
+    color:#f1f1f1;
+    z-index: 1000;
+  }
+  .btn-cancel{
+    background-color: var(--maincolor) !important; 
   }

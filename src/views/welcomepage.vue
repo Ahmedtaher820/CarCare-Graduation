@@ -4,7 +4,7 @@
       class="small-nav d-flex justify-content-center justify-content-lg-start"
     >
       <div class="logowelcomepage">
-        <img src="../assets/logo/logo2.png" />
+        <img src="../assets/logo/logo.svg" />
       </div>
     </div>
     <div class="welcome-content">

@@ -56,9 +56,7 @@
             <span v-else class="text-secondary">Friday</span>
             <span>
               {{
-                new Date(post.date).getUTCHours() > 12
-                  ? Math.ceil(new Date(post.date).getUTCHours() / 2) + 1
-                  : new Date(post.date).getUTCHours()
+                new Date(post.date).getUTCHours() 
               }}:{{
                 new Date(post.date).getUTCMinutes() > 10
                   ? new Date(post.date).getUTCMinutes()
@@ -116,8 +114,9 @@
 
             <div class="bg-muted rounded-3 shadow-sm px-md-5 p-1">
               <i class="bi bi-calendar"></i>
-              <span class="ms-2">{{
-                post.date.slice(0, post.date.indexOf("T"))
+              <span class="ms-2">{{ 
+              post.date.slice(0, post.date.indexOf("T"))
+
               }}</span>
             </div>
           </div>
@@ -181,8 +180,8 @@ export default {
           },
         }
       );
-      this.passengerPost = posts.data;
-      console.log(posts.data);
+      this.passengerPost = posts.data.carSharingPost;
+      console.log(posts.data.carSharingPost);
       this.show = false;
     } catch (error) {
       this.show = false;

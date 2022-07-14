@@ -1,23 +1,31 @@
 <template>
-<div>
-  {{getAllPosts}}
-</div>
+  <div class="container">
+     <post
+      v-for="(post, index) in getAllPosts"
+      :key="index"
+      :post="post"
+    />
+  </div>
 </template>
 
 <script>
+import post from "./post.vue";
+
 export default {
-  data(){
-    return{
-    }
+  components: {
+    post,
   },
-  mounted(){
-    this.$store.dispatch("getMyAllPosts")
+  data() {
+    return {};
   },
-  computed:{
-    getAllPosts(){
-        return this.$store.state.myPosts
-    }
-  }
+  mounted() {
+    this.$store.dispatch("getMyAllPosts");
+  },
+  computed: {
+    getAllPosts() {
+      return this.$store.state.myPosts;
+    },
+  },
 };
 </script>
 

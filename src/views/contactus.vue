@@ -111,12 +111,12 @@ export default {
         loctaion: {
           mainclass: "col-md-6 ",
           icon: "bi bi-geo-alt contact-icon rounded-circle mb-1 fs-2 bg-light d-inline-block border main-text",
-          paragraph: "Elkhalifa Street, Cairo, NY 535022",
+          paragraph: "El-Soltan Street, Ismailia, NY 535022",
         },
         email: {
           mainclass: "col-md-3 col-6 mt-md-0 mt-2",
           icon: "bi bi-envelope contact-icon rounded-circle mb-1 fs-2 bg-light d-inline-block border main-text",
-          paragraph: "Ahmed@gmail.com",
+          paragraph: "Ahmedtaher@gmail.com",
         },
         call: {
           mainclass: "col-md-3 col-6 mt-md-0 mt-2",

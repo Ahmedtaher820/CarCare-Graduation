@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-12 col-lg-6">
           <div class="sign-heading text-center mx-auto mt-5 mb-3">
-            <img src="../assets/logo/logo2.png" alt="" />
+            <img src="../assets/logo/logo.svg" alt="" />
             <h2 class="fs-2">Create a new account</h2>
           </div>
           <form class="text-start">
@@ -221,7 +221,8 @@ export default {
   padding-left: 0px !important ;
 }
 .sign-heading img {
-  width: 200px;
+  width: 150px;
+  margin-bottom: 25px;
 }
 @media (max-width: 991px) {
   .sign-heading img {

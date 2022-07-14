@@ -42,39 +42,7 @@
               </div>
               <span class="input-check-err text-danger mt-2 mb-4"></span>
             </div>
-            <div class="row mt-0">
-              <div class="col-md-6">
-                <div class="car-group">
-                  <label for="carMake" class="form-label">Car Make</label>
-                  <select
-                    class="form-control"
-                    v-model="userBookInfo.carMake"
-                    id="carMake"
-                  >
-                    <option value="Hond" selected>Honda</option>
-                    <option value="Volkswagen">Volkswagen</option>
-                    <option value="BMW">BMW</option>
-                    <option value="Chevrolet">Chevrolet</option>
-                    <option value="Hyundai">Hyundai</option>
-                    <option value="Toyota">Toyota</option>
-                    <option value="Mazda">Mazda</option>
-                    <option value="Ford">Ford</option>
-                    <option value="Kia">Kia</option>
-                    <option value="Mercedes">Mercedes</option>
-                    <option value="Audi">Audi</option>
-                    <option value="Jeep">Jeep</option>
-                  </select>
-                  <span class="input-check-err text-danger mt-2"></span>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="car-group">
-                  <label for="color" class="form-label">Color</label>
-                  <input class="form-control" type="text" id="car-color" />
-                </div>
-                <span class="input-check-err text-danger mt-2"></span>
-              </div>
-            </div>
+            
           </div>
           <div
             class="car-type p-md-4 shadow mb-3 p-0 text-md-start text-center"
@@ -214,7 +182,6 @@ export default {
       userBookInfo: {
         carModel: "",
         email: "",
-        carMake: "",
       },
       personInfo: [],
       inputError: [],
@@ -247,13 +214,8 @@ export default {
       inputCheck.forEach((err) => {
         err.textContent = "";
       });
-      this.check("Required", "email-contact", 0);
       if (this.userBookInfo.carModel == "") {
         this.check("Choose Your Car Type", "car-type", 1);
-        return;
-      }
-      if (!this.userBookInfo.carMake) {
-        this.check("Required", "car-select", 2);
         return;
       }
       if (this.userlatlong.lat == "") {

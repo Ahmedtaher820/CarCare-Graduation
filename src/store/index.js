@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import swal from "sweetalert";
-
+import router from "../router/index";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -340,20 +340,15 @@ export default new Vuex.Store({
     userlatlan: 0,
     userprofile: [],
     usercarwash: {
-      location: {
-        lat: "",
-        lang: "",
-      },
+      location: [],
       options: [
         // {
         //   price: "",
         //   option: "",
         // },
       ],
-      carMake: "",
       carModel: "",
       email: "",
-      color: "",
       pricing: "26$",
       title: "Bronze",
       totalPrice: 26,
@@ -361,7 +356,8 @@ export default new Vuex.Store({
     // carShare Part
     getPostId: "",
     myWatingBooking: [],
-    myPosts:[]
+    myPosts: [],
+    postById: "",
   },
   mutations: {
     increasecar(state) {
@@ -377,7 +373,8 @@ export default new Vuex.Store({
       return (state.userprofile = payload);
     },
     userlatlong(state, payload) {
-      return (state.usercarwash.location = payload);
+      state.usercarwash.location.push(payload.lat);
+      return state.usercarwash.location.push(payload.long);
     },
     // to make sure option is not add ever
     useroptions(state, payload) {
@@ -412,7 +409,7 @@ export default new Vuex.Store({
       state.usercarwash.totalPrice = Number(
         payload.slice(0, payload.indexOf("$"))
       );
-      return (state.usercarwash.pricing = payload);
+      return (state.usercarwash.pricing = Number(payload.slice(0, payload.indexOf("$"))))
     },
     pricingTitle(state, payload) {
       console.log(payload);
@@ -421,18 +418,13 @@ export default new Vuex.Store({
     carinfo(state, payload) {
       return (state.usercarwash.car = payload);
     },
-    carMake(state, payload) {
-      return (state.usercarwash.carMake = payload);
-    },
     carModel(state, payload) {
       return (state.usercarwash.carModel = payload);
     },
     email(state, payload) {
       return (state.usercarwash.email = payload);
     },
-    color(state, payload) {
-      return (state.usercarwash.color = payload);
-    },
+
     personalinfo(state, payload) {
       return (state.usercarwash.personal = payload);
     },
@@ -447,12 +439,17 @@ export default new Vuex.Store({
     },
     // Get All My Post
     waitingBook(state, payload) {
+      console.log(payload);
       return (state.myWatingBooking = payload);
     },
-    // Get All My Post 
-    myPosts(state,payload){
-      return state.myPosts = payload
-    }
+    // Get All My Post
+    myPosts(state, payload) {
+      return (state.myPosts = payload);
+    },
+    // Get Post By Id
+    getOnePost(state, payload) {
+      return (state.postById = payload);
+    },
   },
   actions: {
     async getuserfun({ commit }) {
@@ -480,17 +477,30 @@ export default new Vuex.Store({
     checkuser() {},
     userBookInfo({ commit }, payload) {
       console.log(payload);
-      commit("carMake", payload.carMake);
       commit("carModel", payload.carModel);
       commit("email", payload.email);
-      commit("color", payload.color);
     },
-    completeWashBook({ state }) {
+    async completeWashBook({ state }) {
       console.log("done");
       console.log(state.usercarwash);
+      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+      try {
+        let repo = await axios.post(
+          `https://car-care3.herokuapp.com/api/carWash/register`,
+          state.usercarwash,
+          {
+            headers: {
+              "x-auth-token": `${usertoken}`,
+            },
+          }
+        );
+        console.log(repo);
+      } catch (error) {
+        console.log(error);
+      }
     },
     // for book post
-    async booking({ state,dispatch }, payload) {
+    async booking({ state, dispatch }, payload) {
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       try {
         let postBooking = await axios.post(
@@ -502,14 +512,15 @@ export default new Vuex.Store({
             },
           }
         );
-        console.log(postBooking)
+        console.log(postBooking);
         swal({
           title: "Thank You!",
           text: `${postBooking.data.message}`,
           icon: "success",
           button: "Ok!",
         });
-        dispatch("getWaitingPostFun")
+        dispatch("getWaitingPostFun");
+        this.$router.push("passenger");
       } catch (error) {
         swal({
           title: "Opps!",
@@ -523,20 +534,20 @@ export default new Vuex.Store({
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       try {
         let watingPosts = await axios.get(
-          `https://car-care3.herokuapp.com/api/carSharingPost/getBooking`,
+          `https://car-care3.herokuapp.com/api/Booking/getAllBooking`,
           {
             headers: {
               "x-auth-token": `${usertoken}`,
             },
           }
         );
-        console.log(watingPosts.data.booking)
+        console.log(watingPosts);
         commit("waitingBook", watingPosts.data.booking);
       } catch (error) {
         console.log(error);
       }
     },
-    async getMyAllPosts({commit}) {
+    async getMyAllPosts({ commit }) {
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       try {
         let posts = await axios.get(
@@ -551,6 +562,53 @@ export default new Vuex.Store({
       } catch (error) {
         console.log(error);
       }
+    },
+    async getPostById({ commit }, payload) {
+      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+      try {
+        let post = await axios.get(
+          `https://car-care3.herokuapp.com/api/carSharingPost/getPostById/${payload}`,
+          {
+            headers: {
+              "x-auth-token": `${usertoken}`,
+            },
+          }
+        );
+        commit("getOnePost", post.data);
+        console.log(post);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // Delete Post
+    async deletePost({ state }, payload) {
+      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+      console.log(state);
+
+      await axios.delete(
+        `https://car-care3.herokuapp.com/api/carSharingPost/deleteMyPost/${payload}`,
+        {
+          headers: {
+            "x-auth-token": `${usertoken}`,
+          },
+        }
+      );
+      router.push("/passenger");
+    },
+    // Delete Post Book
+    async DeletebookPost({ state }, payload) {
+      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+      console.log(payload);
+      await axios.delete(
+        `https://car-care3.herokuapp.com/api/Booking/${payload}`,
+        {
+          headers: {
+            "x-auth-token": `${usertoken}`,
+          },
+        }
+      );
+      location.reload();
+      console.log(state);
     },
   },
 });

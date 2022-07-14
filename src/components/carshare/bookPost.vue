@@ -1,7 +1,7 @@
 <template>
   <div class="post-modal center-items">
     <form action="" class="position-relative">
-      <i class="bi bi-x-circle fs-3 text-light" @click="$emit('closePostModal',postBook.many)"></i>
+      <i class="bi bi-x-circle fs-3 text-light" @click="$emit('closePostModal')"></i>
       <h3 class="fs-3 mb-3">Book Post:</h3>
       <input
         type="number"

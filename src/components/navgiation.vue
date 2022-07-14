@@ -176,9 +176,9 @@ export default {
 @media (max-width: 991px) {
   .navbar-nav {
     position: absolute;
-    top: 100px;
+    top: 80px;
     left: 0px;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 80px);
     width: 100%;
     background-color: var(--secondcolor);
     align-items: center;

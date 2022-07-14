@@ -34,8 +34,8 @@
 }
 
 .logowelcomepage img {
-  width: 200px;
-  margin: 3% 0px 40px 40px;
+  width: 150px;
+  margin: 10% 0px 40px 40px;
 }
 .welcome-screen .welcome-content .row > div:not(:last-of-type) {
   margin-top: 1%;

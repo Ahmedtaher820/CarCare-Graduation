@@ -1,6 +1,6 @@
 <template>
   <div class="recentPost pt-4">
-    <div>
+    <div class="mb-4">
       <button
         class="me-2 post-btn active py-2 px-3"
         @click="funPost($event)"
@@ -47,9 +47,6 @@ export default {
   },
   data() {
     return {
-      mypost: [],
-      mybooking: [],
-      postrequests: [],
     };
   },
   methods: {

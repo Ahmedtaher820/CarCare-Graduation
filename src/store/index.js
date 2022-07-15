@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 import swal from "sweetalert";
 import router from "../router/index";
+import { post } from "jquery";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -360,6 +361,7 @@ export default new Vuex.Store({
     requests: null,
     myPosts: [],
     postById: "",
+    postHaveRequest:null
   },
   mutations: {
     increasecar(state) {
@@ -463,6 +465,9 @@ export default new Vuex.Store({
       console.log(payload);
       return (state.requests = payload);
     },
+    postHaveRequest(state,payload){
+      return state.postHaveRequest = payload
+    }
   },
   actions: {
     async getuserfun({ commit }) {
@@ -567,19 +572,38 @@ export default new Vuex.Store({
       }
     },
     // Get Requests
-    async postRequest({ commit }) {
+    async postRequest({ commit  }) {
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       try {
         let posts = await axios.get(
-          `https://car-care3.herokuapp.com/api/Booking`,
+          `https://car-care3.herokuapp.com/api/Booking/`,
           {
             headers: {
               "x-auth-token": `${usertoken}`,
             },
           }
         );
-        console.log(posts);
+        console.log(post.data);
+        // dispatch("postHaveRequest",post.data.booking.carSharingPostId)
         commit("requests", posts.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // Post it's have requests
+    async postHaveRequest({commit},payload){
+      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+      try {
+        let postsRequested = await axios.get(
+          `https://car-care3.herokuapp.com/api/carSharingPost/getPostById/${payload}`,
+          {
+            headers: {
+              "x-auth-token": `${usertoken}`,
+            },
+          }
+        );
+        console.log(postsRequested);
+        commit("postHaveRequest", postsRequested.data);
       } catch (error) {
         console.log(error);
       }

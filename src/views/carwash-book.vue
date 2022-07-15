@@ -15,7 +15,6 @@
               v-model="userBookInfo.email"
               required
             />
-            <span class="input-check-err text-danger mt-2"></span>
           </div>
           <div class="car-type p-4 shadow mb-3" id="car-type">
             <h4 class="fs-4 mb-4">What kind of car do you drive?</h4>
@@ -151,6 +150,8 @@
                   class="total-wash d-flex justify-content-between align-items-center my-3"
                 >
                   <h5 class="fs-6">Your Wash Total</h5>
+      
+
                   <h5 class="fs-5">{{ sum }}$</h5>
                 </div>
               </div>
@@ -212,16 +213,16 @@ export default {
       // to carMake all error in page is empty
       let inputCheck = document.querySelectorAll(".input-check-err");
       inputCheck.forEach((err) => {
+      console.log(err)
+
         err.textContent = "";
       });
       if (this.userBookInfo.carModel == "") {
-        this.check("Choose Your Car Type", "car-type", 1);
+        this.check("Choose Your Car Type", "car-type", 0);
         return;
       }
-      if (this.userlatlong.lat == "") {
-        this.check("Required", "address", 4);
-        this.check("Required", "city", 5);
-        this.check("Required", "Country", 6);
+      if (this.userlatlong.length == 0) {
+        this.check("Location Required", "address", 1);
         return;
       }
       this.$store.dispatch("userBookInfo", this.userBookInfo);

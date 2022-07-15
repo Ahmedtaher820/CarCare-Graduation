@@ -4,7 +4,9 @@
     <div class="row">
       <div class="col-md-6">
         <div class="addrs-input mb-2">
-          <label for="address" class="form-label">Street Address</label>
+          <label for="address" class="form-label"
+            >Street Address (option)</label
+          >
           <input
             type="text"
             class="form-control"
@@ -13,12 +15,11 @@
             @input="loactionNone"
             v-model="userLocationWrite.street"
           />
-          <span class="input-check-err text-danger mt-2  d-inline-block"></span>
         </div>
       </div>
       <div class="col-md-6">
         <div class="addrs-input mb-2">
-          <label for="city" class="form-label">City</label>
+          <label for="city" class="form-label">City (option)</label>
           <input
             type="text"
             class="form-control"
@@ -27,12 +28,11 @@
             v-model="userLocationWrite.city"
             @input="loactionNone"
           />
-          <span class="input-check-err text-danger mt-2  "></span>
         </div>
       </div>
       <div class="col-md-6">
         <div class="addrs-input mb-2">
-          <label for="Country" class="form-label">Country</label>
+          <label for="Country" class="form-label">Country (option)</label>
           <input
             type="text"
             class="form-control"
@@ -41,7 +41,6 @@
             v-model="userLocationWrite.country"
             @input="loactionNone"
           />
-          <span class="input-check-err text-danger mt-2  "></span>
         </div>
       </div>
     </div>
@@ -49,16 +48,17 @@
     <button class="btn border curr-loc" @click="currentLocation">
       Current Location <i class="bi bi-geo-alt-fill"></i>
     </button>
+    <span class="input-check-err text-danger mt-2 d-inline-block"></span>
     <div
-      class="err p-1 mt-0 text-danger rounded-3  "
+      class="err p-1 mt-0 text-danger rounded-3"
       style="width: fit-content"
       v-if="err.length > 0"
     >
       {{ err[0] }}
     </div>
-    <div v-if="showmark" class="d-inline-block  ms-2">
+    <div v-if="showmark" class="d-inline-block ms-2">
       <i class="bi bi-check2 text-success fs-3"></i>
-    </div>    
+    </div>
   </div>
 </template>
 
@@ -71,9 +71,9 @@ export default {
         city: "",
         country: "",
       },
-      userLatLong:{
-        lat:"",
-        long:""
+      userLatLong: {
+        lat: "",
+        long: "",
       },
       showmark: false,
       err: [],
@@ -98,7 +98,7 @@ export default {
             document.querySelectorAll(".addrs-input input").forEach((e) => {
               e.classList.add("disabled");
             });
-            this.$store.commit("userlatlong",this.userLatLong)
+            this.$store.commit("userlatlong", this.userLatLong);
           },
           (error) => {
             this.err.push(error.message);
@@ -109,7 +109,6 @@ export default {
         console.log("your browser not support this featured");
       }
     },
-    
   },
 };
 </script>
@@ -119,7 +118,7 @@ input.disabled {
   pointer-events: none;
   opacity: 0.5;
 }
-.btn.curr-loc{
+.btn.curr-loc {
   color: var(--secondcolor) !important;
 }
 </style>

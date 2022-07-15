@@ -354,8 +354,10 @@ export default new Vuex.Store({
       totalPrice: 26,
     },
     // carShare Part
+    pagePosts: null,
     getPostId: "",
     myWatingBooking: [],
+    requests: null,
     myPosts: [],
     postById: "",
   },
@@ -409,7 +411,9 @@ export default new Vuex.Store({
       state.usercarwash.totalPrice = Number(
         payload.slice(0, payload.indexOf("$"))
       );
-      return (state.usercarwash.pricing = Number(payload.slice(0, payload.indexOf("$"))))
+      return (state.usercarwash.pricing = Number(
+        payload.slice(0, payload.indexOf("$"))
+      ));
     },
     pricingTitle(state, payload) {
       console.log(payload);
@@ -444,11 +448,20 @@ export default new Vuex.Store({
     },
     // Get All My Post
     myPosts(state, payload) {
+      console.log(payload);
       return (state.myPosts = payload);
+    },
+    // Get Post IN Page
+    allPosts(state, payload) {
+      return (state.pagePosts = payload);
     },
     // Get Post By Id
     getOnePost(state, payload) {
       return (state.postById = payload);
+    },
+    requests(state, payload) {
+      console.log(payload);
+      return (state.requests = payload);
     },
   },
   actions: {
@@ -480,9 +493,8 @@ export default new Vuex.Store({
       commit("carModel", payload.carModel);
       commit("email", payload.email);
     },
+    // make car wash
     async completeWashBook({ state }) {
-      console.log("done");
-      console.log(state.usercarwash);
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       try {
         let repo = await axios.post(
@@ -495,6 +507,13 @@ export default new Vuex.Store({
           }
         );
         console.log(repo);
+        swal({
+          title: "Thank You!",
+          text: `${repo.data.message}`,
+          icon: "success",
+          button: "Ok!",
+        });
+        router.push({ path: "/" });
       } catch (error) {
         console.log(error);
       }
@@ -543,6 +562,24 @@ export default new Vuex.Store({
         );
         console.log(watingPosts);
         commit("waitingBook", watingPosts.data.booking);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // Get Requests
+    async postRequest({ commit }) {
+      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+      try {
+        let posts = await axios.get(
+          `https://car-care3.herokuapp.com/api/Booking`,
+          {
+            headers: {
+              "x-auth-token": `${usertoken}`,
+            },
+          }
+        );
+        console.log(posts);
+        commit("requests", posts.data);
       } catch (error) {
         console.log(error);
       }
@@ -609,6 +646,38 @@ export default new Vuex.Store({
       );
       location.reload();
       console.log(state);
+    },
+    // Get All Post
+    async allPosts({ commit }) {
+      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+      try {
+        let posts = await axios.get(
+          "https://car-care3.herokuapp.com/api/carSharingPost/getAllPost",
+          {
+            headers: {
+              "x-auth-token": `${usertoken}`,
+            },
+          }
+        );
+        // this.passengerPost = posts.data.carSharingPost;
+        commit("allPosts", posts.data.carSharingPost);
+        console.log(posts.data.carSharingPost);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // Search From City to City
+    async submitSearch({ commit }, payload) {
+      // let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+      try {
+        let searchFun = await axios.get(
+          `https://car-care3.herokuapp.com/api/carSharingPost/getAllPost/?from=${payload.startCity}&to=${payload.endCity}`
+        );
+        console.log(searchFun);
+        commit("allPosts", searchFun.data.carSharingPost);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 });

@@ -9,11 +9,7 @@
     </div>
     <recentPost />
     <div class="passenger-boxes">
-      <div class="input-box d-flex my-4 gap-2 align-items-center">
-        <input type="text" class="form-control" placeholder="Start Point" />
-        <span>To</span>
-        <input type="text" class="form-control" placeholder="End Point" />
-      </div>
+      <cityFilter />
       <div
         class="passenger-box p-4"
         v-for="(post, index) in passengerPost"
@@ -55,9 +51,7 @@
             >
             <span v-else class="text-secondary">Friday</span>
             <span>
-              {{
-                new Date(post.date).getUTCHours() 
-              }}:{{
+              {{ new Date(post.date).getUTCHours() }}:{{
                 new Date(post.date).getUTCMinutes() > 10
                   ? new Date(post.date).getUTCMinutes()
                   : "0" + new Date(post.date).getUTCMinutes()
@@ -114,9 +108,8 @@
 
             <div class="bg-muted rounded-3 shadow-sm px-md-5 p-1">
               <i class="bi bi-calendar"></i>
-              <span class="ms-2">{{ 
-              post.date.slice(0, post.date.indexOf("T"))
-
+              <span class="ms-2">{{
+                post.date.slice(0, post.date.indexOf("T"))
               }}</span>
             </div>
           </div>
@@ -139,16 +132,16 @@ import "../global/Carshare/carShare.css";
 import recentPost from "../components/carshare/recentPost.vue";
 import loading from "../components/loading.vue";
 import bookPost from "../components/carshare/bookPost.vue";
-import axios from "axios";
+import cityFilter from "../components/carshare/cityFilter.vue";
 export default {
   components: {
     recentPost,
     loading,
     bookPost,
+    cityFilter,
   },
   data() {
     return {
-      passengerPost: null,
       show: false,
       showPost: false,
     };
@@ -164,29 +157,13 @@ export default {
       this.$store.commit("postId", postId);
       this.showPost = true;
     },
-    closePostModal(){
-      this.showPost = false
-    }
+    closePostModal() {
+      this.showPost = false;
+    },
   },
   async mounted() {
-    this.show = true;
-    let usertoken = JSON.parse(localStorage.getItem("usertoken"));
-    try {
-      let posts = await axios.get(
-        "https://car-care3.herokuapp.com/api/carSharingPost/getAllPost",
-        {
-          headers: {
-            "x-auth-token": `${usertoken}`,
-          },
-        }
-      );
-      this.passengerPost = posts.data.carSharingPost;
-      console.log(posts.data.carSharingPost);
-      this.show = false;
-    } catch (error) {
-      this.show = false;
-      console.log(error);
-    }
+    // this.show = true;
+    this.$store.dispatch("allPosts");
   },
   created() {
     window.addEventListener("scroll", () => {
@@ -201,6 +178,11 @@ export default {
       }
     });
   },
+  computed:{
+    passengerPost(){
+      return this.$store.state.pagePosts
+    }
+  }
 };
 </script>
 

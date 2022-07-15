@@ -19,6 +19,7 @@
         <optionBox :optionInfo="optionBoxtwo" />
       </div>
     </div>
+    
   </div>
 </template>
 

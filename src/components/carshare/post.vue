@@ -15,7 +15,7 @@
           <tr>
             <td>{{ post.fromCity }}</td>
             <td>{{ post.toCity }}</td>
-            <td>{{ post.date.slice(0, post.date.indexOf("T")) }}</td>
+            <!-- <td>{{ post.date.slice(0, post.date.indexOf("T")) }}</td> -->
           </tr>
         </tbody>
       </table>

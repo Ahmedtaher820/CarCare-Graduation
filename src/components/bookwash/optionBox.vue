@@ -42,12 +42,10 @@ export default {
         event.target.parentElement.firstChild.nextElementSibling.textContent;
       this.options.option =
         event.target.parentElement.firstChild.nextElementSibling.nextElementSibling.textContent;
-      console.log(this.options.price);
       if (event.target.classList.contains("active")) {
         this.$store.commit("useroptions", this.options);
       } else {
         this.$store.commit("useroptions", this.options);
-        console.log("done")
         this.$store.commit(
           "optionSum",
           this.removeDollarSign(this.options.price)

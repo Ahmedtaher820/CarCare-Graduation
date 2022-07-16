@@ -361,7 +361,7 @@ export default new Vuex.Store({
     requests: null,
     myPosts: [],
     postById: "",
-    postHaveRequest:null
+    postHaveRequest: null,
   },
   mutations: {
     increasecar(state) {
@@ -383,14 +383,17 @@ export default new Vuex.Store({
     // to make sure option is not add ever
     useroptions(state, payload) {
       if (state.usercarwash.options.length > 0) {
+        // search if option is in object or not
         let findOption = state.usercarwash.options.find(
           (optionParam) => optionParam == payload
         );
+        // this mean that option in object
         if (findOption != undefined) {
+          // subtract option price from total price
           state.usercarwash.totalPrice -= Number(
             findOption.price.slice(0, findOption.price.indexOf("$"))
           );
-
+            // remove option from object
           return state.usercarwash.options.splice(
             state.usercarwash.options.indexOf(findOption),
             1
@@ -418,7 +421,6 @@ export default new Vuex.Store({
       ));
     },
     pricingTitle(state, payload) {
-      console.log(payload);
       return (state.usercarwash.title = payload);
     },
     carinfo(state, payload) {
@@ -440,17 +442,14 @@ export default new Vuex.Store({
     },
     // Car Share Post
     postId(state, payload) {
-      console.log(payload);
       return (state.getPostId = payload);
     },
     // Get All My Post
     waitingBook(state, payload) {
-      console.log(payload);
       return (state.myWatingBooking = payload);
     },
     // Get All My Post
     myPosts(state, payload) {
-      console.log(payload);
       return (state.myPosts = payload);
     },
     // Get Post IN Page
@@ -462,12 +461,11 @@ export default new Vuex.Store({
       return (state.postById = payload);
     },
     requests(state, payload) {
-      console.log(payload);
       return (state.requests = payload);
     },
-    postHaveRequest(state,payload){
-      return state.postHaveRequest = payload
-    }
+    postHaveRequest(state, payload) {
+      return (state.postHaveRequest = payload);
+    },
   },
   actions: {
     async getuserfun({ commit }) {
@@ -565,14 +563,13 @@ export default new Vuex.Store({
             },
           }
         );
-        console.log(watingPosts);
         commit("waitingBook", watingPosts.data.booking);
       } catch (error) {
         console.log(error);
       }
     },
     // Get Requests
-    async postRequest({ commit  }) {
+    async postRequest({ commit }) {
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       try {
         let posts = await axios.get(
@@ -591,7 +588,7 @@ export default new Vuex.Store({
       }
     },
     // Post it's have requests
-    async postHaveRequest({commit},payload){
+    async postHaveRequest({ commit }, payload) {
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       try {
         let postsRequested = await axios.get(
@@ -602,7 +599,6 @@ export default new Vuex.Store({
             },
           }
         );
-        console.log(postsRequested);
         commit("postHaveRequest", postsRequested.data);
       } catch (error) {
         console.log(error);
@@ -636,7 +632,6 @@ export default new Vuex.Store({
           }
         );
         commit("getOnePost", post.data);
-        console.log(post);
       } catch (error) {
         console.log(error);
       }
@@ -656,10 +651,10 @@ export default new Vuex.Store({
       );
       router.push("/passenger");
     },
+
     // Delete Post Book
-    async DeletebookPost({ state }, payload) {
+    async DeletebookPost({ dispatch }, payload) {
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
-      console.log(payload);
       await axios.delete(
         `https://car-care3.herokuapp.com/api/Booking/${payload}`,
         {
@@ -668,9 +663,9 @@ export default new Vuex.Store({
           },
         }
       );
-      location.reload();
-      console.log(state);
+      dispatch("getWaitingPostFun");
     },
+    
     // Get All Post
     async allPosts({ commit }) {
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
@@ -685,7 +680,6 @@ export default new Vuex.Store({
         );
         // this.passengerPost = posts.data.carSharingPost;
         commit("allPosts", posts.data.carSharingPost);
-        console.log(posts.data.carSharingPost);
       } catch (error) {
         console.log(error);
       }
@@ -697,7 +691,6 @@ export default new Vuex.Store({
         let searchFun = await axios.get(
           `https://car-care3.herokuapp.com/api/carSharingPost/getAllPost/?from=${payload.startCity}&to=${payload.endCity}`
         );
-        console.log(searchFun);
         commit("allPosts", searchFun.data.carSharingPost);
       } catch (error) {
         console.log(error);

@@ -41,12 +41,10 @@ export default {
   data() {
     return {
       showConfirm: false,
-      id:this.post._id
+      id: this.post._id,
     };
   },
-  mounted() {
-    console.log(this.post);
-  },
+  mounted() {},
   methods: {
     deleteBook() {
       if (this.showConfirm == false) {
@@ -56,6 +54,7 @@ export default {
     confirmDelete(confirmType) {
       if (confirmType == "delete") {
         this.$store.dispatch("DeletebookPost", this.id);
+        this.showConfirm = false;
       } else {
         this.showConfirm = false;
       }

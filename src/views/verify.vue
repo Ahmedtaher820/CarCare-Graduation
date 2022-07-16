@@ -23,7 +23,7 @@
             </button>
           </div>
         </div>
-        <div class="d-none d-lg-block col-lg-6 carousel-box">
+        <div class="d-none d-lg-block col-lg-5 carousel-box">
           <carousel />
         </div>
         <div class="resetmodal p-5 rounded-3">

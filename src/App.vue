@@ -1,10 +1,7 @@
 <template>
   <div id="app">
     <navgiation v-if="shownav" />
-    <!-- <transition class="fade-out" name="fade"> -->
-    <!-- <transition> -->
     <router-view />
-    <!-- </transition> -->
     <img
       v-for="(img, i) in animationimg"
       :key="i"

@@ -1,14 +1,17 @@
 <template>
-  <div class="input-box d-flex my-4 align-items-center justify-content-between w-100 px-4">
+  <div
+    class="input-box d-flex my-4 align-items-center justify-content-between w-100 px-4"
+  >
     <div class="d-flex gap2 align-items-center gap-2">
       <select v-model="search.startCity" @change="checkPoint">
-        <option>Select Your End City</option>
+        <option disabled selected>Select Your Start City</option>
         <option v-for="(city, index) in cities" :key="index" :value="city">
           {{ city }}
         </option>
       </select>
       <span>To</span>
       <select v-model="search.endCity" @change="checkPoint">
+        <option disabled selected>Select Your End City</option>
         <option v-for="(city, index) in cities" :key="index">
           {{ city }}
         </option>
@@ -89,12 +92,12 @@ export default {
     checkPoint() {
       if (!this.search.startCity == "" && !this.search.endCity == "") {
         this.$store.dispatch("submitSearch", this.search);
-      } else {
-        return;
       }
     },
     allPost() {
-        this.$store.dispatch("allPosts")
+      this.search.startCity = "";
+      this.search.endCity = "";
+      this.$store.dispatch("allPosts");
     },
   },
 };
@@ -116,8 +119,8 @@ select:focus {
   background-color: var(--maincolor);
   outline: none;
 }
-.all-post{
-    background-color: var(--secondcolor);
-   cursor: pointer;
+.all-post {
+  background-color: var(--secondcolor);
+  cursor: pointer;
 }
 </style>

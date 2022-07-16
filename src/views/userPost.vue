@@ -125,7 +125,7 @@ export default {
     this.$store.dispatch("getPostById", this.id);
     setTimeout(() => {
       this.showLoad = false;
-    }, 3000);
+    }, 2000);
   },
   methods: {
     deletePost(postId) {

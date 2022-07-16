@@ -87,6 +87,7 @@ export default {
         document.querySelector(".curr-loc").classList.remove("disabled");
       }
     },
+
     currentLocation() {
       this.err = [];
       if (navigator.geolocation) {
@@ -109,6 +110,7 @@ export default {
         console.log("your browser not support this featured");
       }
     },
+    
   },
 };
 </script>

@@ -38,10 +38,13 @@ export default {
 
   methods: {
     addService(event) {
+      // take price from box to store this price 
       this.options.price =
         event.target.parentElement.firstChild.nextElementSibling.textContent;
+      // take option from box to store this option 
       this.options.option =
         event.target.parentElement.firstChild.nextElementSibling.nextElementSibling.textContent;
+        // check if this option selected before or not to select operation add or abstractive
       if (event.target.classList.contains("active")) {
         this.$store.commit("useroptions", this.options);
       } else {

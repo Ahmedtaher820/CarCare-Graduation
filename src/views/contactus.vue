@@ -8,9 +8,7 @@
           v-for="(data, i) in contactData"
           :key="i"
           :class="data.mainclass"
-          data-aos="fade-up"
-          data-aos-duration="1500"
-          data-os-delay="500"
+        
         >
           <div
             class="haeding-box py-4 text-center shadow bg-light rounded-3 text-muted"
@@ -22,9 +20,7 @@
         <div class="contact-main row mt-5">
           <div
             class="col-md-6"
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-os-delay="200"
+         
           >
             <div class="con-box mb-md-0 mb-4">
               <iframe
@@ -38,9 +34,7 @@
           </div>
           <div
             class="col-md-6"
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-delay="200"
+          
           >
             <div class="contact-form bg-light p-4 shadow rounded-3">
               <form>

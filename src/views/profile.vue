@@ -119,16 +119,18 @@
       v-on:closemodal="closemodal"
       v-if="showmodal"
     />
+    <loading v-if="showloading" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import passmodal from "../components/passmodal.vue";
+import loading from "../components/loading.vue"
 export default {
   name: "profile",
   components: {
-    passmodal,
+    passmodal,loading
   },
   data() {
     return {
@@ -139,9 +141,11 @@ export default {
       showphone: true,
       token: null,
       showmodal: false,
+      showloading:false
     };
   },
   created() {
+    this.showloading = true
     let id = JSON.parse(localStorage.getItem("user-info"));
     this.token = JSON.parse(localStorage.getItem("usertoken"));
     axios
@@ -149,6 +153,7 @@ export default {
       .then((response) => {
         console.log(response.data.user);
         this.userinfo.push(response.data.user);
+        this.showloading = false
       });
   },
   methods: {

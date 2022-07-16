@@ -1,7 +1,7 @@
 <template>
-  <div class="statistic-box text-light d-flex justify-content-center align-items-center" id="statistic">
-    <div class="container d-flex justify-content-center flex-column">
-      <h2 class="pt-4 fs-1">Our Statistics</h2>
+  <div class="statistic-box text-light d-flex  align-items-center" id="statistic">
+    <div class="container d-flex  flex-column">
+      <h2 class="pt-1 fs-1">Our Statistics</h2>
       <div class="row">
         <div class="col-md-4">
           <div class="stat-box d-flex flex-column   bg-light mt-4">

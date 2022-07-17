@@ -2,21 +2,21 @@
   <div class="recentPost pt-4">
     <div class="mb-4">
       <button
-        class="me-2 post-btn active py-2 px-3"
+        class="me-2 post-btn active py-2 px-3 mb-2"
         @click="funPost($event)"
         data-posts="myBooking"
       >
         My Booking
       </button>
       <button
-        class="me-2 post-btn py-2 px-3"
+        class="me-2 post-btn py-2 px-3 mb-2"
         @click="funPost($event)"
         data-posts="postRequests"
       >
         My Post Requests
       </button>
       <button
-        class="post-btn py-2 px-3"
+        class="post-btn py-2 px-3 mb-2"
         @click="funPost($event)"
         data-posts="myposts"
       >
@@ -46,8 +46,7 @@ export default {
     postRequests,
   },
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     funPost(e) {

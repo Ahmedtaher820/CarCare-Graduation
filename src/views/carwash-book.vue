@@ -213,22 +213,21 @@ export default {
       // to carMake all error in page is empty
       let inputCheck = document.querySelectorAll(".input-check-err");
       inputCheck.forEach((err) => {
-      console.log(err)
-
         err.textContent = "";
       });
       if (this.userBookInfo.carModel == "") {
-        this.check("Choose Your Car Type", "car-type", 0);
+        this.check("Choose Your Car Type", 0);
         return;
       }
       if (this.userlatlong.length == 0) {
-        this.check("Location Required", "address", 1);
+        console.log("lat empty")
+        this.check("Required", 1);
         return;
       }
       this.$store.dispatch("userBookInfo", this.userBookInfo);
       this.$store.dispatch("completeWashBook");
     },
-    check(message, id, index) {
+    check(message, index) {
       let inputCheck = document.querySelectorAll(".input-check-err");
       inputCheck[index].textContent = message;
     },

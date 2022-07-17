@@ -20,13 +20,11 @@ export default {
 <style>
 .page-box-title {
   min-height: 350px;
-  background: linear-gradient(45deg, rgba(51, 51, 51, 0.418), #333),
-    url("../assets/pagesbox/bg.jpg") no-repeat center;
-  background-size: cover;
+  background: var(--maincolor);
+  color: var(--secondcolor);
 }
 .page-box-title .title {
   font-size: 80px;
-  color: var(--maincolor);
 }
 @media (max-width: 991px) {
   .page-box-title .title {

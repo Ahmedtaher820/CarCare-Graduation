@@ -34,9 +34,9 @@ ul {
   margin: 0px !important;
 }
 h1 {
-  /* background: transparent !important;
-  color: var(--secondcolor) !important;
-  padding-left: 0px !important; */
+  background: transparent !important;
+  /* color: var(--secondcolor) !important; */
+  padding-left: 0px !important;
 }
 .btn {
   border: none !important;

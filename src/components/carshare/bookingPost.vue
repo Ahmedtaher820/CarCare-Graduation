@@ -15,7 +15,7 @@
           <td>{{ post.many }}</td>
           <td>{{ post.checked == false ? "Wating" : "Accepting" }}</td>
           <td>
-            <button class="btn" @click="deleteBook(post._id)">Delete</button>
+            <button class="btn bg-danger rounded-0" @click="deleteBook(post._id)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -41,10 +41,11 @@ export default {
   data() {
     return {
       showConfirm: false,
-      id: this.post._id,
+      id:this.post._id
     };
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     deleteBook() {
       if (this.showConfirm == false) {
@@ -55,6 +56,7 @@ export default {
       if (confirmType == "delete") {
         this.$store.dispatch("DeletebookPost", this.id);
         this.showConfirm = false;
+
       } else {
         this.showConfirm = false;
       }

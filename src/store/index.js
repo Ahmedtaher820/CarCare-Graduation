@@ -3,7 +3,6 @@ import Vuex from "vuex";
 import axios from "axios";
 import swal from "sweetalert";
 import router from "../router/index";
-import { post } from "jquery";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -393,7 +392,7 @@ export default new Vuex.Store({
           state.usercarwash.totalPrice -= Number(
             findOption.price.slice(0, findOption.price.indexOf("$"))
           );
-            // remove option from object
+          // remove option from object
           return state.usercarwash.options.splice(
             state.usercarwash.options.indexOf(findOption),
             1
@@ -552,11 +551,12 @@ export default new Vuex.Store({
         });
       }
     },
+    // my booking list
     async getWaitingPostFun({ commit }) {
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       try {
         let watingPosts = await axios.get(
-          `https://car-care3.herokuapp.com/api/Booking/getAllBooking`,
+          `https://car-care3.herokuapp.com/api/Booking/`,
           {
             headers: {
               "x-auth-token": `${usertoken}`,
@@ -564,6 +564,7 @@ export default new Vuex.Store({
           }
         );
         commit("waitingBook", watingPosts.data.booking);
+        console.log(watingPosts.data.booking);
       } catch (error) {
         console.log(error);
       }
@@ -573,16 +574,16 @@ export default new Vuex.Store({
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       try {
         let posts = await axios.get(
-          `https://car-care3.herokuapp.com/api/Booking/`,
+          `https://car-care3.herokuapp.com/api/carSharingPost/getBooking`,
           {
             headers: {
               "x-auth-token": `${usertoken}`,
             },
           }
         );
-        console.log(post.data);
+        console.log(posts.data.booking);
         // dispatch("postHaveRequest",post.data.booking.carSharingPostId)
-        commit("requests", posts.data);
+        commit("requests", posts.data.booking);
       } catch (error) {
         console.log(error);
       }
@@ -665,7 +666,43 @@ export default new Vuex.Store({
       );
       dispatch("getWaitingPostFun");
     },
-    
+
+    // accept book
+    async acceptBook({ state }, payload) {
+      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+      try {
+        let accept = await axios.patch(
+          `https://car-care3.herokuapp.com/api/carSharingPost/acceptedBooking/${payload}/true`,
+          {
+            headers: {
+              "x-auth-token": `${usertoken}`,
+            },
+          }
+        );
+        console.log(accept);
+        console.log(state);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // delete book
+    async deleteBook({ state }, payload) {
+      let usertoken = JSON.parse(localStorage.getItem("usertoken"));
+      try {
+        let accept = await axios.patch(
+          `https://car-care3.herokuapp.com/api/carSharingPost/acceptedBooking/${payload}/false`,
+          {
+            headers: {
+              "x-auth-token": `${usertoken}`,
+            },
+          }
+        );
+        console.log(accept);
+        console.log(state);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     // Get All Post
     async allPosts({ commit }) {
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));

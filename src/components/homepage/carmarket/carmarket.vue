@@ -1,6 +1,11 @@
 <template>
   <div class="container">
-    <h2 class="main-title fs-2" data-aos="fade-left" data-aos-duration="1500">
+    <h2
+      class="main-title fs-2"
+      style="margin: 0px auto 20px"
+      data-aos="fade-left"
+      data-aos-duration="1500"
+    >
       Car Market
     </h2>
     <div class="row car-row">
@@ -135,7 +140,6 @@ export default {
   transition: 0.3s;
   overflow: hidden;
 }
-
 .box-content p.carprice {
   top: 24px;
   left: 24px;

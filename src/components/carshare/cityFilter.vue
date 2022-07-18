@@ -1,6 +1,6 @@
 <template>
   <div
-    class="input-box d-flex my-4 align-items-center justify-content-between w-100 px-4"
+    class="input-box d-flex my-4 align-items-md-center justify-content-between w-100 px-1 flex-column flex-md-row align-items-start "
   >
     <div class="d-flex gap2 align-items-center gap-2">
       <select v-model="search.startCity" @change="checkPoint">
@@ -17,7 +17,7 @@
         </option>
       </select>
     </div>
-    <div class="all-post p-2 text-light rounded-3" @click="allPost">
+    <div class="all-post p-2 text-light rounded-3 mt-2 mt-md-0" @click="allPost">
       <span>All <i class="bi bi-list"></i></span>
     </div>
   </div>

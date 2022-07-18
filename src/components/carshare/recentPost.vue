@@ -1,5 +1,11 @@
 <template>
   <div class="recentPost pt-4">
+    <div
+      class="position-fixed d-inline-block d-md-none close-recent"
+      @click="removeRecent"
+    >
+      <i class="bi bi-x-circle fs-2"></i>
+    </div>
     <div class="mb-4">
       <button
         class="me-2 post-btn active py-2 px-3 mb-2"
@@ -62,6 +68,9 @@ export default {
       document
         .querySelector("." + e.target.dataset.posts)
         .classList.remove("noactive");
+    },
+    removeRecent() {
+      document.querySelector(".recentPost").classList.remove("active");
     },
   },
   mounted() {},

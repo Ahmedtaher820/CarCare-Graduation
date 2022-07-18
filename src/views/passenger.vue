@@ -120,9 +120,12 @@
           >
             Book
           </button>
-          <loading v-if="show" />
         </div>
       </div>
+    </div>
+    <loading v-if="show" />
+    <div class="trip-details position-fixed d-block d-md-none rounded-3 px-2 py-1" @click="showTripDetails">
+      <span>Trip Detailes <i class="bi bi-box-arrow-in-down"></i></span>
     </div>
   </div>
 </template>
@@ -160,6 +163,9 @@ export default {
     closePostModal() {
       this.showPost = false;
     },
+    showTripDetails(){
+      document.querySelector(".recentPost").classList.toggle("active")
+    }
   },
   async mounted() {
     // this.show = true;
@@ -178,11 +184,11 @@ export default {
       }
     });
   },
-  computed:{
-    passengerPost(){
-      return this.$store.state.pagePosts
-    }
-  }
+  computed: {
+    passengerPost() {
+      return this.$store.state.pagePosts;
+    },
+  },
 };
 </script>
 

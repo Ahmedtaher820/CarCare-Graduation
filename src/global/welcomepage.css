@@ -3,7 +3,7 @@
 }
 @media (max-width: 767px) {
   .welcome-screen {
-    min-height: 50vh;
+    height: 50vh !important;
   }
 }
 @media (max-width: 991px) {

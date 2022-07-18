@@ -8,7 +8,7 @@
       <product />
     </div> -->
     <div
-      class="aboutus position-relative py-5"
+      class="aboutus position-relative py-0 py-md-5"
       id="aboutus"
       data-aos="fade-up"
       data-aos-duration="1500"

@@ -31,8 +31,10 @@
             </div>
           </div>
           <div class="col-12 col-lg-8">
-            <div class="right-box text-start ps-5 py-3 shadow">
-              <h4 class="fs-4 border-bottom pb-2">User Information</h4>
+            <div class="right-box text-start ps-0 ps-md-5 py-3 shadow">
+              <h4 class="fs-4 border-bottom pb-2 d-none d-md-block">
+                User Information
+              </h4>
               <div
                 class="info-box d-flex mb-3 flex-column flex-md-row gap-md-4 gap-1"
               >
@@ -44,13 +46,21 @@
                         <p v-if="showname" @dblclick="showname = false">
                           {{ info.name }}
                         </p>
-                        <input
-                          type="text"
-                          class="form-control p-1 fs-5 rounded-3"
-                          v-model="info.name"
-                          v-if="!showname"
-                          @keyup.enter="changeinfo(info.name, 'name')"
-                        />
+                        <div class="profile-group">
+                          <input
+                            type="text"
+                            class="profile-input"
+                            v-model="info.name"
+                            v-if="!showname"
+                            @keyup.enter="changeinfo(info.name, 'name')"
+                          />
+                          <span
+                            v-if="!showname"
+                            class="d-inline-block d-md-none"
+                            @click="changeinfo(info.name, 'name')"
+                            >Change</span
+                          >
+                        </div>
                       </h6>
                     </div>
                   </div>
@@ -61,13 +71,21 @@
                         <p v-if="showjob" @dblclick="showjob = false">
                           {{ info.job }}
                         </p>
-                        <input
-                          type="text"
-                          class="form-control p-1 fs-5 rounded-3"
-                          v-model="info.job"
-                          v-if="!showjob"
-                          @keyup.enter="changeinfo(info.job, 'job')"
-                        />
+                        <div class="profile-group">
+                          <input
+                            type="text"
+                            class="form-control p-1 fs-5 rounded-3"
+                            v-model="info.job"
+                            v-if="!showjob"
+                            @keyup.enter="changeinfo(info.job, 'job')"
+                          />
+                          <span
+                            v-if="!showjob"
+                            class="d-inline-block d-md-none"
+                            @click="changeinfo(info.job, 'job')"
+                            >Change</span
+                          >
+                        </div>
                       </h6>
                     </div>
                   </div>
@@ -77,13 +95,21 @@
                       <p @dblclick="showphone = false" v-if="showphone">
                         {{ info.phone }}
                       </p>
-                      <input
-                        type="text"
-                        class="form-control p-1 fs-5 rounded-3"
-                        v-model="info.phone"
-                        v-if="!showphone"
-                        @keyup.enter="changeinfo(info.phone, 'phone')"
-                      />
+                      <div class="profile-group">
+                        <input
+                          type="text"
+                          class="form-control p-1 fs-5 rounded-3"
+                          v-model="info.phone"
+                          v-if="!showphone"
+                          @keyup.enter="changeinfo(info.phone, 'phone')"
+                        />
+                        <span
+                          v-if="!showphone"
+                          class="d-inline-block d-md-none"
+                          @click="changeinfo(info.phone, 'phone')"
+                          >Change</span
+                        >
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -109,11 +135,13 @@
         </div>
       </div>
     </div>
-    <span class="text-start d-inline-block"
+    <span class="text-start fs-5"
       >*to edit your information double click in the field need to change
       it</span
     >
-    <span>*to save your change press enter</span>
+    <span class="text-start d-md-inline-block d-none"
+      >*to save your change press enter</span
+    >
     <passmodal
       :token="this.token"
       v-on:closemodal="closemodal"
@@ -126,11 +154,12 @@
 <script>
 import axios from "axios";
 import passmodal from "../components/passmodal.vue";
-import loading from "../components/loading.vue"
+import loading from "../components/loading.vue";
 export default {
   name: "profile",
   components: {
-    passmodal,loading
+    passmodal,
+    loading,
   },
   data() {
     return {
@@ -141,11 +170,16 @@ export default {
       showphone: true,
       token: null,
       showmodal: false,
-      showloading:false
+      showloading: false,
+      info: {
+        name: "",
+        job: "",
+        phone: null,
+      },
     };
   },
   created() {
-    this.showloading = true
+    this.showloading = true;
     let id = JSON.parse(localStorage.getItem("user-info"));
     this.token = JSON.parse(localStorage.getItem("usertoken"));
     axios
@@ -153,15 +187,19 @@ export default {
       .then((response) => {
         console.log(response.data.user);
         this.userinfo.push(response.data.user);
-        this.showloading = false
+        this.showloading = false;
       });
   },
   methods: {
     movecard(event) {
-      var card = document.querySelector(".profile .card-box");
-      let x = (window.innerWidth / 2.5 - event.clientX) / 40;
-      let y = (window.innerHeight / 2.5 - event.clientY) / 40;
-      card.style.transform = `rotateY(${y}deg) rotateX(${x}deg)`;
+      if (window.innerWidth > 768) {
+        var card = document.querySelector(".profile .card-box");
+        let x = (window.innerWidth / 2.5 - event.clientX) / 40;
+        let y = (window.innerHeight / 2.5 - event.clientY) / 40;
+        card.style.transform = `rotateY(${y}deg) rotateX(${x}deg)`;
+      } else {
+        return;
+      }
     },
     async changeinfo(e, type) {
       console.log(type);
@@ -208,6 +246,25 @@ export default {
           console.log(resolve);
         });
     },
+    async updataAll(info) {
+      console.log(info.name);
+      try {
+        let repo = await axios.patch(
+          `https://car-care3.herokuapp.com/api/users/updateMe`,
+          {
+            name: info.name,
+            job: info.job,
+            phone: info.phone,
+          },
+          {
+            headers: { "x-auth-token": `${this.token}` },
+          }
+        );
+        console.log(repo);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     changepass() {
       this.showmodal = true;
     },
@@ -243,6 +300,11 @@ export default {
 }
 .profile .row > * {
   padding: 0px !important;
+}
+@media (max-width: 768px) {
+  .profile .row > * {
+    padding: 0px 20px 10px !important;
+  }
 }
 .right-box {
   border-top-right-radius: 10px;
@@ -281,5 +343,32 @@ export default {
 span.change,
 .bi-box-arrow-right {
   cursor: pointer;
+}
+/* profile-card button to change data in small screen */
+.profile-card button {
+  width: fit-content;
+  background-color: var(--secondcolor);
+  padding: 10px !important;
+}
+.profile-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 5px 10px;
+}
+@media (max-width: 768px) {
+  .profile-group{
+    background-color: #f1f1f1;
+    display: flex;
+  }
+  .profile-group span {
+    background-color: var(--secondcolor);
+    color: white;
+    line-height: 35px;
+    padding: 3px;
+    font-size: 14px;
+    cursor: pointer;
+  }
 }
 </style>

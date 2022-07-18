@@ -18,7 +18,7 @@
           <td>{{ req.many }}</td>
           <td><button class="btn" @click="accept(req._id)">Accept</button></td>
           <td>
-            <button class="btn bg-danger rounded-0" @click="ignore(req._id)">
+            <button class="btn bg-danger w-100 rounded-0" @click="ignore(req._id)">
               Ignore
             </button>
           </td>

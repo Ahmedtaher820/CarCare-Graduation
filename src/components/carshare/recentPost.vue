@@ -4,7 +4,7 @@
       class="position-fixed d-inline-block d-md-none close-recent"
       @click="removeRecent"
     >
-      <i class="bi bi-x-circle fs-2"></i>
+      <i class="bi bi-x-circle fs-1 text-danger"></i>
     </div>
     <div class="mb-4">
       <button

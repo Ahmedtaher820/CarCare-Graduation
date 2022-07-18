@@ -1,15 +1,22 @@
 <template>
   <div
-    class="input-box d-flex my-4 align-items-md-center justify-content-between w-100 px-1 flex-column flex-md-row align-items-start "
+    class="input-box d-flex my-4 align-items-md-center justify-content-between w-100 px-1 flex-column flex-md-row align-items-start"
   >
-    <div class="d-flex gap2 align-items-center gap-2">
+    <h4>Filtering Cities:</h4>
+    <div
+      class="d-flex gap2 align-items-md-center text-start gap-md-2 gap-0 flex-column flex-md-row"
+    >
       <select v-model="search.startCity" @change="checkPoint">
         <option disabled selected>Select Your Start City</option>
         <option v-for="(city, index) in cities" :key="index" :value="city">
           {{ city }}
         </option>
       </select>
-      <span>To</span>
+      <div class="my-1 m-md-0 d-flex justify-content-around">
+        <span class="to-lgscreen">To</span>
+        <span><i class="bi bi-arrow-down-circle-fill fs-2"></i></span>
+        <span><i class="bi bi-arrow-down-circle-fill fs-2"></i></span>
+      </div>
       <select v-model="search.endCity" @change="checkPoint">
         <option disabled selected>Select Your End City</option>
         <option v-for="(city, index) in cities" :key="index">
@@ -17,7 +24,10 @@
         </option>
       </select>
     </div>
-    <div class="all-post p-2 text-light rounded-3 mt-2 mt-md-0" @click="allPost">
+    <div
+      class="all-post p-2 text-light rounded-3 mt-3 mt-md-0"
+      @click="allPost"
+    >
       <span>All <i class="bi bi-list"></i></span>
     </div>
   </div>
@@ -122,5 +132,17 @@ select:focus {
 .all-post {
   background-color: var(--secondcolor);
   cursor: pointer;
+}
+.bi-arrow-down-circle-fill {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .bi-arrow-down-circle-fill {
+    display: inline-block;
+  }
+  .to-lgscreen {
+    display: none;
+  }
 }
 </style>

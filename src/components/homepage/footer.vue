@@ -1,9 +1,8 @@
 <template>
   <div class="footer-section text-light text-start mt-5 position-relative">
     <div class="footer-content">
-      <img src="../../assets/logo/logo.png" alt="" class="footer-logo" />
-      <ul class="list-unstyled d-flex gap-3 justify-content-center">
-        
+      <img src="../../assets/logo/logowhite .svg" alt="" class="footer-logo" />
+      <ul class="list-unstyled d-flex gap-3 justify-content-center social">
         <li>
           <a href="">
             <i class="bi bi-facebook bg-radial"></i>
@@ -26,9 +25,16 @@
         </li>
       </ul>
     </div>
-    <div class="copyright d-flex justify-content-between align-items-center">
-      <p>&copy; <a href="/">CareCare</a> ,All Right Reversed.</p>
-      <p>Designed By <a href="https://ahmedtaher820.github.io/my-portfolio/" target="_blank">Ahmed Taher</a></p>
+    <div
+      class="copyright d-flex text-center justify-content-between align-items-center"
+    >
+      <p class="mb-0">&copy; <a href="/">CareCare</a> ,All Right Reversed.</p>
+      <p class="mb-0">
+        Designed By
+        <a href="https://ahmedtaher820.github.io/my-portfolio/" target="_blank"
+          >Ahmed Taher</a
+        >
+      </p>
     </div>
   </div>
 </template>
@@ -44,7 +50,7 @@ export default {};
   background-image: url("../../assets/news/footer.png");
   background-size: cover;
 }
-.footer-content{
+.footer-content {
   position: absolute;
   left: 14%;
   bottom: 30%;
@@ -53,35 +59,49 @@ export default {};
   width: 200px;
   height: 180px;
 }
-.bg-radial{
-font-size: 22px;  
-background: -webkit-linear-gradient(#464660,#fff);
-background-clip: text;
--webkit-text-fill-color: transparent;
+.bg-radial {
+  font-size: 22px;
+  background: -webkit-linear-gradient(#464660, #fff);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.copyright{
+.copyright {
   position: absolute;
   bottom: 0px;
   left: 0px;
   width: 100%;
   padding: 0px 60px;
-  color:#0B132B;
+  color: #0b132b;
   font-size: 18px;
 }
-.copyright a{
+.copyright a {
   color: var(--maincolor);
   text-decoration: none;
   font-weight: bold;
   font-size: 20px;
 }
-@media(max-width:768px){
-  .footer-content{
+@media (max-width: 768px) {
+  .footer-section {
+    background-position: 65%;
+  }
+  .footer-logo {
+    width: 165px;
+    position: relative;
+    left: 15%;
+    top: -35px;
+  }
+  .social {
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+    gap: 30px !important;
+  }
+  .footer-content {
     left: 50%;
     transform: translateX(-50%);
   }
   .copyright {
-    padding: 0px 20px;
-    font-size: 15px;
+    display: none !important;
   }
 }
 </style>

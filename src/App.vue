@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <navgiation v-if="shownav" />
+    <!-- <transition class="fade-out" name="fade"> -->
+    <!-- <transition> -->
     <router-view />
+    <!-- </transition> -->
     <img
       v-for="(img, i) in animationimg"
       :key="i"
@@ -28,7 +31,7 @@ export default {
   },
   created() {
     this.checkRouter();
-    // "user-info" it's property in local storage it's store when user login 
+    // "user-info" it's property in local storage it's store when user login
     let user = localStorage.getItem("user-info");
     if (!user) {
       this.$router.push({ path: "/welcomepage" });

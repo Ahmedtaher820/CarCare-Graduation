@@ -74,7 +74,6 @@
                         <div class="profile-group">
                           <input
                             type="text"
-                            class="form-control p-1 fs-5 rounded-3"
                             v-model="info.job"
                             v-if="!showjob"
                             @keyup.enter="changeinfo(info.job, 'job')"
@@ -98,7 +97,6 @@
                       <div class="profile-group">
                         <input
                           type="text"
-                          class="form-control p-1 fs-5 rounded-3"
                           v-model="info.phone"
                           v-if="!showphone"
                           @keyup.enter="changeinfo(info.phone, 'phone')"

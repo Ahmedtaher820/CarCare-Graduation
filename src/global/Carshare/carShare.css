@@ -18,7 +18,17 @@
   border-right: 2px solid #ddd;
   transition: .3s;
 }
-
+.recentPost::-webkit-scrollbar {
+  width: 12px;
+}
+.recentPost::-webkit-scrollbar-track {
+  background: var(--maincolor);
+}
+.recentPost::-webkit-scrollbar-thumb {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  border: 3px solid var(--maincolor);
+}
 .recentPost.Up {
   top: 0px;
   height: 100vh;

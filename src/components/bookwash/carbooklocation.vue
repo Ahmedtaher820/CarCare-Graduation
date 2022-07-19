@@ -9,7 +9,7 @@
           >
           <input
             type="text"
-            class="form-control"
+            class="form-control disabled"
             placeholder="Address"
             id="address"
             @input="loactionNone"
@@ -22,7 +22,7 @@
           <label for="city" class="form-label">City (option)</label>
           <input
             type="text"
-            class="form-control"
+            class="form-control disabled"
             placeholder="City"
             id="city"
             v-model="userLocationWrite.city"
@@ -35,7 +35,7 @@
           <label for="Country" class="form-label">Country (option)</label>
           <input
             type="text"
-            class="form-control"
+            class="form-control disabled"
             placeholder="Country"
             id="Country"
             v-model="userLocationWrite.country"

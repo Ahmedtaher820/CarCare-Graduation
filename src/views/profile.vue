@@ -75,6 +75,7 @@
                           <input
                             type="text"
                             v-model="info.job"
+                            class="profile-input"
                             v-if="!showjob"
                             @keyup.enter="changeinfo(info.job, 'job')"
                           />
@@ -98,6 +99,7 @@
                         <input
                           type="text"
                           v-model="info.phone"
+                          class="profile-input"
                           v-if="!showphone"
                           @keyup.enter="changeinfo(info.phone, 'phone')"
                         />
@@ -356,10 +358,11 @@ span.change,
   padding: 5px 10px;
 }
 @media (max-width: 768px) {
-  .profile-group{
+  .profile-group {
     background-color: #f1f1f1;
     display: flex;
   }
+
   .profile-group span {
     background-color: var(--secondcolor);
     color: white;

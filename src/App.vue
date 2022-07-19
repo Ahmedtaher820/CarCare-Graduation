@@ -54,7 +54,8 @@ export default {
       ) {
         this.shownav = true;
         this.shawfooter = false;
-      } else {
+      } else if(this.$route.name === "Home"){
+        console.log("done")
         this.shownv = true;
         this.shawfooter = true;
       }

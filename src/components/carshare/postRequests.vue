@@ -7,14 +7,18 @@
     >
       <thead>
         <tr>
-          <th>description</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Passenger Name</th>
           <th>many</th>
           <th colspan="2">Status</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>{{ req.description }}</td>
+          <td>{{req.carSharingPostId.fromCity}}</td>
+          <td>{{req.carSharingPostId.toCity}}</td>
+          <td>{{ req.userId.name }}</td>
           <td>{{ req.many }}</td>
           <td><button class="btn" @click="accept(req._id)">Accept</button></td>
           <td>
@@ -39,7 +43,7 @@ export default {
       this.$store.dispatch("acceptBook", postId);
     },
     ignore(postId) {
-      this.$store.dispatch("deleteBook", postId);
+      this.$store.dispatch("rejectBook", postId);
 
       // console.log(
       //   event.target.parentElement.parentElement.parentElement.parentElement,
@@ -56,4 +60,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>

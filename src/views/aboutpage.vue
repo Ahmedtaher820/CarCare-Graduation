@@ -3,12 +3,12 @@
     <pagebg :title="title" />
     <div class="provide my-5 text-start">
       <div class="container">
-        <h2 class="fs-2 mb-3 text-center mb-5">
+        <h2 class="fs-2 mb-3 text-center mb-5" v-once>
           We Provide Variety Of High-End <br />
           Auto Customiztions
         </h2>
         <div class="row">
-          <div class="col-lg-4" v-for="(info, i) in boxinfo" :key="i">
+          <div class="col-lg-4" v-for="(info, i) in boxinfo" :key="i" v-once>
             <div class="service-box d-flex gap-3">
               <div class="service-img mb-3 mb-lg-0">
                 <img

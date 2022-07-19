@@ -26,6 +26,7 @@
 <script>
 export default {
   props: ["post"],
+  
   mounted() {
   },
 };

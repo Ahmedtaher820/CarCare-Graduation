@@ -1,273 +1,363 @@
 .passenger {
-    min-height: 100vh;
-  }
-  .passenger-boxes {
-    position: absolute;
-    left: 38%;
-    width: 60%;
-  }
-  .recentPost {
-    position: fixed;
-    top: 80px;
-    left: 0px;
-    width: 35%;
-    height: calc(100vh - 80px);
-    overflow-y: scroll;
-    border-right: 2px solid #ddd;
-    transition: .3s;
-  }
-  .recentPost.Up{
-    top:0px;
-    height:100vh;
+  min-height: 100vh;
+}
 
-  }
-  .recentPost::-webkit-scrollbar{
-    display: none;
-  }
-  .recentPost::-webkit-thumb{
-    display: none;
-  }
-  .passenger-box {
-      margin: 0px auto 30px;
-      box-shadow: 0px 0px 73px rgb(114 114 114 / 15%)
-  
-  }
-  .main-box > div {
-    height: 80vh;
-  }
-  .passenger-boxes .input-box {
-    width: fit-content;
-  }
-  .close-recent{
+.passenger-boxes {
+  position: absolute;
+  left: 38%;
+  width: 60%;
+}
+
+.recentPost {
+  position: fixed;
+  top: 80px;
+  left: 0px;
+  width: 35%;
+  height: calc(100vh - 80px);
+  overflow: scroll;
+  border-right: 2px solid #ddd;
+  transition: .3s;
+}
+
+.recentPost.Up {
+  top: 0px;
+  height: 100vh;
+
+}
+
+.passenger-box {
+  margin: 0px auto 30px;
+  box-shadow: 0px 0px 73px rgb(114 114 114 / 15%)
+}
+
+.main-box>div {
+  height: 80vh;
+}
+
+.passenger-boxes .input-box {
+  width: fit-content;
+}
+
+.close-recent {
   z-index: 999;
-  }
-  /* icon for display trip detalis in small screen */
-  .trip-details{
-    bottom: 20px;
-    left: 20px;
-    background-color: var(--secondcolor);
-    color: white;
-    cursor: pointer;
-  }
-  .close-recent{
-    right:10px;
-    cursor: pointer;
-    top: 0px;
-  }
-  @media (max-width: 768px) {
-    .recentPost {
-      display: none;
-    }
-    .recentPost.active{
-      position: fixed;
-      top: 0px;
-      left:0px;
-      width:100%;
-      height: 100%;
-      background-color: #c8cda4;
-      z-index: 999;
-    }
-    .passenger-boxes {
-      left: 10%;
-      width: 80%;
-    }
-  }
- 
-  .user-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    padding: 3px;
-    background-color: rgb(242, 199, 10);
-  }
-  .option-edit {
-    width: 30px;
-    height: 30px;
-    background-color: #333;
-    cursor: pointer;
-    border-radius: 50%;
-  }
-  .options-edit {
-    top: 40px;
-    left: -70px;
-    background-color: var(--secondcolor);
-    border-radius: 10px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(100%);
-    transition: 0.3s;
-  }
-  .options-edit.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(0%);
-  }
-  .options-edit li a {
-    color: var(--maincolor);
-  }
-  .post-body{
-    border-top: 1px dashed var(--secondcolor);
-  }
-  .post-body p {
-    font-size: 14px;
-  }
-  .dest-point{
-    height: 40px;
-  }
-  .header-dest-point .level {
-    width: 20px;
-    position: relative;
-    height: 20px;
-    padding: 5px;
-    border-radius: 50%;
-  }
-  .header-dest-point .level.yellow {
-    background-color: var(--maincolor);
-  }
-  .header-dest-point .level.blue {
-    background-color: var(--secondcolor);
-  }
-  .header-dest-point .point-sty {
-    width: 30px;
-    height: 30px;
-    position: relative;
-    border-radius: 50%;
-    display: inline-block;
-    padding: 10px;
-    border: 1px solid var(--secondcolor);
-    position: relative;
-    top: -10px;
-    left: -10px;
-  }
-  .header-dest-point .dest-point span:not(.down-icon) {
-    width: 4px;
-    height: 4px;
-    background-color: #444;
-    display: block;
-    margin-bottom: 3px;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .down-icon{
-    position: relative;
-    top: -8px;
-    font-weight: bold;
-    display: inline-block;
-  }
-  .header-date {
-    border-right: 2px solid var(--secondcolor);
-  }
-  .header-dest-city {
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  .header-dest-city p:nth-child(2) {
-    margin-top: 30px;
-  }
-  .post-footer > div {
-    background-color: #f1f1f1;
-  }
-  .post-footer > div span {
-    font-size: 14px;
-  }
-  .createPost {
-    width: 40px;
-    height: 40px;
-    background-color: var(--maincolor);
-    color: var(--secondcolor);
-    border-radius: 50%;
-    right: 20px;
-    bottom: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-    z-index: 10;
-  }
-  .createPost:hover {
-    background-color: var(--secondcolor);
-    color: var(--maincolor);
-  }
-  /* Post Modal */
-  .post-modal{
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    
-    width: 100%;
-    min-height: 100%;
-    z-index: 999;
-    background-color: var(--maincolor);
-  }
-  .post-modal form{
-    width: 40%;
-    background-color: var(--secondcolor);
-    padding: 40px;
-    border-radius: 20px;
-  }
-  .post-modal .btn{
-    padding: 10px 30px;
-    background-color: var(--maincolor);
-    display: block;
-    margin-right: auto;
-    border-radius: 10px;
-  }
-  .post-modal h3{
-    text-align: left;
-    color: #fff;
-  }
-  @media (max-width:991px){
-    .post-modal form{
-      width: 80%;
-    }
-  }
-  .post-modal i{
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-  }
-  /* Post Slider toggle Css */
-  div.active {
-    display: block;
-    animation: postAnimate .8s ease-in 1;
-  }
-  @keyframes postAnimate {
-    0% {
-      transform: scale(0) translateY(-100%);
-    }
-    100% {
-      transform: scale(1) translateY(0%);
-    }
-  }
-  div.noactive {
+}
+
+/* icon for display trip detalis in small screen */
+.trip-details {
+  bottom: 20px;
+  left: 20px;
+  background-color: var(--secondcolor);
+  color: white;
+  cursor: pointer;
+}
+
+.close-recent {
+  right: 10px;
+  cursor: pointer;
+  top: 0px;
+}
+
+@media (max-width: 768px) {
+  .recentPost {
     display: none;
   }
-  button {
-    border: none;
-    background-color: var(--secondcolor);
-    color: white;
-    transition: 0.3s;
-  }
-  button.active {
-    background-color: white;
-    color: var(--secondcolor);
-  }
-  /* Confirm Delete Post */
-  .confirmDelete{
-    position: absolute;
+
+  .recentPost.active {
+    position: fixed;
     top: 0px;
     left: 0px;
     width: 100%;
     height: 100%;
-    background-color:#368b85;
-    color:#f1f1f1;
-    z-index: 1000;
+    background-color: #c8cda4;
+    z-index: 999;
   }
-  .btn-cancel{
-    background-color: var(--maincolor) !important; 
+
+  .passenger-boxes {
+    left: 10%;
+    width: 80%;
   }
+}
+
+.user-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding: 3px;
+  background-color: rgb(242, 199, 10);
+}
+
+.option-edit {
+  width: 30px;
+  height: 30px;
+  background-color: #333;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.options-edit {
+  top: 40px;
+  left: -70px;
+  background-color: var(--secondcolor);
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(100%);
+  transition: 0.3s;
+}
+
+.options-edit.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0%);
+}
+
+.options-edit li a {
+  color: var(--maincolor);
+}
+
+.post-body {
+  border-top: 1px dashed var(--secondcolor);
+}
+
+.post-body p {
+  font-size: 14px;
+}
+
+.dest-point {
+  height: 40px;
+}
+
+.header-dest-point .level {
+  width: 20px;
+  position: relative;
+  height: 20px;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.header-dest-point .level.yellow {
+  background-color: var(--maincolor);
+}
+
+.header-dest-point .level.blue {
+  background-color: var(--secondcolor);
+}
+
+.header-dest-point .point-sty {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border-radius: 50%;
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid var(--secondcolor);
+  position: relative;
+  top: -10px;
+  left: -10px;
+}
+
+.header-dest-point .dest-point span:not(.down-icon) {
+  width: 4px;
+  height: 4px;
+  background-color: #444;
+  display: block;
+  margin-bottom: 3px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.down-icon {
+  position: relative;
+  top: -8px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.header-date {
+  border-right: 2px solid var(--secondcolor);
+}
+
+.header-dest-city {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.header-dest-city p:nth-child(2) {
+  margin-top: 30px;
+}
+
+.post-footer>div {
+  background-color: #f1f1f1;
+}
+
+.post-footer>div span {
+  font-size: 14px;
+}
+
+.createPost {
+  width: 40px;
+  height: 40px;
+  background-color: var(--maincolor);
+  color: var(--secondcolor);
+  border-radius: 50%;
+  right: 20px;
+  bottom: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 10;
+}
+
+.createPost:hover {
+  background-color: var(--secondcolor);
+  color: var(--maincolor);
+}
+
+/* Post Modal */
+.post-modal {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+
+  width: 100%;
+  min-height: 100%;
+  z-index: 999;
+  background-color: var(--maincolor);
+}
+
+.post-modal form {
+  width: 40%;
+  background-color: var(--secondcolor);
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.post-modal .btn {
+  padding: 10px 30px;
+  background-color: var(--maincolor);
+  display: block;
+  margin-right: auto;
+  border-radius: 10px;
+}
+
+.post-modal h3 {
+  text-align: left;
+  color: #fff;
+}
+
+@media (max-width:991px) {
+  .post-modal form {
+    width: 80%;
+  }
+}
+
+.post-modal i {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+/* Post Slider toggle Css */
+div.active {
+  display: block;
+  animation: postAnimate .8s ease-in 1;
+}
+
+@keyframes postAnimate {
+  0% {
+    transform: scale(0) translateY(-100%);
+  }
+
+  100% {
+    transform: scale(1) translateY(0%);
+  }
+}
+
+div.noactive {
+  display: none;
+}
+
+button {
+  border: none;
+  background-color: var(--secondcolor);
+  color: white;
+  transition: 0.3s;
+}
+
+button.active {
+  background-color: white;
+  color: var(--secondcolor);
+}
+
+/* Confirm Delete Post */
+.confirmDelete {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #368b85;
+  color: #f1f1f1;
+  z-index: 1000;
+}
+
+.btn-cancel {
+  background-color: var(--maincolor) !important;
+}
+
+/* User Guide */
+.guideUser {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--maincolor);
+  color: var(--secondcolor);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+@media(max-width:768px) {
+  .guideUser {
+    position: fixed;
+    left: auto;
+    right: 5px;
+    top: 80px;
+  }
+}
+
+.guideUserAccordion {
+  position: fixed;
+  top: 10%;
+  left: 15%;
+  width: 70%;
+  height: 80%;
+  z-index: 999;
+  opacity: 0;
+overflow: hidden;
+  animation: showGuide .5s 1 ease-in-out both;
+}
+
+.accordion-boxes {
+  width: 80%;
+}
+
+@media(max-width:768px) {
+
+  .accordion-boxes {
+    width: 90%;
+    font-size: 14px;
+  }
+}
+
+@keyframes showGuide {
+  100% {
+    opacity: 1;
+  }
+}

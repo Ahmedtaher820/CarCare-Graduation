@@ -361,6 +361,9 @@ export default new Vuex.Store({
     myPosts: [],
     postById: "",
     postHaveRequest: null,
+    // postsNum:0,
+    // BooksNum:0,
+    // RequestsNum:0
   },
   mutations: {
     increasecar(state) {
@@ -465,6 +468,16 @@ export default new Vuex.Store({
     postHaveRequest(state, payload) {
       return (state.postHaveRequest = payload);
     },
+    // Post Number
+    // postNumbers(state,payload){
+    //   return state.postsNum = payload
+    // },
+    // BooksNumbers(state,payload){
+    //   return state.BooksNum = payload
+    // },
+    // requestNumbers(state,payload){
+    //   return state.RequestsNum = payload
+    // },
   },
   actions: {
     async getuserfun({ commit }) {
@@ -564,7 +577,7 @@ export default new Vuex.Store({
           }
         );
         commit("waitingBook", watingPosts.data.booking);
-        console.log(watingPosts.data.booking);
+        // commit("BooksNumbers", watingPosts.data.booking.length);
       } catch (error) {
         console.log(error);
       }
@@ -581,8 +594,8 @@ export default new Vuex.Store({
             },
           }
         );
-        console.log(posts.data.booking);
         // dispatch("postHaveRequest",post.data.booking.carSharingPostId)
+        console.log(posts.data)
         commit("requests", posts.data.booking);
       } catch (error) {
         console.log(error);
@@ -600,6 +613,7 @@ export default new Vuex.Store({
             },
           }
         );
+        
         commit("postHaveRequest", postsRequested.data);
       } catch (error) {
         console.log(error);
@@ -617,6 +631,7 @@ export default new Vuex.Store({
           }
         );
         commit("myPosts", posts.data);
+        // commit("postNumbers", posts.data.length);
       } catch (error) {
         console.log(error);
       }
@@ -671,7 +686,7 @@ export default new Vuex.Store({
     async acceptBook({ state }, payload) {
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       try {
-        let accept = await axios.patch(
+         let respo = await axios.patch(
           `https://car-care3.herokuapp.com/api/carSharingPost/acceptedBooking/${payload}/true`,
           {
             headers: {
@@ -679,17 +694,29 @@ export default new Vuex.Store({
             },
           }
         );
-        console.log(accept);
-        console.log(state);
+        swal({
+          title: "Successed!",
+          text: `${respo.data.message} And will be remove this request after day`,
+          icon: "success",
+          button: "Ok!",
+        });
+        console.log(state)
+
       } catch (error) {
         console.log(error);
+        swal({
+          title: "Opps!",
+          text: `Your number of passengers is complete`,
+          icon: "error",
+          button: "Ok!",
+        });
       }
     },
     // delete book
-    async deleteBook({ state }, payload) {
+    async rejectBook({ dispatch }, payload) {
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       try {
-        let accept = await axios.patch(
+       await axios.patch(
           `https://car-care3.herokuapp.com/api/carSharingPost/acceptedBooking/${payload}/false`,
           {
             headers: {
@@ -697,8 +724,7 @@ export default new Vuex.Store({
             },
           }
         );
-        console.log(accept);
-        console.log(state);
+        dispatch("postRequest")
       } catch (error) {
         console.log(error);
       }

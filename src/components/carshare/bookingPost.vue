@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div class="tables">
     <table class="post-table mb-3">
       <thead>
         <tr>
           <th>Description</th>
           <th>Passangers</th>
           <th>Status</th>
+          <th v-if="post.checked == true">Post Owner</th>
           <th></th>
         </tr>
       </thead>
@@ -14,6 +15,7 @@
           <td>{{ post.description }}</td>
           <td>{{ post.many }}</td>
           <td>{{ post.checked == false ? "Wating" : "Accepting" }}</td>
+          <td v-if="post.checked == true">{{post.userId.phone}}</td>
           <td>
             <button class="btn bg-danger rounded-0" @click="deleteBook(post._id)">Delete</button>
           </td>
@@ -45,6 +47,9 @@ export default {
     };
   },
   mounted() {
+    if(document.querySelector(".container").childElementCount > 0){
+      console.log("done")
+    }
   },
   methods: {
     deleteBook() {

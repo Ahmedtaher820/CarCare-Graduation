@@ -5,31 +5,38 @@
       <ul class="list-unstyled d-flex gap-3 justify-content-center social">
         <li>
           <a href="">
-            <i class="bi bi-facebook bg-radial"></i>
+            <i class="bi bi-facebook"></i>
           </a>
         </li>
         <li>
           <a href="">
-            <i class="bi bi-google bg-radial"></i>
+            <i class="bi bi-google"></i>
           </a>
         </li>
         <li>
           <a href="">
-            <i class="bi bi-twitter bg-radial"></i>
+            <i class="bi bi-twitter"></i>
           </a>
         </li>
         <li>
           <a href="">
-            <i class="bi bi-instagram bg-radial"></i>
+            <i class="bi bi-instagram"></i>
           </a>
         </li>
       </ul>
     </div>
+    <div class="list-unstyled footer-info">
+      <h3>Car-Care</h3>
+      <li><b>Location: </b>El-Soltan Street, Ismailia, NY 535022</li>
+      <li></li>
+      <li><b>Mail:</b> ahmedtaher@gmail.com</li>
+      <li><b>Fax:</b> 0473280912</li>
+    </div>
     <div
-      class="copyright d-flex text-center justify-content-between align-items-center"
+      class="copyright d-flex text-center justify-content-end align-items-center"
     >
       <p class="mb-0">&copy; <a href="/">CareCare</a> ,All Right Reversed.</p>
-      <p class="mb-0">
+      <p class="mb-0 d-none">
         Designed By
         <a href="https://ahmedtaher820.github.io/my-portfolio/" target="_blank"
           >Ahmed Taher</a
@@ -59,11 +66,9 @@ export default {};
   width: 200px;
   height: 180px;
 }
-.bg-radial {
+.footer-section ul li a i {
   font-size: 22px;
-  background: -webkit-linear-gradient(#464660, #fff);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #fff !important;
 }
 .copyright {
   position: absolute;
@@ -79,6 +84,14 @@ export default {};
   text-decoration: none;
   font-weight: bold;
   font-size: 20px;
+}
+.footer-info {
+ right: 50px;
+    bottom: 3px;
+    margin-left: auto;
+    width: 50%;
+    text-align: center;
+    position: relative;
 }
 @media (max-width: 768px) {
   .footer-section {

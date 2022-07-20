@@ -1,6 +1,5 @@
 <template>
   <div class="tables">
- 
     <table class="post-table mb-3">
       <thead>
         <tr>
@@ -57,9 +56,6 @@ export default {
     };
   },
   mounted() {
-    if (document.querySelector(".container").childElementCount > 0) {
-      console.log("done");
-    }
   },
   methods: {
     deleteBook() {

@@ -83,11 +83,11 @@
           <div class="post-body pt-3">
             <div class="post-user-info d-flex gap-5 align-items-center">
               <div class="user-info d-flex gap-2">
-                <img src="../assets/carshare/man.png" alt="" class="user-img" />
+                <img v-if="post.user != null" :src="post.user.url" alt="" class="user-img" />
                 <div
                   class="user-content d-flex flex-column justify-content-center text-start"
                 >
-                  <p class="mb-0 fw-bold fs-6 text-secondary">Ahmed</p>
+                  <p class="mb-0 fw-bold fs-6 text-secondary" v-if="post.user != null">{{post.user.name}}</p>
                   <div class="info">
                     <p class="mb-0">
                       <span class="fw-bold text-secondary">(Man</span>

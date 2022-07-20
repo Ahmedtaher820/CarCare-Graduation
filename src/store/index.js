@@ -685,7 +685,7 @@ export default new Vuex.Store({
     },
 
     // accept book
-    async acceptBook({ dispatch }, payload) {
+    async acceptBook({ state }, payload) {
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       try {
          let respo = await axios.patch(
@@ -702,7 +702,8 @@ export default new Vuex.Store({
           icon: "success",
           button: "Ok!",
         });
-        dispatch("postRequest")
+        console.log(state)
+        // dispatch("postRequest")
         this.router.push("/passenger")
       } catch (error) {
         console.log(error);

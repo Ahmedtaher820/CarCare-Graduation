@@ -25,12 +25,19 @@
         </li>
       </ul>
     </div>
-    <div class="list-unstyled footer-info">
-      <h3>Car-Care</h3>
-      <li><b>Location: </b>El-Soltan Street, Ismailia, NY 535022</li>
-      <li></li>
-      <li><b>Mail:</b> ahmedtaher@gmail.com</li>
-      <li><b>Fax:</b> 0473280912</li>
+    <div class="footer-info">
+      <h3 class="fs-3 text-center mb-4 footer-header">Car-Care</h3>
+      <p><b>Location: </b>El-Soltan Street, Ismailia, NY 535022</p>
+      <p>
+        <b>Mail: </b>
+        <a class="link-light" href="mailto:et8989784@gmail.com"
+          >et8989784@gmail.com</a
+        >
+      </p>
+      <p>
+        <b>Fax: </b
+        ><a class="link-light" href="tel:  0473280912"> 0473280912</a>
+      </p>
     </div>
     <div
       class="copyright d-flex text-center justify-content-end align-items-center"
@@ -51,6 +58,8 @@ export default {};
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Josefin+Sans:wght@200;300;400;500;600;700&family=La+Belle+Aurore&family=Lobster&family=Lora:ital,wght@1,400;1,500;1,600;1,700&family=Mochiy+Pop+One&family=Open+Sans:wght@300;400;500;600;700&family=Pacifico&family=Poppins:wght@100;200;300;400;500;600;700;800&family=Raleway:ital,wght@0,500;0,700;1,400&family=Roboto:wght@100&family=Shadows+Into+Light&display=swap");
+
 .footer-section {
   padding: 60px 0px;
   height: 300px;
@@ -61,6 +70,11 @@ export default {};
   position: absolute;
   left: 14%;
   bottom: 30%;
+}
+
+.footer-header {
+  font-family: "Dancing Script", cursive;
+  font-weight: bold;
 }
 .footer-logo {
   width: 200px;
@@ -86,12 +100,14 @@ export default {};
   font-size: 20px;
 }
 .footer-info {
- right: 50px;
-    bottom: 3px;
-    margin-left: auto;
-    width: 50%;
-    text-align: center;
-    position: relative;
+  position: relative;
+  left: 50%;
+  width: fit-content;
+}
+@media (max-width: 991px) {
+  .footer-info {
+    display: none;
+  }
 }
 @media (max-width: 768px) {
   .footer-section {

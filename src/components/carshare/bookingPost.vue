@@ -1,23 +1,33 @@
 <template>
   <div class="tables">
+ 
     <table class="post-table mb-3">
       <thead>
         <tr>
-          <th>Description</th>
-          <th>Passangers</th>
+          <th>fromCity</th>
+          <th>toCity</th>
           <th>Status</th>
-          <th v-if="post.checked == true">Post Owner</th>
-          <th></th>
+          <th v-if="post.checked == true" class="text-danger">*Post Owner*</th>
+          <th class="text-danger">{{post.checked ? '*approved*':''}}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>{{ post.description }}</td>
-          <td>{{ post.many }}</td>
+          <td>{{ post.carSharingPostId.fromCity }}</td>
+          <td>{{ post.carSharingPostId.toCity }}</td>
           <td>{{ post.checked == false ? "Wating" : "Accepting" }}</td>
-          <td v-if="post.checked == true">{{post.userId.phone}}</td>
+          <td v-if="post.checked == true">
+            <a class="link-light" :href="`tel:${post.userId.phone}`">{{
+              post.userId.phone
+            }}</a>
+          </td>
           <td>
-            <button class="btn bg-danger rounded-0" @click="deleteBook(post._id)">Delete</button>
+            <button
+              class="btn bg-danger rounded-0 w-100"
+              @click="deleteBook(post._id)"
+            >
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
@@ -43,12 +53,12 @@ export default {
   data() {
     return {
       showConfirm: false,
-      id:this.post._id
+      id: this.post._id,
     };
   },
   mounted() {
-    if(document.querySelector(".container").childElementCount > 0){
-      console.log("done")
+    if (document.querySelector(".container").childElementCount > 0) {
+      console.log("done");
     }
   },
   methods: {
@@ -61,7 +71,6 @@ export default {
       if (confirmType == "delete") {
         this.$store.dispatch("DeletebookPost", this.id);
         this.showConfirm = false;
-
       } else {
         this.showConfirm = false;
       }

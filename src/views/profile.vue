@@ -6,6 +6,13 @@
         <div class="row">
           <div class="col-12 col-lg-4">
             <div class="left-box">
+              <div
+                class="deleteMe"
+                @click="deleteMe"
+                title="Delete Your Account"
+              >
+                <i class="bi bi-trash"></i>
+              </div>
               <div class="card-img mb-3 position-relative mx-auto">
                 <img :src="info.url" alt="" />
                 <i
@@ -155,6 +162,7 @@
 import axios from "axios";
 import passmodal from "../components/passmodal.vue";
 import loading from "../components/loading.vue";
+import swal from "sweetalert";
 export default {
   name: "profile",
   components: {
@@ -171,6 +179,7 @@ export default {
       token: null,
       showmodal: false,
       showloading: false,
+      userConfirmDelete: false,
       info: {
         name: "",
         job: "",
@@ -179,8 +188,12 @@ export default {
     };
   },
   created() {
-    this.showloading = true;
     let id = JSON.parse(localStorage.getItem("user-info"));
+    if (!id) {
+      this.$router.push("/login");
+    }
+    this.showloading = true;
+
     this.token = JSON.parse(localStorage.getItem("usertoken"));
     axios
       .get("https://car-care3.herokuapp.com/api/users/5555/" + id)
@@ -275,6 +288,27 @@ export default {
       localStorage.clear();
       this.$router.push("/login");
     },
+    async deleteMe() {
+      try {
+        await axios.delete(
+          `https://car-care3.herokuapp.com/api/users/deleteMe`,
+          {
+            headers: { "x-auth-token": `${this.token}` },
+          }
+        );
+        swal({
+          title: "Successed!",
+          text: `Your Account Was Deletedو Have a nice time`,
+          icon: "success",
+          button: "Ok!",
+        });
+        localStorage.removeItem("usertoken");
+        localStorage.removeItem("user-info");
+        this.$router.push("/welcomepage");
+      } catch (error) {
+        console.log("done");
+      }
+    },
   },
 };
 </script>
@@ -286,6 +320,7 @@ export default {
 }
 .profile-card {
   margin: 0px auto 0px;
+  overflow: hidden;
 }
 .left-box {
   padding: 30px 20px;
@@ -294,6 +329,7 @@ export default {
   height: 100%;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  overflow: none;
 }
 .profile .row {
   transform-style: preserve-3d !important;
@@ -305,6 +341,30 @@ export default {
   .profile .row > * {
     padding: 0px 20px 10px !important;
   }
+}
+.deleteMe {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  font-size: 22px;
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  color: var(--secondcolor);
+  border-radius: 50%;
+  cursor: pointer;
+  line-height: 60px;
+  text-align: center;
+  transition: 0.3s;
+}
+.deleteMe:hover {
+  background-color: var(--secondcolor);
+  color: white;
+  border: 1px solid #fff;
+}
+.deleteMe i {
+  position: relative;
+  right: -5px;
 }
 .right-box {
   border-top-right-radius: 10px;

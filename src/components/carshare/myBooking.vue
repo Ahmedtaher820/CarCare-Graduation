@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <span class="d-inline-block text-start mb-3 text-danger p-2 book-note">
+      *If you see the word Approved, it means that it was confirmed by the owner of the post*
+    </span>
     <bookingPost
       v-for="(post, index) in getBooking"
       :key="index"

@@ -19,32 +19,32 @@
               <span
                 v-if="new Date(post.date).getDay() == 0"
                 class="text-secondary"
-                >Saturday</span
+                >Sunday</span
               >
               <span
                 v-else-if="new Date(post.date).getDay() == 1"
                 class="text-secondary"
-                >Sunday</span
+                >Monday</span
               >
               <span
                 v-else-if="new Date(post.date).getDay() == 2"
                 class="text-secondary"
-                >Monday</span
+                >Tuesday</span
               >
               <span
                 v-else-if="new Date(post.date).getDay() == 3"
                 class="text-secondary"
-                >Tuesday</span
+                >Wednesday</span
               >
               <span
                 v-else-if="new Date(post.date).getDay() == 4"
                 class="text-secondary"
-                >Wednesday</span
+                >Thrusday</span
               >
               <span
                 v-else-if="new Date(post.date).getDay() == 5"
                 class="text-secondary"
-                >Thrusday</span
+                >Saturday</span
               >
               <span v-else class="text-secondary">Friday</span>
               <span>
@@ -53,7 +53,7 @@
                     ? new Date(post.date).getUTCMinutes()
                     : "0" + new Date(post.date).getUTCMinutes()
                 }}
-                {{ new Date(post.date).getUTCHours() > 12 ? "PM" : "AM" }}
+                {{ new Date(post.date).getUTCHours() > 12 ? "AM" : "PM" }}
               </span>
             </div>
             <div
@@ -117,10 +117,7 @@
             <bookPost v-if="showPost" v-on:closePostModal="closePostModal" />
             <button
               :class="`btn d-block w-50 mx-auto py-2 mt-4 ${
-                new Date().getTime() > new Date(post.date).getTime()
-                  ? 'disabled'
-                  : 'none'
-              }`"
+                new Date().getTime() > new Date(post.date).getTime()? 'disabled': 'none'}`"
               @click="postBook(post._id)"
             >
               Book
@@ -145,7 +142,10 @@
       <i class="bi bi-info-circle fs-4" v-if="!showUserGuide"></i>
       <i class="bi bi-x-circle fs-4" v-if="showUserGuide"></i>
     </div>
-    <userGuide class="guideUserAccordion center-items flex-column" v-if="showUserGuide" />
+    <userGuide
+      class="guideUserAccordion center-items flex-column"
+      v-if="showUserGuide"
+    />
   </div>
 </template>
 
@@ -155,19 +155,20 @@ import recentPost from "../components/carshare/recentPost.vue";
 import loading from "../components/loading.vue";
 import bookPost from "../components/carshare/bookPost.vue";
 import cityFilter from "../components/carshare/cityFilter.vue";
-import userGuide from "../components/carshare/userGuide.vue"
+import userGuide from "../components/carshare/userGuide.vue";
 export default {
   components: {
     recentPost,
     loading,
     bookPost,
-    cityFilter,userGuide
+    cityFilter,
+    userGuide,
   },
   data() {
     return {
       show: false,
       showPost: false,
-      showUserGuide:false
+      showUserGuide: false,
     };
   },
   methods: {
@@ -210,6 +211,9 @@ export default {
       return this.$store.state.pagePosts;
     },
   },
+  watch(){
+      this.passengerPost
+  }
 };
 </script>
 
@@ -219,5 +223,4 @@ export default {
   color: #fff !important;
   font-size: 18px;
 }
-
 </style>

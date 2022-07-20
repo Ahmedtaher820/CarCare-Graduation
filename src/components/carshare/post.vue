@@ -9,6 +9,8 @@
             <th>From</th>
             <th>To</th>
             <th>Date</th>
+            <th></th>
+            <!-- <th colspan="2"  v-if="post.number > 0">Passengers Completed</th> -->
           </tr>
         </thead>
         <tbody>
@@ -16,6 +18,8 @@
             <td>{{ post.fromCity }}</td>
             <td>{{ post.toCity }}</td>
             <td>{{ post.date.slice(0, post.date.indexOf("T")) }}</td>
+            <td colspan="2"  v-if="post.number == 0" class="text-danger pass-comp">*Passengers Completed*</td>
+
           </tr>
         </tbody>
       </table>

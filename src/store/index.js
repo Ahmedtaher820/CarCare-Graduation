@@ -576,6 +576,7 @@ export default new Vuex.Store({
             },
           }
         );
+        console.log(watingPosts)
         commit("waitingBook", watingPosts.data.booking);
         // commit("BooksNumbers", watingPosts.data.booking.length);
       } catch (error) {
@@ -613,7 +614,7 @@ export default new Vuex.Store({
             },
           }
         );
-        
+        console.log(postsRequested.data)
         commit("postHaveRequest", postsRequested.data);
       } catch (error) {
         console.log(error);
@@ -648,6 +649,7 @@ export default new Vuex.Store({
           }
         );
         commit("getOnePost", post.data);
+        console.log(post.data)
       } catch (error) {
         console.log(error);
       }
@@ -683,7 +685,7 @@ export default new Vuex.Store({
     },
 
     // accept book
-    async acceptBook({ state }, payload) {
+    async acceptBook({ dispatch }, payload) {
       let usertoken = JSON.parse(localStorage.getItem("usertoken"));
       try {
          let respo = await axios.patch(
@@ -700,8 +702,8 @@ export default new Vuex.Store({
           icon: "success",
           button: "Ok!",
         });
-        console.log(state)
-
+        dispatch("postRequest")
+        this.router.push("/passenger")
       } catch (error) {
         console.log(error);
         swal({
@@ -742,6 +744,7 @@ export default new Vuex.Store({
           }
         );
         // this.passengerPost = posts.data.carSharingPost;
+        console.log(posts.data.carSharingPost)
         commit("allPosts", posts.data.carSharingPost);
       } catch (error) {
         console.log(error);

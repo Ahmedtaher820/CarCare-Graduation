@@ -67,15 +67,15 @@
                 <i
                   class="bi bi-eye position-absolute eye fs-5"
                   v-if="eyeopen"
-                  @click="eyeopenfun"
+                  @click="eyeopenfun($event)"
                 ></i>
                 <i
                   class="bi bi-eye-slash position-absolute eye fs-5"
                   v-if="!eyeopen"
-                  @click="eyeopenfun"
+                  @click="eyeopenfun($event)"
                 ></i>
               </div>
-              <div class="mb-1 col-12 col-lg-6">
+              <div class="mb-1 col-12 col-lg-6 position-relative">
                 <label
                   for="validationCustom06"
                   class="form-label mb-2 mb-lg-0 fs-5"
@@ -88,6 +88,16 @@
                   required
                   v-model="userdata.confirmPassword"
                 />
+                <i
+                  class="bi bi-eye position-absolute eye fs-5"
+                  v-if="eyeopen2"
+                  @click="eyeopenfun($event)"
+                ></i>
+                <i
+                  class="bi bi-eye-slash position-absolute eye fs-5"
+                  v-if="!eyeopen2"
+                  @click="eyeopenfun($event)"
+                ></i>
               </div>
               <div class="mb-1 col-12 col-lg-6">
                 <label
@@ -148,6 +158,7 @@ export default {
     return {
       show: false,
       eyeopen: true,
+      eyeopen2:true,
       driverinput: false,
       userdata: {
         name: "",
@@ -165,8 +176,8 @@ export default {
     loading,
   },
   methods: {
-    eyeopenfun() {
-      var passinput = document.querySelector(".pass-input");
+    eyeopenfun(event) {
+      var passinput = event.target.previousElementSibling;
       if (passinput.getAttribute("type") === "password") {
         this.eyeopen = false;
         passinput.setAttribute("type", "text");
